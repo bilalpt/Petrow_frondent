@@ -20,7 +20,7 @@ const attachToken = (req,tokenName) => {
 
 
 const PETBOARDHOMEAxiosInstant = CreateAxiosClint(PETBOARDHOME)
-HomeownerAxiosInstant.interceptors.request.use(async (req) =>{
+PETBOARDHOMEAxiosInstant.interceptors.request.use(async (req) =>{
     const modifiedReq = attachToken(req, 'token')
     return modifiedReq
 })
