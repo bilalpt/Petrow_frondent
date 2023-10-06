@@ -30,11 +30,10 @@ function BoardLogin() {
         }
         if (!isValidEmail(boarduser.email.trim())) {
             boarduserstate({ email: '' })
-            emailInputRef.current.focus();
             toast.warn("enter a valid email");
             return false;
         }
-        if (boarduser.passInputRef.trim() === '') {
+        if (boarduser.password.trim() === '') {
             toast.error('password should not be empty');
             return false;
         }
@@ -42,19 +41,20 @@ function BoardLogin() {
 
     };
 
-    const FormHandler= async(e)=>{
-        e.preventDefalt();
-        if (validations()){
-            try{
-                const res = await BoardLogin(boarduser)
+    const FormHandler = async (e) => {
+        e.preventDefault();
+        if (validations()) {
+            try {
+                // const res = await BoardLogin(boarduser)
+                const res =await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + 'petboarding/token_obtain_pair/token', boarduser)
                 console.log(res.data);
                 navigate("/Home")
 
 
-            }catch(error){
+            } catch (error) {
                 console.log(error);
 
-        }
+            }
 
         }
 
@@ -77,7 +77,7 @@ function BoardLogin() {
 
                 <div className='bg-gray-500 w-100 h-screen flex justify-center items-center pb-40'>
                     <div className='bg-green-100		 w-7/12	 h-3/3  rounded-lg ' >
-                        <form  action="">
+                        <form action="" onSubmit={FormHandler}>
                             <h1 className='pt-8 pl-5'>Pet Boarding Login</h1>
 
 
@@ -86,7 +86,8 @@ function BoardLogin() {
                                 <div className='mt-4'>
                                     <input type="text" placeholder='Enter your email' name='email' className='rounded-lg py-2 px-16 border  ' onChange={(e) => {
                                         console.log(boarduser);
-                                        boarduserstate({ ...boarduser, [e.target.name]: e.target.value })}} />
+                                        boarduserstate({ ...boarduser, [e.target.name]: e.target.value })
+                                    }} />
                                 </div>
 
                                 <div className='mt-4'>

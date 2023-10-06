@@ -19,7 +19,6 @@ function Signup() {
     const [pass, setPass] = useState({ confirmpassword: "", check: true });
 
     const navigate=useNavigate()
-    const home=useNavigate()
 
     console.log(user);
 
@@ -54,7 +53,7 @@ function Signup() {
             return false;
         }
         else if (user.confirmpassword.trim()===''){
-            toast.error('password should not be empty');
+            toast.error('confirm password should not be empty');
             return false;
         }
         return true;
