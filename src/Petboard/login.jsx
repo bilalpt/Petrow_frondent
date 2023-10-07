@@ -70,13 +70,13 @@ function BoardLogin() {
             <ToastContainer />
 
             <div>
-                <NavbarDefault />
+                {/* <NavbarDefault /> */}
 
 
 
 
-                <div className='bg-gray-500 w-100 h-screen flex justify-center items-center pb-40'>
-                    <div className='bg-green-100		 w-7/12	 h-3/3  rounded-lg ' >
+                <div className='bg-[#ffffff] w-100 h-screen flex justify-center items-center pb-40'>
+                    <div className='bg-[#f6f1f1]		 w-7/12	 h-3/3  rounded-lg shadow-2xl' >
                         <form action="" onSubmit={FormHandler}>
                             <h1 className='pt-8 pl-5'>Pet Boarding Login</h1>
 
@@ -96,7 +96,7 @@ function BoardLogin() {
 
                                 <button type='submit' className='bg-cyan-500	 w-20 h-10 mt-6 text-white rounded-lg'>Login</button>
 
-                                <h1 className='px-16 py-4'> Go To Pet Boarding  <a onClick={() => navigate("/Signup")} className='bg-cyan-500'>Sign Up</a></h1>
+                                <h1 className='px-16 py-4'> Go To Pet Boarding  <a onClick={() => navigate("/Signup")} className='text-[#3c25a4]'>Sign Up</a></h1>
 
                             </div>
                         </form>

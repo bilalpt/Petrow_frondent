@@ -4,6 +4,12 @@ import BoardLogin from '../Petboard/login';
 import CareSignup from '../Components/Petcare/CareSignUp';
 import CareLogin from '../Components/Petcare/CareLogin';
 import Home from '../Components/PetrowHome/Home';
+import CareHome from '../Components/Petcare/CareHome';
+import { CareNavbar } from '../Navbar/CareNavbar';
+import { BoardNavbar } from '../Navbar/BoardNavbar';
+import BoardHome from '../Petboard/BoardHome';
+import LoginNavigation from '../Components/LoginNavigation/LoginNavigation';
+
 
 
 
@@ -20,6 +26,16 @@ function Petboard() {
           <Route exact path='/CareLogin'  element={<CareLogin/>}/>
           {/* petrow home */}
           <Route exact path='/Home' element={<Home/>}/>
+          <Route exact path='/CareHome' element={<CareHome/>}/>
+          <Route exact path="/CareNavbar" element={<CareNavbar/>}/>
+          <Route exact path="/BoardNavbar" element={<BoardNavbar/>} />
+          {/* petboard url */}
+          <Route exact path='/BoardHome' element={<BoardHome/>}/>
+
+          {/* loginnavigation */}
+
+          < Route exact path='/LoginNavigation' element={<LoginNavigation/>}/>
+
 
 
         </Routes>

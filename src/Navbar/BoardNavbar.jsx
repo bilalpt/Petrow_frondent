@@ -9,11 +9,9 @@ import {
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 
-
-
-// import CareHome from "../Components/Petcare/CareHome";
+import CareHome from "../Components/Petcare/CareHome";
  
-export function NavbarDefault() {
+export function BoardNavbar() {
 
 
   const [openNav, setOpenNav] = React.useState(false);
@@ -46,7 +44,7 @@ export function NavbarDefault() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center" onClick={()=>navigate('/Home')}>
+        <a href="#" className="flex items-center">
           Home 
         </a>
       </Typography>
@@ -56,8 +54,8 @@ export function NavbarDefault() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a onClick={()=>navigate('/LoginNavigation')} href="#" className="flex items-center">
-          Login
+        <a href="#" className="flex items-center">
+          Boarding under
         </a>
       </Typography>
       <Typography
@@ -66,8 +64,9 @@ export function NavbarDefault() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center" >
-          Pet Taker
+        <a href="#" className="flex items-center" onClick={()=>navigate("/BoardLogin")}
+>
+          Login
 
         </a>
       </Typography>
@@ -85,7 +84,7 @@ export function NavbarDefault() {
   );
  
   return (
-    <Navbar className="mx-auto max-w-full py-2 px-4 lg:px-8 lg:py-4 bg-[#f7f4f4] shadow-xl">
+    <Navbar className="mx-auto max-w-full py-2 px-4 lg:px-8 lg:py-4 bg-green-100">
       <div className="container mx-5 flex items-right-0 justify-between text-blue-gray-900 ">
         <Typography
           as="a"

@@ -182,9 +182,9 @@ const login = useGoogleLogin({
     <>
     <div>
         <ToastContainer/>
-         <NavbarDefault/>
-        <div className='bg-gray-500 w-100 h-screen flex justify-center items-center'>
-            <div className='bg-green-100		 w-7/12	 h-3/4  rounded-lg   ' >
+         {/* <NavbarDefault/> */}
+        <div className='bg-[#ffffff] w-100 h-screen flex justify-center items-center'>
+            <div className='bg-[#f6f1f1]		 w-7/12	 h-3/4  rounded-lg   shadow-2xl' >
                 <form action="" onSubmit={FormHandlerSignup}>
                     <h1 className='pt-8 pl-5'>Pet Boarding Sign Up</h1>
 
@@ -207,11 +207,11 @@ const login = useGoogleLogin({
                         </div>
                         <button type='submit' className='bg-cyan-500	 w-20 h-10 mt-6 text-white rounded-lg'>Sign Up</button>
 
-                        <h1 className='px-16 py-4'> Go To Pet Boarding  <a  onClick={()=>navigate("/BoardLogin")} className='bg-cyan-500'>Login</a></h1>
+                        <h1 className='px-16 py-4'> Go To Pet Boarding  <a  onClick={()=>navigate("/BoardLogin")} className='text-[#3c25a4]'>Login</a></h1>
 
                     </div>
                 </form>
-                <button onClick={() => login()} className="w-2/6 bg-white text-black border-2 border-gray-400 mt-0 mx-4 my-6 px-4 py-2 rounded-full ml-72 ">Continue with Google</button>
+                <button onClick={() => login()} className="flex justify-center items-center w-2/6 bg-white text-black border-2 border-gray-400 mt-0 mx-4 my-6 px-4 py-2 rounded-full ml-72 ">Continue with Google</button>
 
                 {/* <button onClick={() => useGoogleLogin()}>Sign in with Google 🚀 </button> */}
 
