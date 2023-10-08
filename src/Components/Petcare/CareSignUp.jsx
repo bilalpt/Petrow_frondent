@@ -129,7 +129,7 @@ function CareSignup() {
                                 </div>
                                 <button type='submit' className='bg-cyan-500	 w-20 h-10 mt-6 text-white rounded-lg'>Sign Up</button>
                                 {/* <h1 className=''>login</h1> */}
-                                <h1 className='px-16 py-4'> Go To Pet Boarding  <a onClick={() => navigate('/CareLogin')} href="" className='text-[#3c25a4]'>Login</a></h1>
+                                <h1 className='px-16 py-4'> Go To Pet Boarding  <a onClick={() => navigate('/PetBoards/CareLogin')} href="" className='text-[#3c25a4]'>Login</a></h1>
 
                             </div>
                         </form>

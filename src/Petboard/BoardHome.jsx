@@ -1,15 +1,12 @@
 import React from 'react'
 import { BoardNavbar } from '../Navbar/BoardNavbar'
 
-const BoardHome = () => {
+function BoardHome() {
   return (
     <div>
+       <BoardNavbar/>
 
-        <BoardNavbar/>
-
-        <h1> petboarding home</h1>
-
-      
+<h1> petboarding home</h1>
     </div>
   )
 }

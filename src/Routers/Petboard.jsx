@@ -9,6 +9,7 @@ import { CareNavbar } from '../Navbar/CareNavbar';
 import { BoardNavbar } from '../Navbar/BoardNavbar';
 import BoardHome from '../Petboard/BoardHome';
 import LoginNavigation from '../Components/LoginNavigation/LoginNavigation';
+import BoardProfile from '../Petboard/BoardProfile/BoardProfile';
 
 
 
@@ -18,7 +19,7 @@ import React from 'react'
 function Petboard() {
   return (
     <div>
-      <Router>
+      {/* <Router> */}
         <Routes>
           <Route exact path="/Signup" element={<Signup/>}/>
           <Route exact path='/BoardLogin' element={<BoardLogin/>}/>
@@ -36,12 +37,18 @@ function Petboard() {
 
           < Route exact path='/LoginNavigation' element={<LoginNavigation/>}/>
 
+         {/* board profile */}
+
+         <Route exact path='/BoardProfile' element={<BoardProfile/>} />
+
+
+
 
 
         </Routes>
 
 
-      </Router>
+      {/* </Router> */}
       
     </div>
   )

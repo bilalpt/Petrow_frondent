@@ -73,7 +73,7 @@ const FormHandlerSignup = async (e)=>{
             
         );
         toast.success(response.data.msg);
-        console.log(response.data)
+        // console.log(response.data)
 
         userstate({username:'',email:'',phone:'',password:'',});
 
@@ -164,8 +164,9 @@ const login = useGoogleLogin({
       setguser([]);
       const token = JSON.stringify(res.data.token)
       localStorage.setItem('token',token)
-      navigate("/Home");
+      navigate("/PetBoards/BoardHome");
     } catch (error) {
+    
       handleLoading();
       console.log(error.response);
       if (error.response && error.response.data && error.response.data.email) {
@@ -207,7 +208,7 @@ const login = useGoogleLogin({
                         </div>
                         <button type='submit' className='bg-cyan-500	 w-20 h-10 mt-6 text-white rounded-lg'>Sign Up</button>
 
-                        <h1 className='px-16 py-4'> Go To Pet Boarding  <a  onClick={()=>navigate("/BoardLogin")} className='text-[#3c25a4]'>Login</a></h1>
+                        <h1 className='px-16 py-4'> Go To Pet Boarding  <a  onClick={()=>navigate("/PetBoards/BoardLogin")} className='text-[#3c25a4]'>Login</a></h1>
 
                     </div>
                 </form>

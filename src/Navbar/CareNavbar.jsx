@@ -11,6 +11,10 @@ import { useNavigate } from "react-router-dom";
 
 import CareHome from "../Components/Petcare/CareHome";
 import CareLogin from "../Components/Petcare/CareLogin";
+import defaultprofile from "../assets/defaultprofile.jpg"
+
+import PettakerProfile from "../Components/Petcare/PettakerProfile/PettakerProfile";
+
  
 export function CareNavbar() {
 
@@ -77,15 +81,18 @@ export function CareNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <a href="#" onClick={()=>navigate('/PettakerProfile')} className="flex items-center">
+          <img class="block mx-auto h-10 rounded-full sm:mx-0 sm:shrink-0" src={defaultprofile} alt="Woman's Face" />
           Profile
+
+
         </a>
       </Typography>
     </ul>
   );
  
   return (
-    <Navbar className="mx-auto max-w-full py-2 px-4 lg:px-8 lg:py-4 bg-green-100">
+    <Navbar className="mx-auto max-w-full py-2 px-4 lg:px-8 lg:py-4 bg-[#f7f4f4] shadow-2xl">
       <div className="container mx-5 flex items-right-0 justify-between text-blue-gray-900 ">
         <Typography
           as="a"

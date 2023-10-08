@@ -8,6 +8,7 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import defaultprofile from "../assets/defaultprofile.jpg"
 
 
 
@@ -46,7 +47,7 @@ export function NavbarDefault() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center" onClick={()=>navigate('/Home')}>
+        <a href="#" className="flex items-center" onClick={()=>navigate('/PetBoards/Home')}>
           Home 
         </a>
       </Typography>
@@ -56,7 +57,7 @@ export function NavbarDefault() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a onClick={()=>navigate('/LoginNavigation')} href="#" className="flex items-center">
+        <a onClick={()=>navigate('/PetBoards/LoginNavigation')} href="#" className="flex items-center">
           Login
         </a>
       </Typography>
@@ -78,6 +79,8 @@ export function NavbarDefault() {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
+        <img class="block mx-auto h-10 rounded-full sm:mx-0 sm:shrink-0" src={defaultprofile} alt="Woman's Face" />
+
           Profile
         </a>
       </Typography>
