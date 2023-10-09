@@ -47,7 +47,9 @@ const AdminLogin = () => {
                 // const res = await BoardLogin(boarduser)
                 const res = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + 'mainadmin/admintoken', adminuser)
                 console.log(res.data);
-                navigate("/PetBoards/BoardHome")
+                const token = JSON.stringify(res.data);
+                localStorage.setItem("token", token);
+                navigate("/AdminRouters/AdminHome")
 
 
             } catch (error) {

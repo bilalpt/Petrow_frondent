@@ -7,6 +7,7 @@ const PettakerHome = () => {
         <div>
 
             <CareNavbar/>
+            <h1>pettaker home</h1>
 
         </div>
       

@@ -7,7 +7,7 @@ function CareHome() {
     <div>
         <CareNavbar/>
 
-        <h1>pet taking home</h1>
+        <h1>pet taking home care home</h1>
 
     </div>
   )

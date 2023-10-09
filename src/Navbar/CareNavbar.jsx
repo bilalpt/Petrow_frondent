@@ -22,6 +22,13 @@ export function CareNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
 
   const navigate=useNavigate()
+  const Logout =(() =>{
+    
+    localStorage.removeItem('token')
+    navigate('/PetBoards/CareLogin');
+    console.log('token remove')
+
+  })
 
  
   React.useEffect(() => {
@@ -60,7 +67,7 @@ export function CareNavbar() {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
-          Pet Boarding
+          {/* Pet Boarding */}
         </a>
       </Typography>
       <Typography
@@ -69,9 +76,9 @@ export function CareNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center" onClick={()=>navigate("/CareLogin")}
+        <a href="#" className="flex items-center" onClick={()=>Logout()}
 >
-          Login
+          Logout
 
         </a>
       </Typography>

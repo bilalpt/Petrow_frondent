@@ -49,7 +49,9 @@ function CareLogin() {
                     // const res = await BoardLogin(boarduser)
                     const res =await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + 'petcare/tokenobtain_petcare', user)
                     console.log(res.data);
-                    navigate("/PetTakers/PettakerHome")
+                    const token = JSON.stringify(res.data);
+                    localStorage.setItem("token", token);
+                    navigate("/PetBoards/CareHome")
     
     
                 } catch (error) {

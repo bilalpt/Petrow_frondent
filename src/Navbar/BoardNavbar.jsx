@@ -25,6 +25,15 @@ export function BoardNavbar() {
 
   const navigate=useNavigate()
 
+
+  const Logout =(() =>{
+    
+    localStorage.removeItem('token')
+    navigate('/PetBoards/BoardLogin');
+    console.log('token remove')
+
+  })
+
  
   React.useEffect(() => {
     window.addEventListener(
@@ -71,9 +80,9 @@ export function BoardNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center" onClick={()=>navigate("/BoardLogin")}
+        <a href="#" className="flex items-center" onClick={()=>Logout()}
 >
-          Login
+          Logout
 
         </a>
       </Typography>
@@ -159,6 +168,7 @@ export function BoardNavbar() {
       <MobileNav open={openNav}>
         <div className="container mx-auto">
           {navList}
+        
           {/* <Button variant="gradient" size="sm" fullWidth className="mb-2">
             <span>Buy Now</span>
           </Button> */}

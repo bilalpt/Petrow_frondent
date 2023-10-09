@@ -11,6 +11,14 @@ import BoardHome from '../Petboard/BoardHome';
 import LoginNavigation from '../Components/LoginNavigation/LoginNavigation';
 import BoardProfile from '../Petboard/BoardProfile/BoardProfile';
 
+//private routers
+
+import PrivateRouters from '../ProtectedRouters/PrivateRouters';
+
+//protected routers 
+
+import BoardProtected from '../ProtectedRouters/BoardProtected';
+
 
 
 
@@ -20,26 +28,33 @@ function Petboard() {
   return (
     <div>
       {/* <Router> */}
+
         <Routes>
+
+          <Route element={<PrivateRouters/>}>
           <Route exact path="/Signup" element={<Signup/>}/>
-          <Route exact path='/BoardLogin' element={<BoardLogin/>}/>
           <Route exact path='/CareSignup'  element={<CareSignup/>}/>
           <Route exact path='/CareLogin'  element={<CareLogin/>}/>
+          < Route exact path='/LoginNavigation' element={<LoginNavigation/>}/>
+          <Route exact path='/BoardLogin' element={<BoardLogin/>}/>
+          </Route>
+          
+          <Route element={<BoardProtected/>}>
           {/* petrow home */}
-          <Route exact path='/Home' element={<Home/>}/>
           <Route exact path='/CareHome' element={<CareHome/>}/>
-          <Route exact path="/CareNavbar" element={<CareNavbar/>}/>
-          <Route exact path="/BoardNavbar" element={<BoardNavbar/>} />
+
+          {/* <Route exact path="/CareNavbar" element={<CareNavbar/>}/>
+          <Route exact path="/BoardNavbar" element={<BoardNavbar/>} /> */}
           {/* petboard url */}
           <Route exact path='/BoardHome' element={<BoardHome/>}/>
 
           {/* loginnavigation */}
 
-          < Route exact path='/LoginNavigation' element={<LoginNavigation/>}/>
 
          {/* board profile */}
 
          <Route exact path='/BoardProfile' element={<BoardProfile/>} />
+         </Route>
 
 
 

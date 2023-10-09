@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { useState, useRef } from 'react'
 import { NavbarDefault } from '../Navbar/Navbar';
@@ -51,9 +52,9 @@ function BoardLogin() {
                 // const res = await BoardLogin(boarduser)
                 const res =await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + 'petboarding/token_obtain_pair/token', boarduser)
                 console.log(res.data);
+                const token = JSON.stringify(res.data);
+                localStorage.setItem("token", token);
                 navigate("/PetBoards/BoardHome")
-
-
             } catch (error) {
                 console.log(error);
 
