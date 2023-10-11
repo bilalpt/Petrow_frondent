@@ -92,7 +92,7 @@ export function BoardNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" onClick={()=>navigate('/BoardProfile')} className="flex items-center">
+        <a href="#" onClick={()=>navigate('/PetBoards/BoardProfile')} className="flex items-center">
         <img class="block mx-auto h-10 rounded-full sm:mx-0 sm:shrink-0" src={defaultprofile} alt="Woman's Face" />
 
           Profile
