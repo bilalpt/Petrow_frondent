@@ -37,6 +37,17 @@ const BoardProfile = () => {
               </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
       
       </>
   )
