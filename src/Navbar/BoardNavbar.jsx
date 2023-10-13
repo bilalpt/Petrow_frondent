@@ -7,7 +7,7 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import CareHome from "../Components/Petcare/CareHome";
 // import defaultprofile from "../assets/defaultprofile.jpg"
@@ -60,9 +60,9 @@ export function BoardNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <Link href="#" className="flex items-center" to={'/PetBoards/BoardHome'}>
           Home 
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -70,9 +70,9 @@ export function BoardNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Boarding under
-        </a>
+        <Link to={'/PetBoards/BordingForm'}className="flex items-center">
+          Board Now
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -92,11 +92,11 @@ export function BoardNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" onClick={()=>navigate('/PetBoards/BoardProfile')} className="flex items-center">
+        <Link href="#" to={'/PetBoards/BoardProfile'} className="flex items-center">
         <img class="block mx-auto h-10 rounded-full sm:mx-0 sm:shrink-0" src={defaultprofile} alt="Woman's Face" />
 
           Profile
-        </a>
+        </Link>
       </Typography>
     </ul>
   );

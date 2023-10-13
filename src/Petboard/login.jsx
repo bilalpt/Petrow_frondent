@@ -99,7 +99,7 @@ function BoardLogin() {
 
 
                 <div className='bg-[#ffffff] w-100 h-screen flex justify-center items-center pb-40'>
-                    <div className='bg-[#f6f1f1]		 w-7/12	 h-3/3  rounded-lg shadow-2xl' >
+                    <div className='bg-[#f6f1f1] 		 w-7/12	 h-3/3  rounded-lg shadow-2xl' >
                         <form action="" onSubmit={FormHandler}>
                             <h1 className='pt-8 pl-5'>Pet Boarding Login</h1>
 

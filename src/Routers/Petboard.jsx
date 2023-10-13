@@ -19,6 +19,9 @@ import PrivateRouters from '../ProtectedRouters/PrivateRouters';
 
 import BoardProtected from '../ProtectedRouters/BoardProtected';
 
+//board form
+import BordingForm from '../Petboard/BoardingForm/BordingForm';
+
 
 
 
@@ -49,6 +52,9 @@ function Petboard() {
           {/* board profile */}
 
          <Route exact path='/BoardProfile' element={<BoardProfile/>} />
+
+          {/* boarding form */}
+          <Route exact path='/BordingForm' element={<BordingForm/>}/>
          
          </Route>
 
