@@ -46,7 +46,7 @@ function Petboard() {
           {/* petboard home */}
           <Route exact path='/BoardHome' element={<BoardHome/>}/>
 
-         {/* board profile */}
+          {/* board profile */}
 
          <Route exact path='/BoardProfile' element={<BoardProfile/>} />
          

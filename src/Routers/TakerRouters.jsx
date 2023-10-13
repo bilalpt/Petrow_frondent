@@ -3,6 +3,11 @@ import { Routes, Route } from 'react-router-dom'
 import PettakerHome from '../Components/PetrowHome/PettakerHome'
 import PettakerProfile from '../Components/Petcare/PettakerProfile/PettakerProfile'
 import CareHome from '../Components/Petcare/CareHome'
+// import BoardProtected from '../ProtectedRouters/BoardProtected';
+import PrivateRouters from '../ProtectedRouters/PrivateRouters';
+import TakerProtected from '../ProtectedRouters/TakerProtected'
+
+
 
 
 
@@ -14,7 +19,15 @@ const TakerRouters = () => {
             <Routes>
 
                 {/* <Route exact path='/PettakerHome' element={<PettakerHome />} /> */}
-                <Route exact path='/PettakerProfile' element={<PettakerProfile />} />
+                <Route element={<PrivateRouters/>}>
+
+                
+                </Route>
+                <Route element={<TakerProtected/>}>
+                    <Route exact path='/PettakerProfile' element={<PettakerProfile />} />
+                </Route>
+
+
 
                 {/* <Route exact path='/CareHome' element={<CareHome/>}/> */}
 

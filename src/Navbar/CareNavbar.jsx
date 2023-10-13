@@ -7,7 +7,7 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import CareHome from "../Components/Petcare/CareHome";
 import CareLogin from "../Components/Petcare/CareLogin";
@@ -56,9 +56,9 @@ export function CareNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <Link to={`/PetBoards/CareHome`} className="flex items-center">
           Home 
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -88,7 +88,7 @@ export function CareNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" onClick={()=>navigate('/PettakerProfile')} className="flex items-center">
+        <a href="#" onClick={()=>navigate('/PetTakers/PettakerProfile')} className="flex items-center">
           <img class="block mx-auto h-10 rounded-full sm:mx-0 sm:shrink-0" src={defaultprofile} alt="Woman's Face" />
           Profile
 
