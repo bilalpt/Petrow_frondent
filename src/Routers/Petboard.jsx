@@ -22,6 +22,9 @@ import BoardProtected from '../ProtectedRouters/BoardProtected';
 //board form
 import BordingForm from '../Petboard/BoardingForm/BordingForm';
 
+// summary
+import Summary from '../Petboard/BoardingForm/Summary';
+
 
 
 
@@ -55,6 +58,8 @@ function Petboard() {
 
           {/* boarding form */}
           <Route exact path='/BordingForm' element={<BordingForm/>}/>
+          {/* summary */}
+          <Route exact path='/Summary' element={<Summary/>}/>
          
          </Route>
 
