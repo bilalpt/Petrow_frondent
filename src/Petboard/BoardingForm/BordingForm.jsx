@@ -5,13 +5,14 @@ import { useState } from 'react'
 import axios from 'axios'
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setBorderFormRedux } from '../../Redux/BoardUser';
+import { useNavigate } from 'react-router-dom';
 
 const BordingForm = () => {
-
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [formstate,usestate]=useState({pettype:'',nuberofpetboarded:'',petbreed:'',petsize:'',additionalinfo:'',startdate:'',enddate:''})
-    console.log(formstate)
 
 
     //validation
@@ -54,9 +55,12 @@ const BordingForm = () => {
 
             const response= await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL +"petboarding/Boardingform",formstate)
             console.log(response)
+            dispatch(setBorderFormRedux(response.data))
             toast.success(response.data.msg);
+            navigate('/PetBoards/Summary')
 
             usestate({selectpettype:'',numberofpetboard:'',petbreed:'',petsize:'',additional_info:'',boardingdate:'',boardingenddate:''})
+
 
 
 

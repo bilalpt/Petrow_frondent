@@ -1,40 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// const initialState={
-//     id:"",
-//     username:"",
-//     email:"",
-//     phone:"",
-
-// };
-
-// const Boardslice=createSlice({
-
-//     name:"boarduser",
-//     initialState,
-//     reducers:{
-//         setboarduserdetails:(state,action)=>{
-//         const {id,username,email,phone}=action.payload;
-        
-//         return {
-//             ...state,
-//             id: id||state.id,
-//             username:username||state.username,
-//             email:email||state.email,
-//             phone:phone||state.phone,
-
-
-//         }
-//     }
-
-
-//     }
-
-
-
-// })
-
-
 
 
 const initialState={
@@ -42,6 +7,7 @@ const initialState={
     username:"",
     email:"",
     password:"",
+    BordFormRedux : [],
 }
 
 const Boardsplice=createSlice({
@@ -59,10 +25,17 @@ const Boardsplice=createSlice({
                 password:password||state.password,
                 username:username||state.username,
             }
-        }
+        },
+        setBorderFormRedux: (state, action) => {
+            state.BordFormRedux.push(action.payload);
+          },
     }
 
 })
+
+export const {boarduserstore,setBorderFormRedux}=Boardsplice.actions
+
+export default  Boardsplice.reducer;
 
 
 
