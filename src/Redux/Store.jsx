@@ -6,7 +6,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import Boardsplice from './BoardUser'
 
 
-
+//storage kannan vendi
 const persistConfig = {
     key: 'root',      
     storage,     

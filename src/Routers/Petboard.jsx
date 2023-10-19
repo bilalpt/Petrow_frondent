@@ -24,6 +24,11 @@ import BordingForm from '../Petboard/BoardingForm/BordingForm';
 
 // summary
 import Summary from '../Petboard/BoardingForm/Summary';
+// edit boardform
+import EditBoardingForm from '../Petboard/BoardingForm/EditBoardingForm';
+
+
+
 
 
 
@@ -60,6 +65,10 @@ function Petboard() {
           <Route exact path='/BordingForm' element={<BordingForm/>}/>
           {/* summary */}
           <Route exact path='/Summary' element={<Summary/>}/>
+
+          {/* editboardform */}
+
+          <Route exact path='/EditBoardingForm' element={<EditBoardingForm/>}/>
          
          </Route>
 
