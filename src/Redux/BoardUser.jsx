@@ -29,11 +29,16 @@ const Boardsplice=createSlice({
         setBorderFormRedux: (state, action) => {
             state.BordFormRedux.push(action.payload);
           },
+          UpdateBoardForm: (state, action) => {
+            const { index, upadateboardform } = action.payload;
+            state.BordFormRedux[index] = upadateboardform;
+          }
+          
     }
 
 })
 
-export const {boarduserstore,setBorderFormRedux}=Boardsplice.actions
+export const {boarduserstore,setBorderFormRedux,UpdateBoardForm}=Boardsplice.actions
 
 export default  Boardsplice.reducer;
 

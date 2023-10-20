@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Summary = () => {
   const { BordFormRedux } = useSelector((state) => state.user);
   const [formstate, usestate] = useState({ pettype: '', nuberofpetboarded: '', petbreed: '', petsize: '', additionalinfo: '', startdate: '', enddate: '' })
+  const navigate=useNavigate()
+
+
   useEffect(() => {
     
     const data = BordFormRedux[BordFormRedux.length - 1];
@@ -33,7 +37,7 @@ const Summary = () => {
           <h1 className='text-lg place-self-start text-[#757575] pt-5'>End date</h1>
           <h1 className='place-self-start pt-5'>{formstate.enddate}</h1>
 
-          <h1 className='pt-10 space-x-12 text-2xl'><button className='bg-[#aaeeea] rounded-md w-16'>Edit</button>
+          <h1 className='pt-10 space-x-12 text-2xl'><button onClick={()=>navigate('/PetBoards/EditBoardingForm')} className='bg-[#aaeeea] rounded-md w-16'>Edit</button>
             <button className='bg-[#9B89B9] text-white  text-2xl rounded-md w-16'>Next</button></h1>
 
 

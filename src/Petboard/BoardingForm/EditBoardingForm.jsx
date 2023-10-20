@@ -10,18 +10,24 @@ import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from 'react-redux';
 import { setBorderFormRedux } from '../../Redux/BoardUser';
 import { useNavigate } from 'react-router-dom';
+import { UpdateBoardForm } from '../../Redux/BoardUser'
 
 const EditBoardingForm = () => {
-  const [formstate,usestate]=useState({pettype:'',nuberofpetboarded:'',petbreed:'',petsize:'',additionalinfo:'',startdate:'',enddate:''})
 
-  const {Editformsummary}=useSelector((state)=>state.user);
+    const dispatch =useDispatch()
+  const [formstate,usestate]=useState({id:'',pettype:'',nuberofpetboarded:'',petbreed:'',petsize:'',additionalinfo:'',startdate:'',enddate:''})
+
+  const {BordFormRedux}=useSelector((state)=>state.user);
+//   console.log(BordFormRedux);
 
   useEffect(()=>{
 
-    const data = Editformsummary[Editformsummary.length -1]
-    usestate({pettype:data.pettype,nuberofpetboarded:data.nuberofpetboarded,petbreed:id.petbreed,petsize:id.petsize,additionalinfo:id.additionalinfo,startdate:id.startdate,enddate:id.enddate})
+    const data = BordFormRedux[BordFormRedux.length -1]
+    usestate({id:data.id,pettype:data.pettype,nuberofpetboarded:data.nuberofpetboarded,petbreed:data.petbreed,petsize:data.petsize,additionalinfo:data.additionalinfo,startdate:data.startdate,enddate:data.enddate})
 
   }, [])
+
+  const navigate=useNavigate()
 
 
   //validation
@@ -58,12 +64,17 @@ const editboardfun= async(e)=>{
   e.preventDefault();
   if(editboardformvalid())
   try{
-    const response= await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL +"petboarding/Boardingform",formstate)
-    console.log(response)
-    // dispatch(setBorderFormRedux(response.data))
-    toast.success(response.data.msg);
-    // navigate('/PetBoards/Summary')
 
+    const response= await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL +"petboarding/boardingformEdit/"+formstate.id ,formstate)
+    console.log(response)
+    const lastIndex = BordFormRedux.length - 1;
+    dispatch(UpdateBoardForm({index:lastIndex,upadateboardform: response.data}));
+    // toast.success(response.data.msg);
+    navigate('/PetBoards/Summary')
+    
+  }catch(error){
+    console.log(error);
+    console.log('edit board error occure');
   }
 
 }
@@ -77,7 +88,7 @@ const editboardfun= async(e)=>{
       <div className='bg-[#EEEEEE] h-screen flex justify-center items-center shadow-2xl'>
                 <div className='bg-[#ffffff] flex flex-col items-center w-2/4 p-6 rounded-lg shadow-2xl'>
 
-                    <form action="" onSubmit={editboardformvalid}  className="flex flex-col items-center">
+                    <form action="" onSubmit={editboardfun}  className="flex flex-col items-center">
                         <div className='mb-4'>
                             <h1 className='text-3xl mb-4'>Edit Pet Boarding</h1>
                         </div>
@@ -146,7 +157,7 @@ const editboardfun= async(e)=>{
 
                             <input
                             name='boardingenddate'
-                            value={formstate.boardingenddate}
+                            value={formstate.enddate}
                             onChange={(e)=>usestate({...formstate,enddate:e.target.value})}
                               className='w-full md:w-96 lg:w-120   bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type="date" />
                         </div>
