@@ -96,7 +96,7 @@ const editboardfun= async(e)=>{
                         <div className='mb-4 w-full'>
                             <select 
                             name="selectpettype"
-                            value={formstate.selectpettype}
+                            value={formstate.pettype}
                             onChange={(e)=>usestate({...formstate,pettype:e.target.value})}
                             className="w-full md:w-96 lg:w-120 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected>Pet Type</option>
@@ -120,7 +120,7 @@ const editboardfun= async(e)=>{
                             </select>
                         </div>
                         <div className='mb-4 w-full'>
-                            <input name='petbreed' onChange={(e)=>usestate({...formstate,[e.target.name]:e.target.value})}className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type="text" placeholder='Pet Breed' />
+                            <input name='petbreed' value={formstate.petbreed} onChange={(e)=>usestate({...formstate,[e.target.name]:e.target.value})}className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type="text" placeholder='Pet Breed' />
 
                         </div>
 
@@ -139,7 +139,7 @@ const editboardfun= async(e)=>{
                         </div>
 
                         <div className='mb-4 w-full'>
-                            <input  name='additionalinfo' onChange={(e)=>usestate({...formstate,[e.target.name]:e.target.value})} className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type="text" placeholder='Additional Information' />
+                            <input  name='additionalinfo' value={formstate.additionalinfo} onChange={(e)=>usestate({...formstate,[e.target.name]:e.target.value})} className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type="text" placeholder='Additional Information' />
 
                         </div>
 
@@ -147,7 +147,7 @@ const editboardfun= async(e)=>{
                         <div className="mb-4 w-full">
 
                             <input name='boardingdate'
-                            value={formstate.boardingdate}
+                            value={formstate.startdate}
                             onChange={(e)=>usestate({...formstate,startdate:e.target.value})}
                             className='w-full md:w-96 lg:w-120   bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type="date" />
                         </div>

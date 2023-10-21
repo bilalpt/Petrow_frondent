@@ -52,7 +52,7 @@ function Petboard() {
           
           <Route element={<BoardProtected/>}>
           {/* petrow home */}
-          <Route exact path='/CareHome' element={<CareHome/>}/>
+          {/* <Route exact path='/CareHome' element={<CareHome/>}/> */}
 
           {/* petboard home */}
           <Route exact path='/BoardHome' element={<BoardHome/>}/>

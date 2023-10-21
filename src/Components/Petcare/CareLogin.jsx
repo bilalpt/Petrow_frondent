@@ -51,7 +51,7 @@ function CareLogin() {
                     console.log(res.data);
                     const token = JSON.stringify(res.data);
                     localStorage.setItem("token", token);
-                    navigate("/PetBoards/CareHome")
+                    navigate("/PetTakers/PetTakerHome")
     
     
                 } catch (error) {

@@ -33,7 +33,7 @@ const Summary = () => {
           <h1 className='text-lg place-self-start text-[#757575] pt-5'>Anything else the sitter will need to know(optional)</h1>
           <h1 className='place-self-start pt-5'>{formstate.additionalinfo}</h1>
           <h1 className='text-lg place-self-start text-[#757575] pt-5'>Date</h1>
-          <h1 className='place-self-start pt-5'>{formstate.additionalinfo}</h1>
+          <h1 className='place-self-start pt-5'>{formstate.startdate}</h1>
           <h1 className='text-lg place-self-start text-[#757575] pt-5'>End date</h1>
           <h1 className='place-self-start pt-5'>{formstate.enddate}</h1>
 

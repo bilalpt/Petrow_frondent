@@ -56,7 +56,7 @@ export function CareNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to={`/PetBoards/CareHome`} className="flex items-center">
+        <Link to={`/PetTakers/PetTakerHome`} className="flex items-center">
           Home 
         </Link>
       </Typography>
@@ -66,9 +66,9 @@ export function CareNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          {/* Pet Boarding */}
-        </a>
+        <Link href="#" to={`/PetTakers/PetTakerterms`} className="flex items-center">
+          Pet Taker
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -88,12 +88,12 @@ export function CareNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" onClick={()=>navigate('/PetTakers/PettakerProfile')} className="flex items-center">
+        <Link href="#"  to={"/PetTakers/PettakerProfile"}  className="flex items-center">
           <img class="block mx-auto h-10 rounded-full sm:mx-0 sm:shrink-0" src={defaultprofile} alt="Woman's Face" />
           Profile
 
 
-        </a>
+        </Link>
       </Typography>
     </ul>
   );
