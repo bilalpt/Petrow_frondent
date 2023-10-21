@@ -16,21 +16,21 @@ const PetTakerterms = () => {
 
     return (
         <>
-            <div>
+            <div className='bg-[#d7c6f4]'>
                 <CareNavbar />
 
                 <div className=' grid  justify-center  	'>
                     <div className=''>
                         <img
                             src={cropanimal}
-                            className=" pl-24 pr-24 w-screen  h-[65vh] "
+                            className=" pl-24 pr-24 w-screen  h-[65vh] shadow-2xl"
                             alt="cropanimal"
                         />
 
                     </div>
-                    <div className='  flex justify-center items-center mb-10'>
+                    <div className='  flex justify-center items-center mb-10 '>
 
-                        <div className='bg-[#EEEEEE] grid grid-col items-center w-2/4 p-6 rounded-lg shadow-2xl mt-12'>
+                        <div className='bg-[#817299] grid grid-col items-center w-2/4 p-6 rounded-lg shadow-2xl mt-12'>
                             <ul class="list-disc grid justify-center items-center ">
                                 <li>You must be above 18 years old pet lover </li>
                                 <br />
