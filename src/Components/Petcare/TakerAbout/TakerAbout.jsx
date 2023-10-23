@@ -1,5 +1,5 @@
 import React from 'react'
-import { BoardNavbar } from '../../../Navbar/BoardNavbar'
+// import { BoardNavbar } from '../../../Navbar/BoardNavbar'
 import Dogwith from "../../../assets/Dogwith.png"
 import { useState } from 'react'
 import { ToastContainer, toast } from "react-toastify";
@@ -67,7 +67,7 @@ function TakerAbout() {
         <>
             <div className='bg-[#817299]'>
                 <div className='bg-[#817299] h-screen'>
-                    <BoardNavbar />
+                    {/* <BoardNavbar /> */}
                     <div className='bg-[#817299] h-10'>
                     </div>
                     <div className=' bg-[#817299]'>

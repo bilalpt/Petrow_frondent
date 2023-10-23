@@ -27,6 +27,7 @@ const Boardsplice=createSlice({
             }
         },
         // petboard form
+        
         setBorderFormRedux: (state, action) => {
             state.BordFormRedux.push(action.payload);
           },

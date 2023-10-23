@@ -10,6 +10,7 @@ import TakerProtected from '../ProtectedRouters/TakerProtected';
 import PetTakerHome from '../Components/Petcare/PetTakerHome';
 import PetTakerterms from '../Components/Petcare/PetTaker/PetTakerterms';
 import TakerAbout from '../Components/Petcare/TakerAbout/TakerAbout'
+import TakerDescription from '../Components/Petcare/TakerDescription/TakerDescription'
 
 
 
@@ -34,6 +35,8 @@ const TakerRouters = () => {
                     <Route exact path='/PettakerProfile' element={<PettakerProfile />} />
                     <Route exact path='/PetTakerterms'element={<PetTakerterms/>}/>
                     <Route exact path='/TakerAbout' element={<TakerAbout/>}/>
+                    <Route exact path='/TakerDescription' element={<TakerDescription/>}/>
+
                 </Route>
 
 
