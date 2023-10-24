@@ -8,7 +8,18 @@ import axios from 'axios';
 
 
 function TakerDescription() {
-  const [details, detailstate] = useState({ servicename: '', petcount: '', acceptingpet: '', acceptingpetsize: '', howmanywalk: '', apartmentorhome: '', transportemergencies: '', sleepinglocation: '', price: '', location: '', pincode: '' })
+  const [details, detailstate] = useState({ 
+    servicename: '',
+    petcount: '',
+    acceptingpet: '', 
+    acceptingpetsize: '', 
+    howmanywalk: '', 
+    apartmentorhome: '', 
+    transportemergencies: '', 
+    sleepinglocation: '', 
+    price: '', 
+    location: '', 
+    pincode: '', })
   console.log(details);
 
   //description validation
@@ -20,43 +31,43 @@ function TakerDescription() {
     }
     else if (details.petcount.trim === '') {
       toast.error('please select Number of Pet taking ');
-      return false
+      return false;
     }
     else if (details.acceptingpet.trim === '') {
       toast.error('please select Pet Type ');
-      return false
+      return false;
     }
     else if (details.acceptingpetsize.trim === '') {
       toast.error('please select Pet Size ');
-      return false
+      return false;
     }
     else if (details.howmanywalk.trim === '') {
       toast.error('please select How Many Walk Per Day ');
-      return false
+      return false;
     }
     else if (details.apartmentorhome.trim === '') {
       toast.error(' please select What best describes the home you live in  ? ');
-      return false
+      return false;
     }
     else if (details.transportemergencies.trim === '') {
       toast.error('Please Select Do you have any transport emergencies');
-      return false
+      return false;
     }
     else if (details.sleepinglocation.trim === '') {
       toast.error('Please Select where will pets sleep at night ?');
-      return false
+      return false;
     }
     else if (details.price.trim === '') {
       toast.error('Please Enter your boarding price per night');
-      return false
+      return false;
     }
     else if (details.location.trim === '') {
       toast.error('Please Enter your location');
-      return false
+      return false;
     }
     else if (details.location.trim === '') {
       toast.error('Please Enter your Pincode');
-      return false
+      return false;
     }
 
     return true
@@ -64,8 +75,8 @@ function TakerDescription() {
 
 
   const Descriptionfun=async(e)=>{
-    e.preventDefault();
-    if(TakerDescription)
+    e.preventDefault()
+    if(validation())
       try{
           const Response=await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL+ "petcare/Takerdetalis",details);
           toast.success(Response.data.msg)
@@ -102,7 +113,7 @@ function TakerDescription() {
               />
 
               <div className='bg-[#ecd6d6] flex flex-col items-center w-1/2 p-6 rounded-lg shadow-2xl mt-10 ml-20'>
-                <form action="" className="flex flex-col items-center">
+                <form action="" onSubmit={Descriptionfun} className="flex flex-col items-center">
                   <div className='mb-4'>
                     <h1 className='text-3xl mb-4'>Description</h1>
                   </div>
@@ -114,7 +125,10 @@ function TakerDescription() {
 
                   <div className='mb-4 w-full'>
 
-                    <select name="petcount" value={details.petcount} onChange={(e) => detailstate({ ...details, petcount: e.target.value })} id="" className="w-full md:w-96 lg:w-120 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select 
+                      name="petcount" 
+                      value={details.petcount} 
+                      onChange={(e) => detailstate({ ...details, petcount: e.target.value })} id="" className="w-full md:w-96 lg:w-120 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                       <option selected>Nomber of Taking</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -125,7 +139,10 @@ function TakerDescription() {
 
                   </div>
                   <div className='mb-4 w-full'>
-                    <select name="acceptingpet" value={details.acceptingpet} onChange={(e) => detailstate({ ...details, acceptingpet: e.target.value })} className="w-full md:w-96 lg:w-120 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="">
+                    <select 
+                      name="acceptingpet" 
+                      value={details.acceptingpet} 
+                      onChange={(e) => detailstate({ ...details, acceptingpet: e.target.value })} className="w-full md:w-96 lg:w-120 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="">
                       <option selected>Pet Type</option>
                       <option value="Dog">Dog</option>
                       <option value="Cat">Cat</option>
