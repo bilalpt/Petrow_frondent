@@ -3,11 +3,18 @@ import { useState } from 'react'
 import { ToastContainer, toast } from "react-toastify";
 import Dogwith from "../../../assets/Dogwith.png"
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { TakerDescriptionfun } from '../../../Redux/BoardTakerRedux';
+
 
 
 
 
 function TakerDescription() {
+
+  const dispatch=useDispatch()
+
+
   const [details, detailstate] = useState({ 
     servicename: '',
     petcount: '',
@@ -20,6 +27,7 @@ function TakerDescription() {
     price: '', 
     location: '', 
     pincode: '', })
+
   console.log(details);
 
   //description validation
@@ -75,11 +83,12 @@ function TakerDescription() {
 
 
   const Descriptionfun=async(e)=>{
-    e.preventDefault()
+    e.preventDefault();
     if(validation())
       try{
           const Response=await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL+ "petcare/Takerdetalis",details);
           toast.success(Response.data.msg)
+          dispatch(TakerDescriptionfun(Response.data))
 
           console.log(Response.data.msg)
 
@@ -100,10 +109,10 @@ function TakerDescription() {
 
         <div className='bg-[#817299] h-screen'>
           {/* <BoardNavbar /> */}
+
           <div className='bg-[#817299] h-10'>
           </div>
           <div className=' bg-[#817299]'>
-            <ToastContainer />
 
             <div className='bg-[#817299] flex'>
               <img
@@ -113,6 +122,8 @@ function TakerDescription() {
               />
 
               <div className='bg-[#ecd6d6] flex flex-col items-center w-1/2 p-6 rounded-lg shadow-2xl mt-10 ml-20'>
+              <ToastContainer />
+
                 <form action="" onSubmit={Descriptionfun} className="flex flex-col items-center">
                   <div className='mb-4'>
                     <h1 className='text-3xl mb-4'>Description</h1>

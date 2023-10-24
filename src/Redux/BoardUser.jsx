@@ -31,6 +31,7 @@ const Boardsplice=createSlice({
         setBorderFormRedux: (state, action) => {
             state.BordFormRedux.push(action.payload);
           },
+          
           UpdateBoardForm: (state, action) => {
             const { index, upadateboardform } = action.payload;
             state.BordFormRedux[index] = upadateboardform;

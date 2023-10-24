@@ -54,7 +54,7 @@ const BordingForm = () => {
         try {
 
             const response= await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL +"petboarding/Boardingform",formstate)
-            console.log(response)
+            // console.log(response)
             dispatch(setBorderFormRedux(response.data))
             toast.success(response.data.msg);
             navigate('/PetBoards/Summary')

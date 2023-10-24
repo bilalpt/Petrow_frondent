@@ -4,9 +4,15 @@ import Dogwith from "../../../assets/Dogwith.png"
 import { useState } from 'react'
 import { ToastContainer, toast } from "react-toastify";
 import axios from 'axios';
+import { TakerAboutfun } from '../../../Redux/BoardTakerRedux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 function TakerAbout() {
+
+    const dispatch=useDispatch()
+    const navigate=useNavigate()
 
     const[about,aboutstate]=useState({introduction:'',petexperience:'',workstatus:'',skillandqualifications:'',otherpetqualification:''})
     console.log(about);
@@ -46,8 +52,13 @@ function TakerAbout() {
         if(validation())
         try{
             const response=await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL+"petcare/TakerAboutpage",about);
+            dispatch(TakerAboutfun(Response.data))
+
             toast.success(response.data.msg)
             console.log('success aboutpage',response);
+
+            navigate('/PetTakers/TakerDescription')
+
 
             aboutstate({introduction:'',petexperience:'',workstatus:'',skillandqualifications:'',otherpetqualification:''})
 
