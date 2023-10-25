@@ -17,10 +17,14 @@ const Takersplice=createSlice({
         
         TakerDescriptionfun:(state,action)=>{
             state.TakerInitialDesc.push(action.payload);
+        },
+        UpdateDescription: (state,action)=>{
+            const { index,UpdateDescription }=action.payload;
+            state.TakerInitialDesc[index]=UpdateDescription
         }
     }
 })
 
-export const{TakerAboutfun,TakerDescriptionfun}=Takersplice.actions
+export const{TakerAboutfun,TakerDescriptionfun,UpdateDescription}=Takersplice.actions
 
 export default Takersplice.reducer

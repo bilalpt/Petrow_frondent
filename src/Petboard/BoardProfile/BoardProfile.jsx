@@ -2,6 +2,7 @@ import React from 'react'
 import { BoardNavbar } from '../../Navbar/BoardNavbar'
 
 const BoardProfile = () => {
+
   return (
     <>
       <div>
