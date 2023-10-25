@@ -1,10 +1,9 @@
 import React from 'react'
 
-const AdminHome = () => {
+function AdminHome() {
   return (
-    <div className='display flex text-center'>
-
-        <h1 className=''>this is admin home</h1>
+    <div>
+      <h1>admin home</h1>
       
     </div>
   )
