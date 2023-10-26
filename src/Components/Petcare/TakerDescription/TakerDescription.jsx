@@ -5,12 +5,15 @@ import Dogwith from "../../../assets/Dogwith.png"
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { TakerDescriptionfun } from '../../../Redux/BoardTakerRedux';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 
 function TakerDescription() {
+
+  const navigate=useNavigate()
 
   const dispatch=useDispatch()
 
@@ -89,6 +92,7 @@ function TakerDescription() {
           const Response=await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL+ "petcare/Takerdetalis",details);
           toast.success(Response.data.msg)
           dispatch(TakerDescriptionfun(Response.data))
+          navigate('/PetTakers/TakerWithPet')
 
           console.log(Response.data.msg)
 

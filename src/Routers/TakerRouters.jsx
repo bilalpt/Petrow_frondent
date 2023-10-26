@@ -11,6 +11,7 @@ import PetTakerHome from '../Components/Petcare/PetTakerHome';
 import PetTakerterms from '../Components/Petcare/PetTaker/PetTakerterms';
 import TakerAbout from '../Components/Petcare/TakerAbout/TakerAbout'
 import TakerDescription from '../Components/Petcare/TakerDescription/TakerDescription'
+import TakerWithPet from '../Components/Petcare/TakerWithPet/TakerWithPet'
 
 
 
@@ -36,6 +37,7 @@ const TakerRouters = () => {
                     <Route exact path='/PetTakerterms'element={<PetTakerterms/>}/>
                     <Route exact path='/TakerAbout' element={<TakerAbout/>}/>
                     <Route exact path='/TakerDescription' element={<TakerDescription/>}/>
+                    <Route exact path='/TakerWithPet' element={<TakerWithPet/>}/>
 
                 </Route>
 
