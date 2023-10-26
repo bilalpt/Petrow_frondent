@@ -20,8 +20,15 @@ import {
     PowerIcon,
   } from "@heroicons/react/24/solid";
   import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+  import AdminBoarduser from '../SidebarElement/Users/AdminBoarduser';
+  import AdminTakerUser from '../SidebarElement/Users/AdminTakerUser';
+  import { useNavigate } from 'react-router-dom';
+
 
 function AdminSidebar() {
+  const navigate=useNavigate()
+
+
     const [open, setOpen] = React.useState(0);
  
     const handleOpen = (value) => {
@@ -90,26 +97,26 @@ function AdminSidebar() {
           <ListItem className="p-0" selected={open === 2}>
             <AccordionHeader onClick={() => handleOpen(2)} className="border-b-0 p-3">
               <ListItemPrefix>
-                <ShoppingBagIcon className="h-5 w-5" />
+              <UserCircleIcon className="h-5 w-5" />
               </ListItemPrefix>
               <Typography color="blue-gray" className="mr-auto font-normal">
-                E-Commerce
+                Users
               </Typography>
             </AccordionHeader>
           </ListItem>
           <AccordionBody className="py-1">
             <List className="p-0">
-              <ListItem>
+              <ListItem onClick={()=>navigate('AdminBoarduser')}>
                 <ListItemPrefix>
                   <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                 </ListItemPrefix>
-                Orders
+                PetBoard Users
               </ListItem>
-              <ListItem>
+              <ListItem onClick={()=>navigate('AdminTakerUser')}>
                 <ListItemPrefix>
                   <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                 </ListItemPrefix>
-                Products
+                PetTaker Users
               </ListItem>
             </List>
           </AccordionBody>
