@@ -9,110 +9,75 @@ import axios from 'axios';
 
 
 
-
-
 function TakerWithPet() {
 
-    const [selectedImages, setselectedImages] = useState([]);
-    const [previewImages, setpreviewImages] = useState([]);
+    const [selectedImage, setselectedImage] = useState(null);
+    const [previewImage, setpreviewImage] = useState(null);
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
 
-    const handleImageChanges = (e) => {
-        const files = Array.from(e.target.files)
+        setselectedImage(file);
 
-        selectedImages(files)
-
-        const imagePrevieURls = files.map((file) => URL.createObjectURL(file));
-        setpreviewImages(imagePrevieURls)
-
-
+        const imagePreviewURL = file ? URL.createObjectURL(file) : null;
+        setpreviewImage(imagePreviewURL);
     };
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-
         const formData = new FormData();
-        for (let i = 0; i < selectedImages.length; i++) {
-            formData.append('message', selectedImages[i]);
+        if (selectedImage) {
+            formData.append('image', selectedImage);
         }
-
-
 
         try {
-            const Response = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL+"petcare/Takerwithpet",selectedImages)
+            const Response = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/Takerwithpet", formData)
 
-            if (Response.ok) {
-                console.log("Images uploaded successfully!");
+            if (Response.status === 201) {
+                console.log("Image uploaded successfully!");
             } else {
-                console.error("Error uploading images:", Response.statusText);
+                console.error("Error uploading image:", Response.statusText);
             }
 
-        }
-        catch (error) {
-            console.error("Error uploading images:", error);
+        } catch (error) {
+            console.error(error);
         }
     }
-
-
 
     return (
         <>
             <div className='bg-[#817299]'>
                 <div className='bg-[#817299] h-screen'>
-                    {/* <BoardNavbar /> */}
-                    <div className='bg-[#817299] h-10'>
-                    </div>
+                    <div className='bg-[#817299] h-10'></div>
                     <div className=' bg-[#817299]'>
                         <ToastContainer />
-
                         <div className='bg-[#817299] flex '>
                             <img
                                 src={Petwithselfie}
                                 className="  h-[60vh]"
                                 alt="cropanimal"
                             />
-
                             <div className='bg-[#ffffff] flex flex-col items-center w-1/2 p-6 rounded-lg shadow-2xl mt-10  ml-20'>
-                                <div >
-                                    <h1 className='text-3xl mb-4 '>Add Your Pet With Images</h1>
+                                <div>
+                                    <h1 className='text-3xl mb-4 '>Add Your Pet With an Image</h1>
                                 </div>
+                                {previewImage && <img src={previewImage} alt="Preview" />}
                                 <form action="" onSubmit={handleSubmit}>
                                     <input
                                         type="file"
                                         accept="image/*"
-                                        multiple
-                                        onChange={handleImageChanges}
+                                        onChange={handleImageChange}
                                     />
-                                    <div className='bg-[#efd7d7] rounded-md mt-32'>
-                                        <button><img src={Plusbutton} className='h-[10vh]' alt="" /></button>
-
-
+                                    <div className='bg-[#efd7d7] rounded-md mt-32 w-20 ml-28'>
+                                        <button><img src={Plusbutton} className='h-[10vh] w-20' alt="" /></button>
                                     </div>
                                 </form>
-                                <div>
-                                    {previewImages.map((previewURL, index) => (
-                                        <img key={index} src={previewURL} alt={`Preview ${index}`} />
-                                    ))}
-                                </div>
-
-
-
                             </div>
-
                         </div>
-
-
-
-
                     </div>
-
                 </div>
-
-
             </div>
-
         </>
     )
 }
