@@ -76,7 +76,7 @@ function TakerAbout() {
 
     return (
         <>
-            <div className='bg-[#817299]'>
+            <div className='bg-[#817299] '>
                 <div className='bg-[#817299] h-screen'>
                     {/* <BoardNavbar /> */}
                     <div className='bg-[#817299] h-10'>

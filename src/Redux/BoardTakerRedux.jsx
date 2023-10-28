@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState={
     TakerAbout: [],
     TakerInitialDesc: [],
+    Takeruserinitial:[],
 }
 
 const Takersplice=createSlice({
@@ -21,10 +22,14 @@ const Takersplice=createSlice({
         UpdateDescription: (state,action)=>{
             const { index,UpdateDescription }=action.payload;
             state.TakerInitialDesc[index]=UpdateDescription
-        }
+        },
+        Takeruserfun:(state,action)=>{
+            state.Takeruserinitial.push(action.payload);
+
+        },
     }
 })
 
-export const{TakerAboutfun,TakerDescriptionfun,UpdateDescription}=Takersplice.actions
+export const{TakerAboutfun,TakerDescriptionfun,UpdateDescription,Takeruserfun}=Takersplice.actions
 
 export default Takersplice.reducer
