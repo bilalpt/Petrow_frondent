@@ -12,122 +12,200 @@ import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { UpdateDescription } from '../../../Redux/BoardTakerRedux'
+import { toast } from 'react-toastify'
+import jwtDecode from 'jwt-decode'
 
 const PettakerProfile = () => {
   const dispatch = useDispatch();
+
+  //taker user details edit
+
   const [details, detailstate] = useState({
-    id:'',
+    id: '',
     servicename: '',
     petcount: '',
-    acceptingpet: '', 
-    acceptingpetsize: '', 
-    howmanywalk: '', 
-    apartmentorhome: '', 
-    transportemergencies: '', 
-    sleepinglocation: '', 
-    price: '', 
-    location: '', 
-    pincode: '', })
+    acceptingpet: '',
+    acceptingpetsize: '',
+    howmanywalk: '',
+    apartmentorhome: '',
+    transportemergencies: '',
+    sleepinglocation: '',
+    price: '',
+    location: '',
+    pincode: '',
+  })
 
   console.log(details);
-    
-
-
 
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(!open);
 
-  const {TakerInitialDesc}=useSelector((state)=>state.takerforms);
-  const data= TakerInitialDesc[TakerInitialDesc.length-1]
+  const { TakerInitialDesc } = useSelector((state) => state.takerforms);
 
+  const data = TakerInitialDesc[TakerInitialDesc.length - 1]
 
-
-  useEffect(()=>{
+  useEffect(() => {
 
     detailstate({
       id: data.id,
       servicename: data.servicename,
       petcount: data.petcount,
-      acceptingpet: data.acceptingpet, 
-      acceptingpetsize: data.acceptingpetsize, 
-      howmanywalk: data.howmanywalk, 
-      apartmentorhome: data.apartmentorhome, 
-      transportemergencies: data.transportemergencies, 
-      sleepinglocation: data.sleepinglocation, 
-      price: data.price, 
-      location: data.location, 
+      acceptingpet: data.acceptingpet,
+      acceptingpetsize: data.acceptingpetsize,
+      howmanywalk: data.howmanywalk,
+      apartmentorhome: data.apartmentorhome,
+      transportemergencies: data.transportemergencies,
+      sleepinglocation: data.sleepinglocation,
+      price: data.price,
+      location: data.location,
       pincode: data.pincode,
     });
 
 
-  },[])
+  }, [])
 
-    //description validation
+  //taker user details edit end
 
-    const validation = () => {
-      if (details.servicename.trim === '') {
-        toast.error('Please enter the service name');
-        return false;
-      }
-      else if (details.petcount.trim === '') {
-        toast.error('please select Number of Pet taking ');
-        return false;
-      }
-      else if (details.acceptingpet.trim === '') {
-        toast.error('please select Pet Type ');
-        return false;
-      }
-      else if (details.acceptingpetsize.trim === '') {
-        toast.error('please select Pet Size ');
-        return false;
-      }
-      else if (details.howmanywalk.trim === '') {
-        toast.error('please select How Many Walk Per Day ');
-        return false;
-      }
-      else if (details.apartmentorhome.trim === '') {
-        toast.error(' please select What best describes the home you live in  ? ');
-        return false;
-      }
-      else if (details.transportemergencies.trim === '') {
-        toast.error('Please Select Do you have any transport emergencies');
-        return false;
-      }
-      else if (details.sleepinglocation.trim === '') {
-        toast.error('Please Select where will pets sleep at night ?');
-        return false;
-      }
-      else if (details.price.trim === '') {
-        toast.error('Please Enter your boarding price per night');
-        return false;
-      }
-      else if (details.location.trim === '') {
-        toast.error('Please Enter your location');
-        return false;
-      }
-      else if (details.location.trim === '') {
-        toast.error('Please Enter your Pincode');
-        return false;
-      }
-  
-      return true
+  //description validation
+
+  const validation = () => {
+    if (details.servicename.trim === '') {
+      toast.error('Please enter the service name');
+      return false;
+    }
+    else if (details.petcount.trim === '') {
+      toast.error('please select Number of Pet taking ');
+      return false;
+    }
+    else if (details.acceptingpet.trim === '') {
+      toast.error('please select Pet Type ');
+      return false;
+    }
+    else if (details.acceptingpetsize.trim === '') {
+      toast.error('please select Pet Size ');
+      return false;
+    }
+    else if (details.howmanywalk.trim === '') {
+      toast.error('please select How Many Walk Per Day ');
+      return false;
+    }
+    else if (details.apartmentorhome.trim === '') {
+      toast.error(' please select What best describes the home you live in  ? ');
+      return false;
+    }
+    else if (details.transportemergencies.trim === '') {
+      toast.error('Please Select Do you have any transport emergencies');
+      return false;
+    }
+    else if (details.sleepinglocation.trim === '') {
+      toast.error('Please Select where will pets sleep at night ?');
+      return false;
+    }
+    else if (details.price.trim === '') {
+      toast.error('Please Enter your boarding price per night');
+      return false;
+    }
+    else if (details.location.trim === '') {
+      toast.error('Please Enter your location');
+      return false;
+    }
+    else if (details.location.trim === '') {
+      toast.error('Please Enter your Pincode');
+      return false;
     }
 
-    const EditDescription=async(e)=>{
-      e.preventDefault(); 
-      try{
-        const Response=await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL +"petcare/TakerDescriptionEdit/"+details.id,details)
-      const lastIndex=TakerInitialDesc.length -1;
-      console.log(Response.data);
-      dispatch(UpdateDescription({index:lastIndex,UpdateDescription:Response.data}))
-      }catch(error){
+    return true
+  }
+
+  const EditDescription = async (e) => {
+    e.preventDefault();
+    if (validation())
+      try {
+        const Response = await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakerDescriptionEdit/" + details.id, details)
+        const lastIndex = TakerInitialDesc.length - 1;
+        console.log(Response.data);
+        dispatch(UpdateDescription({ index: lastIndex, UpdateDescription: Response.data }))
+      } catch (error) {
         console.log(error);
 
       }
-      
-      
-    }
+
+
+
+
+
+  }
+
+
+
+  //taker edit
+
+  // const [takeruser, stateTakeruser] = useState({ id: '', username: '', email: '' })
+
+  // const [secondOpen, setSecond] = useState(false);
+  // const secondhandle = () => setSecond(!secondOpen);
+
+  // const { Takeruserinitial } = useSelector((state) => state.takerforms)
+  // const userdata = Takeruserinitial[Takeruserinitial.length-1]
+  // if(!userdata){
+  //   return null;
+  // }
+  // useEffect(() => {
+  //   stateTakeruser({
+  //     id: userdata.id,
+  //     username: userdata.username,
+  //     email: userdata.email,
+
+  //   }
+  //   )
+  // })
+  // //taker edit end
+
+  // const uservalidation = () => {
+  //   if (takeruser.username.trim === '') {
+  //     toast.error('please enter the name');
+  //     return false
+  //   }
+  //   else if (takeruser.email.trim === '') {
+  //     toast.error('please enter the email');
+  //     return false
+  //   }
+  //   return true
+  // }
+
+
+  // const EditTaker= async (e)=>{
+  //   e.preventDefault();
+  //   if(uservalidation())
+  //   try{
+
+  //     const Res2=await axios.patch(models.meta.env.VITE_PETBOARDUSERS_URL+"petcare/TakerprofileEdit/"+userdata.id,takeruser);
+  //     const takeruser=Takeruserinitial.length-1;
+  //     const token=JSON.stringify(Res2.data);
+  //     localStorage.setItem("token",token)
+  //     const decode=jwtDecode(token)
+  //     const user_id=decode.id
+  //     const userResponse=await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL +'petboarding/singleboarduser/'+user_id + '/' ,{withCredentials:true})
+  //     dispact(Updateuser(userResponse.data))
+
+
+  //   }
+  //   catch(error){
+  //     console.log(error)
+  //   }
+
+
+  // }
+
+
+
+
+
+
+
+
+
 
 
   return (
@@ -155,35 +233,45 @@ const PettakerProfile = () => {
                 <h1 className=''>Hey,Im</h1><h1 className='text-2xl'>Tommy</h1> <h1 className=''>baxter@gmail.com</h1>
                 <div className=' mt-14   flex gap-4'>
 
-                  <button className='bg-[#9A9A9A] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Edit</button>
-                  {/* <button className='bg-[#AC5555] hover:bg-red-700 text-white font-bold py-2 px-4 rounded pl-4'>logout</button> */}
+                  {/* <button className='bg-[#9A9A9A] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Edit</button> */}
+                  {/* user details edit modal */}
+
+
+                  {/* <Button onClick={setSecond} variant="gradient">
+                    Edit Your Details
+                  </Button>
+                  <Dialog open={secondOpen} handler={setSecond}>
+                    <DialogBody>
+                      <div className='flex  flex-col	justify-center	items-center'>
+
+                        <form action="" onSubmit={EditTaker} className="flex flex-col items-center">
+                          <div className='mb-2'>
+                            <h1 className='text-3xl mb-4'>Edit Taker Description</h1>
+                          </div>
+
+                          <div className='mb-3 w-full'>
+                            <input type="text" name='servicename' value={details.servicename} onChange={(e) => detailstate({ ...details, [e.target.name]: e.target.value })} className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='Give a Name to Your Service' />
+
+                          </div>
+                        </form>
+                      </div>
+                    </DialogBody>
+
+                  </Dialog> */}
+
 
                   {/* modal */}
                   <Button onClick={handleOpen} variant="gradient">
-                    Edit Details
+                    Edit Your Details
                   </Button>
                   <Dialog open={open} handler={handleOpen}>
                     {/* <DialogHeader>Edit Taker Description</DialogHeader> */}
                     <DialogBody>
                       <div className='flex  flex-col	justify-center	items-center'>
-                        {/* <div>
-                          <input type="text" id="field1" className=' w-full  md:w-96 lg:w-120 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' />
-                        </div>
-                        <br />
-                        <div>
-                          <input type="text" id="field2" className='w-full  md:w-96 lg:w-120 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' />
-                        </div>
-                        <br />
-                        <div>
-                          <input type="text" id="field3" className='w-full  md:w-96 lg:w-120 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' />
-                        </div>
-                        <br />
-                        <div>
-                          <input type="text" id="field4" className='w-full  md:w-96 lg:w-120 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' />
-                        </div> */}
+
                         <form action="" onSubmit={EditDescription} className="flex flex-col items-center">
                           <div className='mb-2'>
-                            <h1 className='text-3xl mb-4'>Edit Description</h1>
+                            <h1 className='text-3xl mb-4'>Edit Taker Description</h1>
                           </div>
 
                           <div className='mb-3 w-full'>
@@ -306,7 +394,7 @@ const PettakerProfile = () => {
                           </div>
 
                           <div>
-                          <button className="bg-blue-500 text-white py-2 px-4 rounded-full mx-4">Submit</button>
+                            <button className="bg-blue-500 text-white py-2 px-4 rounded-full mx-4">Submit</button>
 
 
                           </div>
@@ -316,14 +404,7 @@ const PettakerProfile = () => {
 
                       </div>
                     </DialogBody>
-                    {/* <DialogFooter>
-                      <Button variant="text" color="red" onClick={handleOpen} className="mr-1">
-                        <span>Cancel</span>
-                      </Button>
-                      <Button variant="gradient" color="green" onClick={handleOpen}>
-                        <span>Confirm</span>
-                      </Button>
-                    </DialogFooter> */}
+
                   </Dialog>
 
 

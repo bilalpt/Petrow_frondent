@@ -20,3 +20,7 @@ export const BoardLogin = (values) =>{
 
 }
 
+export const TakerUserInfo = (id) =>{
+    return PETBOARDHOMEAxiosInstant.get("/petcare/takeruserinfo/" +id+ "/" ,{withCredentials:true})
+}
+

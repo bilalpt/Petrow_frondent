@@ -8,6 +8,8 @@ const initialState={
     email:"",
     password:"",
     BordFormRedux : [],
+    BoarduserRedux:{},
+    
 }
 
 const Boardsplice=createSlice({
@@ -35,13 +37,16 @@ const Boardsplice=createSlice({
           UpdateBoardForm: (state, action) => {
             const { index, upadateboardform } = action.payload;
             state.BordFormRedux[index] = upadateboardform;
+          },
+          BoarduserDetails:(state,action)=>{
+            state.BoarduserRedux=action.payload.BoarduserRedux
           }
           
     }
 
 })
 
-export const {boarduserstore,setBorderFormRedux,UpdateBoardForm}=Boardsplice.actions
+export const {boarduserstore,setBorderFormRedux,UpdateBoardForm,BoarduserDetails}=Boardsplice.actions
 
 export default  Boardsplice.reducer;
 

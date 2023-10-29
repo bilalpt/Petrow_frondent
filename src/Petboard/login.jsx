@@ -5,6 +5,8 @@ import { NavbarDefault } from '../Navbar/Navbar';
 import axios from "axios";
 import { useEffect } from 'react';
 import jwtDecode from "jwt-decode";
+import { useDispatch } from 'react-redux';
+import { BoarduserDetails } from '../Redux/BoardUser';
 
 
 import "react-toastify/dist/ReactToastify.css";
@@ -14,6 +16,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 
 function BoardLogin() {
+    const dispact=useDispatch()
     const navigate = useNavigate();
     const [boarduser, boarduserstate] = useState({ email: '', password: '' })
 
@@ -54,6 +57,10 @@ function BoardLogin() {
                 console.log(res.data);
                 const token = JSON.stringify(res.data);
                 localStorage.setItem("token", token);
+                const decoded=jwtDecode(token)
+                const user_id=decoded.id
+                const userResponse=await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL +'petboarding/singleboarduser/'+user_id + '/' ,{withCredentials:true})
+                dispact(BoarduserDetails(userResponse.data))
                 navigate("/PetBoards/BoardHome")
             } catch (error) {
                 console.log(error);
