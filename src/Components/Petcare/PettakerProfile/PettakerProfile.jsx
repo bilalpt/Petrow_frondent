@@ -137,6 +137,31 @@ const PettakerProfile = () => {
 
   }
 
+  const { Takeruserinitial } = useSelector((state) => state.takerforms);
+
+  const [takeruser,takerstate]=useState({id:'',username: '', email: '',phone:''})
+
+  console.log(takeruser);
+
+  useEffect(()=>{
+
+    if(Takeruserinitial.length>0){
+      const userdata=Takeruserinitial[Takeruserinitial.length-1];
+      console.log('baxter');
+      console.log('userdata:', userdata);
+      takerstate({
+        username:userdata.username,
+        email:userdata.email,
+        phone:userdata.phone,
+      })
+    }
+
+  
+    })
+
+
+
+
 
 
   //taker edit
@@ -230,7 +255,7 @@ const PettakerProfile = () => {
 
               </div>
               <div className=' mt-8 ml-8 '>
-                <h1 className=''>Hey,Im</h1><h1 className='text-2xl'>Tommy</h1> <h1 className=''>baxter@gmail.com</h1>
+                <h1 className=''>Hey,Im</h1><h1 className='text-2xl'>{takeruser.username}</h1> <h1 className=''>{takeruser.email}</h1>
                 <div className=' mt-14   flex gap-4'>
 
                   {/* <button className='bg-[#9A9A9A] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Edit</button> */}
