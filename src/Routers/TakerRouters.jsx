@@ -12,7 +12,14 @@ import PetTakerterms from '../Components/Petcare/PetTaker/PetTakerterms';
 import TakerAbout from '../Components/Petcare/TakerAbout/TakerAbout'
 import TakerDescription from '../Components/Petcare/TakerDescription/TakerDescription'
 import TakerWithPet from '../Components/Petcare/TakerWithPet/TakerWithPet'
+
+//thats two are same user details different methord
 import TakerIdproof from '../Components/Petcare/TakerIdproof/TakerIdproof'
+import TakerwithidForm from '../Components/Petcare/TakerIdproof/TakerwithidForm'
+// end that thats two are same user details different methord
+
+
+
 
 
 
@@ -41,6 +48,7 @@ const TakerRouters = () => {
                     <Route exact path='/TakerDescription' element={<TakerDescription/>}/>
                     <Route exact path='/TakerWithPet' element={<TakerWithPet/>}/>
                     <Route exact path='/TakerIdproof' element={<TakerIdproof/>}/>
+                    <Route exact path='/TakerwithidForm' element={<TakerwithidForm/>}/>
 
                 </Route>
 

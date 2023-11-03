@@ -3,12 +3,17 @@ import Dogwith from "../../../assets/Dogwith.png"
 import Plusbutton from "../../../assets/Plusbutton.png"
 import { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+
 
 
 
 function TakerIdproof() {
     const [selectedImages, setselectedImages] = useState([]);
     const [previewImages, setpreviewImages] = useState([]);
+
+    console.log(selectedImages);
+    console.log(previewImages);
 
 
     const imageChange = (e) => {
@@ -21,7 +26,7 @@ function TakerIdproof() {
         setselectedImages(files);
         setpreviewImages(selectedImagesArray);
     }
-    
+
     const validation = () => {
         if (selectedImages.length === 0) {
             toast.error('Please add at least one image');
@@ -32,34 +37,35 @@ function TakerIdproof() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         const formData = new FormData();
-    
+
         if (validation()) {
-            for (let i = 0; i < selectedImages.length; i++) {
-                formData.append('images', selectedImages[i]);
-            }
-    
+
+
             try {
+                for (let i = 0; i < selectedImages.length; i++) {
+                    formData.append('proofimage', selectedImages[i]);
+                }
                 console.log('baxter')
-                const Response = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakerDetais", formData);
+                const Response = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakerDetails", formData);
                 setselectedImages([]);
                 setpreviewImages([]);
-    
+
                 if (Response.status === 201) {
                     console.log("Images uploaded successfully!");
                 } else {
                     console.error("Error uploading images:", Response.statusText);
                 }
-    
+
             } catch (error) {
                 console.error(error);
                 console.log(error);
             }
         }
     };
-    
-    
+
+
     return (
         <>
             <div className='bg-[#817299] h-screen grid grid-cols-1 md:grid-cols-2 pt-10'>
@@ -73,9 +79,9 @@ function TakerIdproof() {
                             <input type="text" name='price' className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='Pet Boarding Price in INR : /Per night' />
 
                         </div> */}
-                    {previewImages && previewImages.map((previewImage, index) => (
-                      <img key={index} src={previewImage} alt={`Preview ${index}`} />
-                      ))}
+                        {previewImages && previewImages.map((previewImage, index) => (
+                            <img key={index} src={previewImage} alt={`Preview ${index}`} />
+                        ))}
 
 
                         <input className='md:pl-28 pt-12'
@@ -104,134 +110,4 @@ export default TakerIdproof
 
 
 
-// minhaj code
 
-
-
-// import React from "react";
-// import {
-//   Button,
-//   Dialog,
-//   Card,
-//   CardHeader,
-//   CardBody,
-//   CardFooter,
-//   Typography,
-//   Input,
-//   Checkbox,
-//   select,
-//   Spinner
-// } from "@material-tailwind/react";
-// import { multipleImageSchema } from "../../yup/validation";
-// import { useFormik } from "formik";
-// import { useSelector } from "react-redux";
-// import { useState } from "react";
-// import { useQuery, useQueryClient } from "@tanstack/react-query";
-// import { postImages } from "../../api/artistApi";
-
-
-// export default function DialogWithForm() {
-//   const queryClient = useQueryClient();
-//   const [open, setOpen] = React.useState(false);
-//   const handleOpen = () => {setOpen((cur) => !cur),setImg(null)};
-//   const { artistInfo } = useSelector((state) => state.artist);
-//   const id = artistInfo.email;
-//   const [img, setImg] = useState();
-//   const [spin,setSpin]=useState(false)
-
-//   const initialValues = {
-//     images: [],
-//   };
-
-//   const {
-//     values,
-//     errors,
-//     touched,
-//     handleBlur,
-//     handleSubmit,
-//     handleChange,
-//     setFieldValue,
-//   } = useFormik({
-//     initialValues: initialValues,
-//     validationSchema: multipleImageSchema,
-//     onSubmit: async (values) => {
-//         setSpin(true)
-//       const formData = new FormData();
-//       for (let i = 0; i < values.images.length; i++) {
-//         formData.append("images", values.images[i]);
-//       }
-//       const response = await postImages(formData, id);
-    
-//       if (response) {
-//         setOpen(!open);
-//         setSpin(false)
-//         queryClient.invalidateQueries(["artist"]);
-//       }
-//     },
-//   });
-
-//   const handleImageChange = (e) => {
-//     const file = e.target.files;
-//     const selectedFilesArray = Array.from(file);
-//     const imagesArray = selectedFilesArray.map((data) => {
-//       return URL.createObjectURL(data);
-//     });
-//     setImg(imagesArray);
-//     setFieldValue("images", file);
-//   };
-
-//   return (
-//     <>
-//       <Button className="bg-[#429348]" onClick={handleOpen}>Add posts</Button>
-//       <Dialog
-//         size="xl"
-//         open={open}
-//         handler={handleOpen}
-//         className="bg-transparent shadow-none"
-//       >
-//         <Card className="mx-auto w-full max-w-[24rem]">
-//           <form action="" onSubmit={handleSubmit}>
-//             <CardBody className="flex flex-col gap-4">
-//               <Typography variant="h4" color="blue-gray">
-//                 Add Post
-//               </Typography>
-//               <div className="grid grid-cols-3 gap-4">
-//                 {img
-//                   ? img.map((n, index) => (
-//                       <img key={index} className="w-20 h-20" src={n} alt="" />
-//                     ))
-//                   : null}
-//               </div>
-//               <Input
-//                 size="lg"
-//                 type="file"
-//                 variant="standard"
-//                 name="images"
-//                 label="images"
-//                 multiple
-//                 onChange={handleImageChange}
-//               />
-//               {touched.images && errors.images && (
-//                 <div className="text-red-500 text-sm ">{errors.images}</div>
-//               )}
-//               <Typography className="text-xs">
-//                 # Upload All of your Images About the works
-//               </Typography>
-//             </CardBody>
-//             <CardFooter className="pt-0">
-
-
-//               <Button variant="gradient" type="submit" fullWidth>
-//                 {spin?(<Spinner className="flex justify-center"/>):("Upload")}
-                
-//               </Button>
-//             </CardFooter>
-//           </form>
-//         </Card>
-//       </Dialog>
-//     </>
-//   );
-// }
-
-
-// minhaj code end
