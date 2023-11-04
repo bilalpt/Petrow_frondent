@@ -63,11 +63,16 @@ function TakerwithidForm() {
                 toast.success(Response.data.msg)
                 console.log('bilal thats got');
 
+
+
+
                 if (Response.status === 201) {
                     console.log("Image uploaded successfully!");
                 } else {
                     console.error("Error uploading image:", Response.statusText);
                 }
+                document.querySelector('button[type="back"]').disabled = true;
+                document.querySelector('a[href="/pettaker"]').remove();
             } catch (error) {
                 console.error(error);
                 console.log(error);

@@ -18,6 +18,10 @@ import TakerIdproof from '../Components/Petcare/TakerIdproof/TakerIdproof'
 import TakerwithidForm from '../Components/Petcare/TakerIdproof/TakerwithidForm'
 // end that thats two are same user details different methord
 
+//taker multiple form routers
+import TakermultstepForm from '../Components/Petcare/Pettakermultiform/TakermultstepForm'
+import Mainform from '../Components/Petcare/Pettakermultiform/Mainform'
+
 
 
 
@@ -49,6 +53,9 @@ const TakerRouters = () => {
                     <Route exact path='/TakerWithPet' element={<TakerWithPet/>}/>
                     <Route exact path='/TakerIdproof' element={<TakerIdproof/>}/>
                     <Route exact path='/TakerwithidForm' element={<TakerwithidForm/>}/>
+
+                    <Route exact path='/TakermultstepForm' element={<TakermultstepForm/>}/>
+                    <Route exact path='/Mainform' element={<Mainform/>}/>
 
                 </Route>
 
