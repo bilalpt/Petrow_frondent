@@ -8,6 +8,8 @@
     import { useDispatch } from 'react-redux';
     import { useNavigate } from 'react-router-dom';
     import { useEffect } from 'react';
+    import jwtDecode from 'jwt-decode';
+
 
 
 
@@ -16,32 +18,26 @@
         const dispatch = useDispatch()
         const navigate = useNavigate()
 
-        const [about, aboutstate] = useState({ introduction: '', petexperience: '', workstatus: '', skillandqualifications: '', otherpetqualification: '' })
+        const [about, aboutstate] = useState({ introduction: '', petexperience: '', workstatus: '', skillandqualifications: '', otherpetqualification: '' ,user: null })
         console.log(about);
 
+//user cant go back
 
         useEffect(() => {
-
-            const button = document.querySelector('button');
-            if (button) {
-                button.disabled = true;
-            }
-
-
+            window.history.pushState(null, null, '/PetTakers/TakerAbout');
+          
             window.addEventListener('popstate', function (event) {
-                event.preventDefault();
-
-                history.replaceState(null, null, '/PetTakers/TakerAbout')
+              event.preventDefault();
             });
+          
             return () => {
-                window.removeEventListener('popstate', function (event) {
-                    event.preventDefault();
+              window.removeEventListener('popstate', function (event) {
+                event.preventDefault();
+              });
+            };
+          }, []);
+//user cant go back end
 
-                    history.replaceState(null, null, '/PetTakers/About');
-                });
-            }
-
-        }, []);
 
         //taker form validation
 
@@ -73,39 +69,38 @@
 
         //taker about page function
 
-        const TakerAboutForm = async (e) => {
+        const handleFormSubmit = async (e) => {
             e.preventDefault();
-            console.log('Form submitted');
 
+            if (validation()) {
 
-            if (validation())
                 try {
+                    const token = localStorage.getItem('token');
+                    const decoded = jwtDecode(token);
+                    const user = decoded.id;
+                    console.log('baxter',user);
 
-                    const response = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakerAboutpage", about);
+                    console.log('Before update:', about);
+                    aboutstate({ ...about, user:user });
 
-                    dispatch(TakerAboutfun(Response.data))
-
-                    toast.success(response.data.msg)
+                    console.log('After update:', about);
+    
+                    const response = await axios.post(
+                        import.meta.env.VITE_PETBOARDUSERS_URL + 'petcare/TakerAboutpage',
+                        about,
+                        { withCredentials: true }
+                    );
+    
+                    // dispatch(TakerAboutfun(response.data));
+                    toast.success(response.data.msg);
                     console.log('success aboutpage', response);
-
-                    navigate('/PetTakers/TakerDescription')
-
-
-                    aboutstate({ introduction: '', petexperience: '', workstatus: '', skillandqualifications: '', otherpetqualification: '' })
-
-                    // document.querySelector('button[type="back"]').disabled = true;
-                    // navigate(-1);
-
-
-
-
-
-
-                }
-                catch (error) {
+    
+                    navigate('/PetTakers/TakerDescription');
+                } catch (error) {
                     console.log(error);
                 }
-        }
+            }
+        };
 
 
 
@@ -128,7 +123,7 @@
                                     alt="cropanimal"
                                 />
                                 <div className='bg-[#ecd6d6] flex flex-col items-center w-1/2 p-6 rounded-lg shadow-2xl mt-10 ml-20'>
-                                    <form action="" onSubmit={TakerAboutForm} className="flex flex-col items-center">
+                                    <form action="" onSubmit={handleFormSubmit} className="flex flex-col items-center">
                                         <div className='mb-4'>
                                             <h1 className='text-3xl mb-4'>About Me</h1>
                                         </div>

@@ -6,6 +6,8 @@ import Plusbutton from "../../../assets/Plusbutton.png"
 // import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from 'react';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+
 
 
 
@@ -39,7 +41,18 @@ function TakerWithPet() {
         const formData = new FormData();
         if (validation()) 
             try {
+
+                const token = localStorage.getItem('token');
+                const decoded = jwtDecode(token);
+                const user = decoded.id;
+                console.log('baxterboy',user);
+        
+
+
+
                 formData.append('image', selectedImage);
+                formData.append('user', user);
+
                 const Response = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/Takerwithpet", formData)
                 setselectedImage(null);
                 setpreviewImage(null);

@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { TakerDescriptionfun } from '../../../Redux/BoardTakerRedux';
 import { useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+
 
 
 
@@ -29,7 +31,8 @@ function TakerDescription() {
     sleepinglocation: '', 
     price: '', 
     location: '', 
-    pincode: '', })
+    pincode: '',
+    user:null })
 
   console.log(details);
 
@@ -89,14 +92,26 @@ function TakerDescription() {
     e.preventDefault();
     if(validation())
       try{
-          const Response=await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL+ "petcare/Takerdetalis",details);
+
+
+        const token = localStorage.getItem('token');
+        const decoded = jwtDecode(token);
+        const user = decoded.id;
+        console.log('baxterboy',user);
+
+        console.log('Before update:', details);
+        detailstate({ ...details, user:user });
+
+        console.log('After update:', details);
+
+          const Response=await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL+ "petcare/Takerdetalis",details,{ withCredentials: true });
           toast.success(Response.data.msg)
           dispatch(TakerDescriptionfun(Response.data))
           navigate('/PetTakers/TakerWithPet')
 
           console.log(Response.data.msg)
 
-          detailstate({ servicename: '', petcount: '', acceptingpet: '', acceptingpetsize: '', howmanywalk: '', apartmentorhome: '', transportemergencies: '', sleepinglocation: '', price: '', location: '', pincode: '' })
+          detailstate({ servicename: '', petcount: '', acceptingpet: '', acceptingpetsize: '', howmanywalk: '', apartmentorhome: '', transportemergencies: '', sleepinglocation: '', price: '', location: '', pincode: '',user:null })
 
     }catch(error){
       console.log(error)
