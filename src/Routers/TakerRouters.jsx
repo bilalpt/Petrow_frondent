@@ -22,6 +22,11 @@ import TakerwithidForm from '../Components/Petcare/TakerIdproof/TakerwithidForm'
 import TakermultstepForm from '../Components/Petcare/Pettakermultiform/TakermultstepForm'
 import Mainform from '../Components/Petcare/Pettakermultiform/Mainform'
 
+// navbar
+
+import { CareNavbar } from '../Navbar/CareNavbar'
+import { useState } from 'react'
+
 
 
 
@@ -32,6 +37,16 @@ import Mainform from '../Components/Petcare/Pettakermultiform/Mainform'
 
 
 const TakerRouters = () => {
+
+    const [takernav,settakernav]=useState(false)
+
+    const SubmitPettakernav=()=>{
+        settakernav(true)
+
+    }
+
+
+
     return (
         <div>
 
@@ -54,8 +69,9 @@ const TakerRouters = () => {
                     <Route exact path='/TakerIdproof' element={<TakerIdproof/>}/>
                     <Route exact path='/TakerwithidForm' element={<TakerwithidForm/>}/>
 
-                    <Route exact path='/TakermultstepForm' element={<TakermultstepForm/>}/>
+                    <Route exact path='/TakermultstepForm' element={<TakermultstepForm SubmitPettakernav={SubmitPettakernav}/>}/>
                     <Route exact path='/Mainform' element={<Mainform/>}/>
+                    <Route exact path='/CareNavbar' element={<CareNavbar showpetTakernav={!takernav}/>}/>
 
                 </Route>
 

@@ -7,12 +7,15 @@ import Plusbutton from "../../../assets/Plusbutton.png"
 import { useState } from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 
 function TakerWithPet() {
+    
+    const navigate=useNavigate()
 
     const [selectedImage, setselectedImage] = useState(null);
     const [previewImage, setpreviewImage] = useState(null);
@@ -62,6 +65,8 @@ function TakerWithPet() {
                 } else {
                     console.error("Error uploading image:", Response.statusText);
                 }
+                navigate("/PetTakers/TakerwithidForm")
+                
     
             } catch (error) {
                 console.error(error);

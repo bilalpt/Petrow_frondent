@@ -4,9 +4,15 @@ import Plusbutton from "../../../assets/Plusbutton.png"
 import { useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
+import jwtDecode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 
-function TakerwithidForm() {
+function TakerwithidForm({submitPettakernav}) {
+
+    const navigate=useNavigate()
+
+
     const [setadhar, setstateadhar] = useState(null);
     const [previeadhar, setpreviewadhar] = useState(null);
 
@@ -53,8 +59,16 @@ function TakerwithidForm() {
 
         if (validation())
             try {
+
+                const token=localStorage.getItem('token')
+                const decoded=jwtDecode(token)
+
+                const user=decoded.id
+
+
                 formData.append('adharimg', setadhar)
                 formData.append('otheridimg', setotherid)
+                formData.append('user', user)
                 const Response = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakeridwithformView", formData)
                 setstateadhar(null)
                 setpreviewadhar(null)
@@ -62,6 +76,18 @@ function TakerwithidForm() {
                 setpreviewotherid(null)
                 toast.success(Response.data.msg)
                 console.log('bilal thats got');
+
+                if (submitPettakernav) {
+                    submitPettakernav();
+                } 
+                    navigate('/PetTakers/PetTakerHome')
+                
+                
+
+
+                navigate('/PetTakers/PetTakerHome')
+
+
 
 
 
@@ -71,8 +97,8 @@ function TakerwithidForm() {
                 } else {
                     console.error("Error uploading image:", Response.statusText);
                 }
-                document.querySelector('button[type="back"]').disabled = true;
-                document.querySelector('a[href="/pettaker"]').remove();
+                // document.querySelector('button[type="back"]').disabled = true;
+                // document.querySelector('a[href="/pettaker"]').remove();
             } catch (error) {
                 console.error(error);
                 console.log(error);

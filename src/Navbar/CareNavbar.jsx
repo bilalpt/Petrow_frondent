@@ -16,7 +16,7 @@ import defaultprofile from "../assets/defaultprofile.jpg"
 import PettakerProfile from "../Components/Petcare/PettakerProfile/PettakerProfile";
 
  
-export function CareNavbar() {
+export function CareNavbar({showpetTakernav}) {
 
 
   const [openNav, setOpenNav] = React.useState(false);
@@ -60,7 +60,7 @@ export function CareNavbar() {
           Home 
         </Link>
       </Typography>
-      <Typography
+      {showpetTakernav &&(<Typography
         as="li"
         variant="small"
         color="blue-gray"
@@ -69,7 +69,7 @@ export function CareNavbar() {
         <Link href="#" to={`/PetTakers/PetTakerterms`} className="flex items-center">
           Pet Taker
         </Link>
-      </Typography>
+      </Typography>)}
       <Typography
         as="li"
         variant="small"
