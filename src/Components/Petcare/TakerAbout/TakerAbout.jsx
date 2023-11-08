@@ -18,8 +18,15 @@
         const dispatch = useDispatch()
         const navigate = useNavigate()
 
-        const [about, aboutstate] = useState({ introduction: '', petexperience: '', workstatus: '', skillandqualifications: '', otherpetqualification: '' ,user: null })
+        const token = localStorage.getItem('token');
+        const decoded = jwtDecode(token);
+
+        const [about, aboutstate] = useState({ introduction: '', petexperience: '', workstatus: '', skillandqualifications: '', otherpetqualification: '' ,user: decoded.id })
         console.log(about);
+
+
+
+
 
 //user cant go back
 
@@ -75,13 +82,12 @@
             if (validation()) {
 
                 try {
-                    const token = localStorage.getItem('token');
-                    const decoded = jwtDecode(token);
-                    const user = decoded.id;
-                    console.log('baxter',user);
 
-                    console.log('Before update:', about);
-                    aboutstate({ ...about, user:user });
+                    // const user = decoded.id;
+                    // console.log('baxter',user);
+
+                    // console.log('Before update:', about);
+                    // aboutstate({ ...about, user:user });
 
                     console.log('After update:', about);
     
@@ -91,7 +97,7 @@
                         { withCredentials: true }
                     );
     
-                    // dispatch(TakerAboutfun(response.data));
+                    dispatch(TakerAboutfun(response.data));
                     toast.success(response.data.msg);
                     console.log('success aboutpage', response);
     

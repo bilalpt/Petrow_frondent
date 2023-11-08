@@ -15,24 +15,28 @@ import jwtDecode from 'jwt-decode';
 
 function TakerDescription() {
 
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
+
+  const token=localStorage.getItem('token')
+  const decoded=jwtDecode(token)
 
 
-  const [details, detailstate] = useState({ 
+  const [details, detailstate] = useState({
     servicename: '',
     petcount: '',
-    acceptingpet: '', 
-    acceptingpetsize: '', 
-    howmanywalk: '', 
-    apartmentorhome: '', 
-    transportemergencies: '', 
-    sleepinglocation: '', 
-    price: '', 
-    location: '', 
+    acceptingpet: '',
+    acceptingpetsize: '',
+    howmanywalk: '',
+    apartmentorhome: '',
+    transportemergencies: '',
+    sleepinglocation: '',
+    price: '',
+    location: '',
     pincode: '',
-    user:null })
+    user: decoded.id
+  })
 
   console.log(details);
 
@@ -88,38 +92,28 @@ function TakerDescription() {
   }
 
 
-  const Descriptionfun=async(e)=>{
+  const Descriptionfun = async (e) => {
     e.preventDefault();
-    if(validation())
-      try{
+    if (validation()) {
+      try {
 
-
-        const token = localStorage.getItem('token');
-        const decoded = jwtDecode(token);
-        const user = decoded.id;
-        console.log('baxterboy',user);
-
-        console.log('Before update:', details);
-        detailstate({ ...details, user:user });
-
-        console.log('After update:', details);
-
-          const Response=await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL+ "petcare/Takerdetalis",details,{ withCredentials: true });
-          toast.success(Response.data.msg)
-          dispatch(TakerDescriptionfun(Response.data))
-          navigate('/PetTakers/TakerWithPet')
-
-          console.log(Response.data.msg)
-
-          detailstate({ servicename: '', petcount: '', acceptingpet: '', acceptingpetsize: '', howmanywalk: '', apartmentorhome: '', transportemergencies: '', sleepinglocation: '', price: '', location: '', pincode: '',user:null })
-
-    }catch(error){
-      console.log(error)
+        const Response = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/Takerdetalis", details, { withCredentials: true });
+  
+        toast.success(Response.data.msg);
+        dispatch(TakerDescriptionfun(Response.data));
+        navigate('/PetTakers/TakerWithPet');
+  
+        detailstate({
+          servicename: '', petcount: '', acceptingpet: '', acceptingpetsize: '', howmanywalk: '',
+          apartmentorhome: '', transportemergencies: '', sleepinglocation: '', price: '', location: '', pincode: '', user: null
+        });
+      } catch (error) {
+        console.log(error);
+        toast.error('An error occurred while saving the data.');
+      }
     }
-    
-
-    
-    }
+  }
+  
 
 
   return (
@@ -141,7 +135,7 @@ function TakerDescription() {
               />
 
               <div className='bg-[#ecd6d6] flex flex-col items-center w-1/2 p-6 rounded-lg shadow-2xl mt-10 ml-20'>
-              <ToastContainer />
+                <ToastContainer />
 
                 <form action="" onSubmit={Descriptionfun} className="flex flex-col items-center">
                   <div className='mb-4'>
@@ -155,9 +149,9 @@ function TakerDescription() {
 
                   <div className='mb-4 w-full'>
 
-                    <select 
-                      name="petcount" 
-                      value={details.petcount} 
+                    <select
+                      name="petcount"
+                      value={details.petcount}
                       onChange={(e) => detailstate({ ...details, petcount: e.target.value })} id="" className="w-full md:w-96 lg:w-120 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                       <option selected>Nomber of Taking</option>
                       <option value="1">1</option>
@@ -169,9 +163,9 @@ function TakerDescription() {
 
                   </div>
                   <div className='mb-4 w-full'>
-                    <select 
-                      name="acceptingpet" 
-                      value={details.acceptingpet} 
+                    <select
+                      name="acceptingpet"
+                      value={details.acceptingpet}
                       onChange={(e) => detailstate({ ...details, acceptingpet: e.target.value })} className="w-full md:w-96 lg:w-120 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="">
                       <option selected>Pet Type</option>
                       <option value="Dog">Dog</option>
