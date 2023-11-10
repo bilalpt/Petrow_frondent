@@ -38,6 +38,7 @@ const Boardsplice=createSlice({
             const { index, upadateboardform } = action.payload;
             state.BordFormRedux[index] = upadateboardform;
           },
+
           BoarduserDetails:(state,action)=>{
             state.BoarduserRedux=action.payload.BoarduserRedux
           }

@@ -38,12 +38,15 @@ import { useState } from 'react'
 
 const TakerRouters = () => {
 
-    const [takernav,settakernav]=useState(false)
+    // const [takernav,settakernav]=useState(false)
+    // const [currentUser, setCurrentUser] = useState(null);
 
-    const SubmitPettakernav=()=>{
-        settakernav(true)
 
-    }
+    // const SubmitPettakernav=(user)=>{
+    //     settakernav(true)
+    //     setCurrentUser(user)
+
+    // }
 
 
 
@@ -69,9 +72,9 @@ const TakerRouters = () => {
                     <Route exact path='/TakerIdproof' element={<TakerIdproof/>}/>
                     <Route exact path='/TakerwithidForm' element={<TakerwithidForm/>}/>
 
-                    <Route exact path='/TakermultstepForm' element={<TakermultstepForm SubmitPettakernav={SubmitPettakernav}/>}/>
+                    <Route exact path='/TakermultstepForm' element={<TakermultstepForm />}/>
                     <Route exact path='/Mainform' element={<Mainform/>}/>
-                    <Route exact path='/CareNavbar' element={<CareNavbar showpetTakernav={!takernav}/>}/>
+                    <Route exact path='/CareNavbar' element={<CareNavbar />}/>
 
                 </Route>
 

@@ -15,32 +15,41 @@ import defaultprofile from "../assets/defaultprofile.jpg"
 
 import PettakerProfile from "../Components/Petcare/PettakerProfile/PettakerProfile";
 
- 
-export function CareNavbar({showpetTakernav}) {
+import { useSelector } from "react-redux";
+
+export function CareNavbar() {
+
+  const takeridInitial = useSelector(state => state.takerforms.TakeridInitial);
+  const currentUserData = useSelector(state => state.takerforms.Takeruserinitial);
+  const loggedInUserId = currentUserData.id;
+
+  console.log(takeridInitial.user);
+  console.log(loggedInUserId);
+
 
 
   const [openNav, setOpenNav] = React.useState(false);
 
-  const navigate=useNavigate()
-  const Logout =(() =>{
-    
+  const navigate = useNavigate()
+  const Logout = (() => {
+
     localStorage.removeItem('token')
     navigate('/PetBoards/CareLogin');
     console.log('token remove')
 
   })
 
- 
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false),
     );
   }, []);
- 
+
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-     {/* <Typography
+      {/* <Typography
         as="li"
         variant="small"
         color="blue-gray"
@@ -57,27 +66,33 @@ export function CareNavbar({showpetTakernav}) {
         className="p-1 font-normal"
       >
         <Link to={`/PetTakers/PetTakerHome`} className="flex items-center">
-          Home 
+          Home
         </Link>
       </Typography>
-      {showpetTakernav &&(<Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Link href="#" to={`/PetTakers/PetTakerterms`} className="flex items-center">
-          Pet Taker
-        </Link>
-      </Typography>)}
+
+      {takeridInitial.user === loggedInUserId ? null : (
+        <Typography
+          as="li"
+          variant="small"
+          color="blue-gray"
+          className="p-1 font-normal"
+        >
+          <Link to={`/PetTakers/PetTakerterms`} className="flex items-center">
+            Pet Taker
+          </Link>
+        </Typography>
+      )}
+
+
+
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center" onClick={()=>Logout()}
->
+        <a href="#" className="flex items-center" onClick={() => Logout()}
+        >
           Logout
 
         </a>
@@ -88,7 +103,7 @@ export function CareNavbar({showpetTakernav}) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link href="#"  to={"/PetTakers/PettakerProfile"}  className="flex items-center">
+        <Link href="#" to={"/PetTakers/PettakerProfile"} className="flex items-center">
           <img class="block mx-auto h-10 rounded-full sm:mx-0 sm:shrink-0" src={defaultprofile} alt="Woman's Face" />
           Profile
 
@@ -97,7 +112,7 @@ export function CareNavbar({showpetTakernav}) {
       </Typography>
     </ul>
   );
- 
+
   return (
     <Navbar className="mx-auto max-w-full py-2 px-4 lg:px-8 lg:py-4 bg-[#f7f4f4] shadow-2xl">
       <div className="container mx-5 flex items-right-0 justify-between text-blue-gray-900 ">
@@ -112,7 +127,7 @@ export function CareNavbar({showpetTakernav}) {
             className="w-10 h-7  border-purple-400"
             alt="Petrow_logo"
           />
-            {/* <h6 className="px-12 ">Pet row</h6> */}
+          {/* <h6 className="px-12 ">Pet row</h6> */}
 
 
         </Typography>

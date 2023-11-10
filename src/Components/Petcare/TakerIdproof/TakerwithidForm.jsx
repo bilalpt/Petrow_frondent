@@ -6,11 +6,14 @@ import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import jwtDecode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import { TakeridImages } from '../../../Redux/BoardTakerRedux';
+import { useDispatch } from 'react-redux';
 
 
 function TakerwithidForm({submitPettakernav}) {
 
     const navigate=useNavigate()
+    const dispatch=useDispatch()
 
 
     const [setadhar, setstateadhar] = useState(null);
@@ -75,14 +78,7 @@ function TakerwithidForm({submitPettakernav}) {
                 setstateotherid(null)
                 setpreviewotherid(null)
                 toast.success(Response.data.msg)
-                console.log('bilal thats got');
-
-                if (submitPettakernav) {
-                    submitPettakernav();
-                } 
-                    navigate('/PetTakers/PetTakerHome')
-                
-                
+                dispatch(TakeridImages ({ TakeridInitial : Response.data }))
 
 
                 navigate('/PetTakers/PetTakerHome')
