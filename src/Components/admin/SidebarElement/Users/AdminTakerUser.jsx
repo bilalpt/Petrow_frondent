@@ -17,10 +17,19 @@ import {
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
+import {
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
 
 
 
-const TABLE_HEAD = ["# Id", "Name", "Mobile","Date" ,"Email", "Block&Unblock"];
+
+
+
+const TABLE_HEAD = ["# Id", "Name", "Mobile", "Date", "Email", "Block&Unblock"];
 
 const TABLE_ROWS = [
   {
@@ -31,7 +40,7 @@ const TABLE_ROWS = [
     org: "block",
     online: '9447932166',
     date: "23/04/18",
-    id:"12",
+    id: "12",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
@@ -41,7 +50,7 @@ const TABLE_ROWS = [
     org: "block",
     online: '9447932166',
     date: "23/04/18",
-    id:"12",
+    id: "12",
 
   },
   {
@@ -52,7 +61,7 @@ const TABLE_ROWS = [
     org: "block",
     online: '9447932166',
     date: "19/09/17",
-    id:"12",
+    id: "12",
 
   },
   {
@@ -63,7 +72,7 @@ const TABLE_ROWS = [
     org: "block",
     online: '9447932166',
     date: "24/12/08",
-    id:"12",
+    id: "12",
 
   },
   {
@@ -74,19 +83,61 @@ const TABLE_ROWS = [
     org: "block",
     online: '9447932166',
     date: "04/10/21",
-    id:"12",
+    id: "12",
 
   },
 ];
 
 function AdminTakerUser() {
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(!open);
+
+
+
+
   return (
     <>
       <div className='bg-[#D9D9D9] h-screen'>
 
-        <div className='grid grid-cols-1 w-full pt-10'>
-          <h1 className='text-2xl pl-8'>Pet Owners List</h1>
+        <div className='grid grid-cols-2 w-full pt-10'>
+          <div>
+            <h1 className='text-2xl pl-8'>Pet Owners List</h1>
+          </div>
+
+          {/* modal */}
+          <div className='pl-96'>
+            <Button onClick={handleOpen} variant="gradient">
+              Open Dialog
+            </Button>
+            <Dialog open={open} handler={handleOpen}>
+              <DialogHeader>Pet Takers Requests</DialogHeader>
+              {/* <DialogBody>
+                The key to more success is to have a lot of pillows. Put it this way,
+                it took me twenty five years to get these plants, twenty five years of
+                blood sweat and tears, and I&apos;m never giving up, I&apos;m just
+                getting started. I&apos;m up to something. Fan luv.
+              </DialogBody> */}
+              <DialogFooter>
+                <Button
+                  variant="text"
+                  color="red"
+                  onClick={handleOpen}
+                  className="mr-1"
+                >
+                  <span>Cancel</span>
+                </Button>
+                {/* <Button variant="gradient" color="green" onClick={handleOpen}>
+                  <span>Confirm</span>
+                </Button> */}
+              </DialogFooter>
+            </Dialog>
+
+          </div>
+          {/* end modal */}
+
         </div>
+
 
         <div className='mt-10 mx-10'>
           <Card className="h-full w-full">
@@ -149,7 +200,7 @@ function AdminTakerUser() {
                             </div>
                           </td>
                           <td className={classes}>
-                          <div className="flex flex-col">
+                            <div className="flex flex-col">
                               <Typography
                                 variant="small"
                                 color="blue-gray"
