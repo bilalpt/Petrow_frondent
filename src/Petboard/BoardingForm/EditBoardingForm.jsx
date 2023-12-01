@@ -23,6 +23,7 @@ const EditBoardingForm = () => {
   useEffect(()=>{
 
     const data = BordFormRedux[BordFormRedux.length -1]
+    
     usestate({
         id:data.id,
         pettype:data.pettype,

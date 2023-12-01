@@ -10,6 +10,7 @@ import TakerProtected from '../ProtectedRouters/TakerProtected';
 import PetTakerHome from '../Components/Petcare/PetTakerHome';
 import PetTakerterms from '../Components/Petcare/PetTaker/PetTakerterms';
 import TakerAbout from '../Components/Petcare/TakerAbout/TakerAbout'
+import TakeraboutEdit from '../Components/Petcare/TakerAbout/TakeraboutEdit'
 import TakerDescription from '../Components/Petcare/TakerDescription/TakerDescription'
 import TakerWithPet from '../Components/Petcare/TakerWithPet/TakerWithPet'
 
@@ -21,7 +22,6 @@ import TakerwithidForm from '../Components/Petcare/TakerIdproof/TakerwithidForm'
 //taker multiple form routers
 import TakermultstepForm from '../Components/Petcare/Pettakermultiform/TakermultstepForm'
 import Mainform from '../Components/Petcare/Pettakermultiform/Mainform'
-
 // navbar
 
 import { CareNavbar } from '../Navbar/CareNavbar'
@@ -75,6 +75,7 @@ const TakerRouters = () => {
                     <Route exact path='/TakermultstepForm' element={<TakermultstepForm />}/>
                     <Route exact path='/Mainform' element={<Mainform/>}/>
                     <Route exact path='/CareNavbar' element={<CareNavbar />}/>
+                    <Route exact path='/TakeraboutEdit' element={<TakeraboutEdit/>}/>
 
                 </Route>
 

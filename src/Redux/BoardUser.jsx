@@ -42,7 +42,7 @@ const Boardsplice=createSlice({
           BoarduserDetails:(state,action)=>{
             state.BoarduserRedux=action.payload.BoarduserRedux
           }
-          
+
     }
 
 })

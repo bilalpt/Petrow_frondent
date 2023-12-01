@@ -14,9 +14,13 @@ import { useSelector } from 'react-redux'
 import { UpdateDescription } from '../../../Redux/BoardTakerRedux'
 import { toast } from 'react-toastify'
 import jwtDecode from 'jwt-decode'
+import { useNavigate } from 'react-router-dom'
+
 
 const PettakerProfile = () => {
   const dispatch = useDispatch();
+  const navigate=useNavigate();
+
 
   //taker user details edit
 
@@ -35,7 +39,6 @@ const PettakerProfile = () => {
     pincode: '',
   })
 
-  console.log(details);
 
   const [open, setOpen] = React.useState(false);
 
@@ -43,27 +46,30 @@ const PettakerProfile = () => {
 
   const { TakerInitialDesc } = useSelector((state) => state.takerforms);
 
-  const data = TakerInitialDesc[TakerInitialDesc.length - 1]
 
   useEffect(() => {
+    const takerdec = TakerInitialDesc[TakerInitialDesc.length - 1]
 
     detailstate({
-      id: data.id,
-      servicename: data.servicename,
-      petcount: data.petcount,
-      acceptingpet: data.acceptingpet,
-      acceptingpetsize: data.acceptingpetsize,
-      howmanywalk: data.howmanywalk,
-      apartmentorhome: data.apartmentorhome,
-      transportemergencies: data.transportemergencies,
-      sleepinglocation: data.sleepinglocation,
-      price: data.price,
-      location: data.location,
-      pincode: data.pincode,
+      id: takerdec.id || '',
+      servicename: takerdec.servicename,
+      petcount: takerdec.petcount,
+      acceptingpet: takerdec.acceptingpet,
+      acceptingpetsize: takerdec.acceptingpetsize,
+      howmanywalk: takerdec.howmanywalk,
+      apartmentorhome: takerdec.apartmentorhome,
+      transportemergencies: takerdec.transportemergencies,
+      sleepinglocation: takerdec.sleepinglocation,
+      price: takerdec.price,
+      location: takerdec.location,
+      pincode: takerdec.pincode,
     });
 
 
   }, [])
+
+  console.log(details,'bilal');
+
 
   //taker user details edit end
 
@@ -122,6 +128,8 @@ const PettakerProfile = () => {
     e.preventDefault();
     if (validation())
       try {
+        console.log("Details ID:", details.id);
+
         const Response = await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakerDescriptionEdit/" + details.id, details)
         const lastIndex = TakerInitialDesc.length - 1;
         console.log(Response.data);
@@ -283,6 +291,8 @@ const PettakerProfile = () => {
                     </DialogBody>
 
                   </Dialog> */}
+
+                  <button onClick={()=>navigate('/PetTakers/TakeraboutEdit')}>About Taker</button>
 
 
                   {/* modal */}

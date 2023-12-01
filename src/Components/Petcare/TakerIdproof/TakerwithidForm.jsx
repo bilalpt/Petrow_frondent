@@ -109,7 +109,7 @@ function TakerwithidForm({submitPettakernav}) {
     return (
         <>
             <div className='bg-[#817299] h-screen grid grid-cols-1 md:grid-cols-2 pt-10'>
-                <div className='bg-[#817299] grid grid-cols-2 md:ml-28'>
+                <div className='bg-[#817299] grid grid-cols-1 md:ml-28'>
                     <img className=' h-[60vh]' src={Dogwith} alt="" />
                 </div>
                 <form action="" onSubmit={submitfun} className='grid items-center bg-[#817299]'>
