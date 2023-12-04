@@ -26,6 +26,7 @@ import Mainform from '../Components/Petcare/Pettakermultiform/Mainform'
 
 import { CareNavbar } from '../Navbar/CareNavbar'
 import { useState } from 'react'
+import EditTakerwithPet from '../Components/Petcare/TakerWithPet/EditTakerwithPet'
 
 
 
@@ -76,6 +77,8 @@ const TakerRouters = () => {
                     <Route exact path='/Mainform' element={<Mainform/>}/>
                     <Route exact path='/CareNavbar' element={<CareNavbar />}/>
                     <Route exact path='/TakeraboutEdit' element={<TakeraboutEdit/>}/>
+
+                    < Route exact path='/EditTakerwithPet' element={<EditTakerwithPet/>}/>
 
                 </Route>
 

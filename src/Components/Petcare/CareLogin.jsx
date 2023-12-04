@@ -9,8 +9,10 @@ import { useDispatch } from 'react-redux';
 import { Takeruserfun } from '../../Redux/BoardTakerRedux';
 import jwtDecode from 'jwt-decode';
 import { TakerUserInfo } from '../../Services/PetboardrApi';
-
-
+import TakeraboutEdit from './TakerAbout/TakeraboutEdit';
+import { TakerAboutfun } from '../../Redux/BoardTakerRedux';
+import { TakerDescriptionfun } from '../../Redux/BoardTakerRedux';
+import { TakeridImages } from '../../Redux/BoardTakerRedux';
 
 function CareLogin() {
     const [user, userstate] = useState({ email: '', password: '' })
@@ -57,10 +59,39 @@ function CareLogin() {
                 localStorage.setItem("token", token);
                 const decoded = jwtDecode(token)
                 const user_id =  decoded.id
+                console.log(user_id);
 
                 const res2 =  await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + 'petcare/takeruserinfo/' +user_id+ "/",{withCredentials:true})
+
+                const AboutpageResponse=  await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + 'petcare/AboutpageRetrive/' +user_id,{withCredentials:true})
+
+                const descriptionData=await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + 'petcare/descriptionRetrive/' +user_id,{withCredentials:true})
+
+                const Takeridimages= await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + 'petcare/TakerIdRetreve/' +user_id,{withCredentials:true})
+
+                // const Takeraboutdata=
+
+                dispatch(TakeridImages({TakeridInitial:Takeridimages.data}))
                 
                 dispatch(Takeruserfun({Takeruserinitial: res2.data}))
+
+                dispatch(TakerAboutfun({TakerAbout:AboutpageResponse.data}))
+
+                dispatch(TakerDescriptionfun({TakerInitialDesc:descriptionData.data}))
+
+
+                // if (res2.data.TakerAbout && Array.isArray(res2.data.TakerAbout)) {
+                //     res2.data.TakerAbout.map((values, index) => {
+                //       dispatch(TakerAboutfun(values));
+                //     });
+                //   } else {
+                //     // Handle the case where TakerAbout is not defined or not an array
+                //     console.error('TakerAbout is undefined or not an array');
+                //   }
+
+                
+                
+
                 
                 navigate("/PetTakers/PetTakerHome")
 

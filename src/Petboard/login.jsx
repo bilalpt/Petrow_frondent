@@ -60,7 +60,8 @@ function BoardLogin() {
                 const decoded=jwtDecode(token)
                 const user_id=decoded.id
                 const userResponse=await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL +'petboarding/singleboarduser/'+user_id + '/' ,{withCredentials:true})
-                dispact(BoarduserDetails(userResponse.data))
+                dispact(BoarduserDetails({BoarduserRedux:userResponse.data}))
+                console.log(BoarduserDetails);
                 navigate("/PetBoards/BoardHome")
             } catch (error) {
                 console.log(error);

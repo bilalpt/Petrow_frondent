@@ -47,26 +47,27 @@ const PettakerProfile = () => {
   const { TakerInitialDesc } = useSelector((state) => state.takerforms);
 
 
-  useEffect(() => {
-    const takerdec = TakerInitialDesc[TakerInitialDesc.length - 1]
 
-    detailstate({
-      id: takerdec.id || '',
-      servicename: takerdec.servicename,
-      petcount: takerdec.petcount,
-      acceptingpet: takerdec.acceptingpet,
-      acceptingpetsize: takerdec.acceptingpetsize,
-      howmanywalk: takerdec.howmanywalk,
-      apartmentorhome: takerdec.apartmentorhome,
-      transportemergencies: takerdec.transportemergencies,
-      sleepinglocation: takerdec.sleepinglocation,
-      price: takerdec.price,
-      location: takerdec.location,
-      pincode: takerdec.pincode,
-    });
+  // useEffect(() => {
+  //   const takerdec = TakerInitialDesc[TakerInitialDesc.length - 1]
+
+  //   detailstate({
+  //     id: takerdec.id,
+  //     servicename: takerdec.servicename,
+  //     petcount: takerdec.petcount,
+  //     acceptingpet: takerdec.acceptingpet,
+  //     acceptingpetsize: takerdec.acceptingpetsize,
+  //     howmanywalk: takerdec.howmanywalk,
+  //     apartmentorhome: takerdec.apartmentorhome,
+  //     transportemergencies: takerdec.transportemergencies,
+  //     sleepinglocation: takerdec.sleepinglocation,
+  //     price: takerdec.price,
+  //     location: takerdec.location,
+  //     pincode: takerdec.pincode,
+  //   });
 
 
-  }, [])
+  // }, [])
 
   console.log(details,'bilal');
 
@@ -133,7 +134,7 @@ const PettakerProfile = () => {
         const Response = await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakerDescriptionEdit/" + details.id, details)
         const lastIndex = TakerInitialDesc.length - 1;
         console.log(Response.data);
-        dispatch(UpdateDescription({ index: lastIndex, UpdateDescription: Response.data }))
+        dispatch(UpdateDescription({ index: lastIndex, updatedescription: Response.data }))
       } catch (error) {
         console.log(error);
 
@@ -176,10 +177,10 @@ const PettakerProfile = () => {
 
   // const [takeruser, stateTakeruser] = useState({ id: '', username: '', email: '' })
 
-  // const [secondOpen, setSecond] = useState(false);
+  const [secondOpen, setSecond] = useState(false);
   // const secondhandle = () => setSecond(!secondOpen);
 
-  // const { Takeruserinitial } = useSelector((state) => state.takerforms)
+  // // const { Takeruserinitial } = useSelector((state) => state.user)
   // const userdata = Takeruserinitial[Takeruserinitial.length-1]
   // if(!userdata){
   //   return null;
@@ -193,43 +194,43 @@ const PettakerProfile = () => {
   //   }
   //   )
   // })
-  // //taker edit end
+  //taker edit end
 
-  // const uservalidation = () => {
-  //   if (takeruser.username.trim === '') {
-  //     toast.error('please enter the name');
-  //     return false
-  //   }
-  //   else if (takeruser.email.trim === '') {
-  //     toast.error('please enter the email');
-  //     return false
-  //   }
-  //   return true
-  // }
-
-
-  // const EditTaker= async (e)=>{
-  //   e.preventDefault();
-  //   if(uservalidation())
-  //   try{
-
-  //     const Res2=await axios.patch(models.meta.env.VITE_PETBOARDUSERS_URL+"petcare/TakerprofileEdit/"+userdata.id,takeruser);
-  //     const takeruser=Takeruserinitial.length-1;
-  //     const token=JSON.stringify(Res2.data);
-  //     localStorage.setItem("token",token)
-  //     const decode=jwtDecode(token)
-  //     const user_id=decode.id
-  //     const userResponse=await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL +'petboarding/singleboarduser/'+user_id + '/' ,{withCredentials:true})
-  //     dispact(Updateuser(userResponse.data))
+  const uservalidation = () => {
+    if (takeruser.username.trim === '') {
+      toast.error('please enter the name');
+      return false
+    }
+    else if (takeruser.email.trim === '') {
+      toast.error('please enter the email');
+      return false
+    }
+    return true
+  }
 
 
-  //   }
-  //   catch(error){
-  //     console.log(error)
-  //   }
+  const EditTaker= async (e)=>{
+    e.preventDefault();
+    if(uservalidation())
+    try{
+
+      const Res2=await axios.patch(models.meta.env.VITE_PETBOARDUSERS_URL+"petcare/TakerprofileEdit/"+userdata.id,takeruser);
+      const takeruser=Takeruserinitial.length-1;
+      const token=JSON.stringify(Res2.data);
+      localStorage.setItem("token",token)
+      const decode=jwtDecode(token)
+      const user_id=decode.id
+      const userResponse=await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL +'petboarding/singleboarduser/'+user_id + '/' ,{withCredentials:true})
+      dispact(Updateuser(userResponse.data))
 
 
-  // }
+    }
+    catch(error){
+      console.log(error)
+    }
+
+
+  }
 
 
 
@@ -270,7 +271,7 @@ const PettakerProfile = () => {
                   {/* user details edit modal */}
 
 
-                  {/* <Button onClick={setSecond} variant="gradient">
+                  <Button onClick={setSecond} variant="gradient">
                     Edit Your Details
                   </Button>
                   <Dialog open={secondOpen} handler={setSecond}>
@@ -290,7 +291,7 @@ const PettakerProfile = () => {
                       </div>
                     </DialogBody>
 
-                  </Dialog> */}
+                  </Dialog>
 
                   <button onClick={()=>navigate('/PetTakers/TakeraboutEdit')}>About Taker</button>
 

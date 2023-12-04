@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 const initialState={
-    TakerAbout: [],
-    TakerInitialDesc: [],
+    TakerAbout: {},
+    TakerInitialDesc: {},
     Takeruserinitial:{},
-    TakeridInitial:{}
+    TakeridInitial:[],
+    Petwithimage:{},
 }
 
 const Takersplice=createSlice({
@@ -13,16 +14,32 @@ const Takersplice=createSlice({
     initialState,
 
     reducers:{
+
+        LogoutTakeruser:(state,action)=>{
+            state.Takeruserinitial = {};
+            state.TakerAbout = {};
+            state.TakerInitialDesc={};
+            state.TakeridInitial=[];
+
+
+        },
+        RemoveTakeridinitial:(state,action)=>{
+        },
+
+
+        PetwithImagefun:(state,action)=>{
+            state.Petwithimage=action.payload.Petwithimage
+        },
         TakerAboutfun:(state,action)=>{
-            state.TakerAbout.push(action.payload);
+            state.TakerAbout=action.payload.TakerAbout
         },
         
         TakerDescriptionfun:(state,action)=>{
-            state.TakerInitialDesc.push(action.payload);
+            state.TakerInitialDesc=action.payload.TakerInitialDesc
         },
         UpdateDescription: (state,action)=>{
-            const { index,UpdateDescription }=action.payload;
-            state.TakerInitialDesc[index]=UpdateDescription
+            const { index,updatedescription }=action.payload;
+            state.TakerInitialDesc[index]=updatedescription
         },
         Takeruserfun:(state,action)=>{
             state.Takeruserinitial = action.payload.Takeruserinitial
@@ -39,13 +56,13 @@ const Takersplice=createSlice({
 
         },
         UpdateAboutpage:(state,action)=>{
-            const{index, UpdateAboutpage}=action.payload;
-            state.TakerAbout[index]=UpdateAboutpage
+            const{index, updateaboutpage }=action.payload;
+            state.TakerAbout[index]=updateaboutpage
           }
           
     }
 })
 
-export const{TakerAboutfun,TakerDescriptionfun,UpdateDescription,Takeruserfun,Updateuser,TakeridImages,UpdateAboutpage}=Takersplice.actions
+export const{RemoveTakeridinitial,TakerAboutfun,TakerDescriptionfun,UpdateDescription,Takeruserfun,Updateuser,TakeridImages,UpdateAboutpage,LogoutTakeruser}=Takersplice.actions
 
 export default Takersplice.reducer

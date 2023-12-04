@@ -100,7 +100,7 @@ function TakerDescription() {
         const Response = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/Takerdetalis", details, { withCredentials: true });
   
         toast.success(Response.data.msg);
-        dispatch(TakerDescriptionfun(Response.data));
+        dispatch(TakerDescriptionfun({TakerInitialDesc:Response.data}));
         navigate('/PetTakers/TakerWithPet');
   
         detailstate({

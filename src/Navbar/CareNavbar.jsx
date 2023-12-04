@@ -12,6 +12,9 @@ import { Link, useNavigate } from "react-router-dom";
 import CareHome from "../Components/Petcare/CareHome";
 import CareLogin from "../Components/Petcare/CareLogin";
 import defaultprofile from "../assets/defaultprofile.jpg"
+import { LogoutTakeruser } from "../Redux/BoardTakerRedux";
+import { useDispatch } from "react-redux";
+import { RemoveTakeridinitial } from "../Redux/BoardTakerRedux";
 
 import PettakerProfile from "../Components/Petcare/PettakerProfile/PettakerProfile";
 
@@ -19,11 +22,17 @@ import { useSelector } from "react-redux";
 
 export function CareNavbar() {
 
-  const takeridInitial = useSelector(state => state.takerforms.TakeridInitial);
+  const dispatch=useDispatch()
+
+  const takeridInitialdata = useSelector(state => state.takerforms.TakeridInitial);
   const currentUserData = useSelector(state => state.takerforms.Takeruserinitial);
   const loggedInUserId = currentUserData.id;
+  const takeridInitial = takeridInitialdata[0]
 
-  console.log(takeridInitial.user);
+  console.log(takeridInitial.user,'login user idqqqqaaaaaa',);
+  
+
+  // console.log(takeridInitial.user);
   console.log(loggedInUserId);
 
 
@@ -34,6 +43,9 @@ export function CareNavbar() {
   const Logout = (() => {
 
     localStorage.removeItem('token')
+    dispatch(LogoutTakeruser())
+    dispatch(RemoveTakeridinitial())
+    
     navigate('/PetBoards/CareLogin');
     console.log('token remove')
 

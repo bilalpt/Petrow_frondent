@@ -22,7 +22,8 @@ function TakeraboutEdit() {
     // const [about, aboutstate] = useState({ introduction: '', petexperience: '', workstatus: '', skillandqualifications: '', otherpetqualification: '' ,user: decoded.id })
 
 
-    const { TakerAbout } = useSelector((state) => state.user);
+    const { TakerAbout } = useSelector((state) => state.takerforms);
+
 
 
 
@@ -30,7 +31,8 @@ function TakeraboutEdit() {
 
         const data = TakerAbout[TakerAbout.length - 1]
 
-        console.log('shamlid');
+
+        console.log(data);
 
         aboutsetstate({
             id: data.id,
@@ -76,7 +78,7 @@ function TakeraboutEdit() {
                 const response = await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakeraboutEdit/" + aboutstate.id, aboutstate)
                 console.log(response)
                 const lastIndex = TakerAbout.length - 1;
-                dispatch(UpdateAboutpage({ index: lastIndex, Updateboutpage: response.data }))
+                dispatch(UpdateAboutpage({ index: lastIndex, updateaboutpage: response.data }))
                 navigate()
 
             } catch (error) {

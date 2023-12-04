@@ -13,6 +13,8 @@ import CareHome from "../Components/Petcare/CareHome";
 // import defaultprofile from "../assets/defaultprofile.jpg"
 import BoardProfile from "../Petboard/BoardProfile/BoardProfile";
 import defaultprofile from "../assets/defaultprofile.jpg"
+import { LogoutBoarduser } from "../Redux/BoardUser";
+import { useDispatch } from "react-redux";
 
 
 
@@ -25,11 +27,14 @@ export function BoardNavbar() {
 
   const navigate=useNavigate()
 
+  const dispatch=useDispatch()
+
 
   const Logout =(() =>{
     
     localStorage.removeItem('token')
     navigate('/PetBoards/BoardLogin');
+    dispatch(LogoutBoarduser())
     console.log('token remove')
 
   })
