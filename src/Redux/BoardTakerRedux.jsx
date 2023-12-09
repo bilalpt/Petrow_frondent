@@ -45,9 +45,9 @@ const Takersplice=createSlice({
             state.Takeruserinitial = action.payload.Takeruserinitial
 
         },
-        Updateuser:(state,action)=>{
-            const {index,Updateuser}=action.payload;
-            state.Takeruserinitial[index]=Updateuser
+        UpdateUser:(state,action)=>{
+            const {index,updateuser}=action.payload;
+            state.Takeruserinitial[index]=updateuser
         },
         //id images
         
@@ -63,6 +63,6 @@ const Takersplice=createSlice({
     }
 })
 
-export const{RemoveTakeridinitial,TakerAboutfun,TakerDescriptionfun,UpdateDescription,Takeruserfun,Updateuser,TakeridImages,UpdateAboutpage,LogoutTakeruser}=Takersplice.actions
+export const{RemoveTakeridinitial,TakerAboutfun,TakerDescriptionfun,UpdateDescription,Takeruserfun,UpdateUser,TakeridImages,UpdateAboutpage,LogoutTakeruser}=Takersplice.actions
 
 export default Takersplice.reducer

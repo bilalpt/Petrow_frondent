@@ -15,7 +15,7 @@ import { UpdateDescription } from '../../../Redux/BoardTakerRedux'
 import { toast } from 'react-toastify'
 import jwtDecode from 'jwt-decode'
 import { useNavigate } from 'react-router-dom'
-
+import { UpdateUser } from '../../../Redux/BoardTakerRedux'
 
 const PettakerProfile = () => {
   const dispatch = useDispatch();
@@ -48,26 +48,25 @@ const PettakerProfile = () => {
 
 
 
-  // useEffect(() => {
-  //   const takerdec = TakerInitialDesc[TakerInitialDesc.length - 1]
+  useEffect(() => {
+    const takerdec = TakerInitialDesc[TakerInitialDesc.length - 1]
 
-  //   detailstate({
-  //     id: takerdec.id,
-  //     servicename: takerdec.servicename,
-  //     petcount: takerdec.petcount,
-  //     acceptingpet: takerdec.acceptingpet,
-  //     acceptingpetsize: takerdec.acceptingpetsize,
-  //     howmanywalk: takerdec.howmanywalk,
-  //     apartmentorhome: takerdec.apartmentorhome,
-  //     transportemergencies: takerdec.transportemergencies,
-  //     sleepinglocation: takerdec.sleepinglocation,
-  //     price: takerdec.price,
-  //     location: takerdec.location,
-  //     pincode: takerdec.pincode,
-  //   });
+    detailstate({
+      id: takerdec.id,
+      servicename: takerdec.servicename,
+      petcount: takerdec.petcount,
+      acceptingpet: takerdec.acceptingpet,
+      acceptingpetsize: takerdec.acceptingpetsize,
+      howmanywalk: takerdec.howmanywalk,
+      apartmentorhome: takerdec.apartmentorhome,
+      transportemergencies: takerdec.transportemergencies,
+      sleepinglocation: takerdec.sleepinglocation,
+      price: takerdec.price,
+      location: takerdec.location,
+      pincode: takerdec.pincode,
+    });
 
-
-  // }, [])
+  }, [])
 
   console.log(details,'bilal');
 
@@ -131,6 +130,7 @@ const PettakerProfile = () => {
       try {
         console.log("Details ID:", details.id);
 
+
         const Response = await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakerDescriptionEdit/" + details.id, details)
         const lastIndex = TakerInitialDesc.length - 1;
         console.log(Response.data);
@@ -140,108 +140,104 @@ const PettakerProfile = () => {
 
       }
 
-
-
-
-
   }
 
-  const { Takeruserinitial } = useSelector((state) => state.takerforms);
-
-  const [takeruser,takerstate]=useState({id:'',username: '', email: '',phone:''})
-
-  console.log(takeruser);
-
-  useEffect(()=>{
-
-    if(Takeruserinitial.length>0){
-      const userdata=Takeruserinitial[Takeruserinitial.length-1];
-      console.log('baxter');
-      console.log('userdata:', userdata);
-      takerstate({
-        username:userdata.username,
-        email:userdata.email,
-        phone:userdata.phone,
-      })
-    }
-
   
-    })
-
-
-
-
-
-
   //taker edit
+  const {Takeruserinitial}= useSelector((state)=>state.takerforms)
 
-  // const [takeruser, stateTakeruser] = useState({ id: '', username: '', email: '' })
+  const [value, setValue] = useState({
+     id: Takeruserinitial.id, 
+     username: Takeruserinitial.username, 
+     phone: Takeruserinitial.phone,
+     profileimage:null,
+    })
+  console.log(value,'all data geting');
 
   const [secondOpen, setSecond] = useState(false);
-  // const secondhandle = () => setSecond(!secondOpen);
+  const secondhandle = () => setSecond(!secondOpen);
 
-  // // const { Takeruserinitial } = useSelector((state) => state.user)
-  // const userdata = Takeruserinitial[Takeruserinitial.length-1]
+ 
   // if(!userdata){
   //   return null;
   // }
+  // const userdata = Takeruserinitial
+
+
   // useEffect(() => {
   //   stateTakeruser({
   //     id: userdata.id,
   //     username: userdata.username,
-  //     email: userdata.email,
-
+  //     phone: userdata.phone,
+  //     profileimage: userdata.userdata,
+  //     email:userdata.email,
   //   }
   //   )
-  // })
+  // },[])
+
+  const handleImageChange = (e) =>{
+    const file = e.target.files[0];
+
+  setValue((value) => ({
+    ...value,
+    profileimage: file,
+  }));
+  }
+  // const images=(e)=>{
+  //   console.log(e.target.files[0],'in image geting here');
+  //   file=e.target.files[0]
+  //   stateTakeruser({...takeruser,profileimage:file})
+  // }
+
   //taker edit end
 
   const uservalidation = () => {
-    if (takeruser.username.trim === '') {
+    if (value.username.trim() === '') {
       toast.error('please enter the name');
       return false
     }
-    else if (takeruser.email.trim === '') {
-      toast.error('please enter the email');
-      return false
-    }
+    // else if (takeruser.email.trim === '') {
+    //   toast.error('please enter the email');
+    //   return false
+    // }
     return true
   }
-
-
   const EditTaker= async (e)=>{
     e.preventDefault();
-    if(uservalidation())
-    try{
+    if(uservalidation()){
 
-      const Res2=await axios.patch(models.meta.env.VITE_PETBOARDUSERS_URL+"petcare/TakerprofileEdit/"+userdata.id,takeruser);
-      const takeruser=Takeruserinitial.length-1;
-      const token=JSON.stringify(Res2.data);
-      localStorage.setItem("token",token)
-      const decode=jwtDecode(token)
-      const user_id=decode.id
-      const userResponse=await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL +'petboarding/singleboarduser/'+user_id + '/' ,{withCredentials:true})
-      dispact(Updateuser(userResponse.data))
+      
+      try{
+        const formdata=new FormData()
 
 
-    }
-    catch(error){
-      console.log(error)
+
+
+        formdata.append('username',value.username)
+        console.log(formdata,'formdata');
+        formdata.append('profileimage',value.profileimage)
+        formdata.append('phone',value.phone)
+
+       
+
+        const Res2=await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL+"petcare/TakerprofileEdit/"+Takeruserinitial.id,formdata,{
+          headers: {
+            'Content-Type': 'multipart/form-data', // Set the appropriate content type
+            // Add any other headers as needed (e.g., authorization headers)
+          },
+        });
+        console.log(Res2,'fasil pp');
+        const takeruser2=Takeruserinitial;
+        dispatch(UpdateUser({ index:takeruser2, updateuser:Res2.data}))
+  
+      }
+      catch(error){
+        console.log(error)
+      }
     }
 
 
   }
-
-
-
-
-
-
-
-
-
-
-
   return (
     <div>
       <div>
@@ -264,7 +260,7 @@ const PettakerProfile = () => {
 
               </div>
               <div className=' mt-8 ml-8 '>
-                <h1 className=''>Hey,Im</h1><h1 className='text-2xl'>{takeruser.username}</h1> <h1 className=''>{takeruser.email}</h1>
+                  <h1 className=''>Hey,Im</h1><h1 className='text-2xl'>{value.username}</h1> <h1 className=''>{value.email}</h1>
                 <div className=' mt-14   flex gap-4'>
 
                   {/* <button className='bg-[#9A9A9A] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Edit</button> */}
@@ -280,12 +276,23 @@ const PettakerProfile = () => {
 
                         <form action="" onSubmit={EditTaker} className="flex flex-col items-center">
                           <div className='mb-2'>
-                            <h1 className='text-3xl mb-4'>Edit Taker Description</h1>
+                            <h1 className='text-3xl mb-4'>Edit Taker profile</h1>
                           </div>
 
                           <div className='mb-3 w-full'>
-                            <input type="text" name='servicename' value={details.servicename} onChange={(e) => detailstate({ ...details, [e.target.name]: e.target.value })} className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='Give a Name to Your Service' />
-
+                          {/* name="name"
+                value={value.name}
+                onChange={(e) => setValue({ ...value, [e.target.name]: e.target.value })} */}
+                            <input type="text" name='username' value={value.username} onChange={(e) => setValue({ ...value, [e.target.name]: e.target.value })} className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='Give a Name to Your Service' />
+                          </div>                          
+                          <div className='mb-3 w-full'>
+                            <input type="text" name='phone' value={value.phone} onChange={(e)=> setValue({...value,[e.target.name]: e.target.value})} className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='Give a Name to Your Service' />
+                          </div>
+                          <div className='mb-3 w-full'>
+                            <input type="file" name='profileimage'  accept="image/*"  onChange={(e) => handleImageChange(e)} className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='Give a Name to Your Service' />
+                          </div>
+                          <div>
+                            <button className="bg-blue-500 text-white py-2 px-4 rounded-full mx-4">Submit</button>
                           </div>
                         </form>
                       </div>
