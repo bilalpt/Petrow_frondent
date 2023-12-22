@@ -44,7 +44,6 @@ export function CareNavbar() {
 
     localStorage.removeItem('token')
     dispatch(LogoutTakeruser())
-    dispatch(RemoveTakeridinitial())
     
     navigate('/PetBoards/CareLogin');
     console.log('token remove')

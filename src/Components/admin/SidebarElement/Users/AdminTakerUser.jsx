@@ -42,50 +42,7 @@ const TABLE_ROWS = [
     date: "23/04/18",
     id: "12",
   },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "#12",
-    org: "block",
-    online: '9447932166',
-    date: "23/04/18",
-    id: "12",
 
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "#45",
-    org: "block",
-    online: '9447932166',
-    date: "19/09/17",
-    id: "12",
-
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "#62",
-    org: "block",
-    online: '9447932166',
-    date: "24/12/08",
-    id: "12",
-
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "#34",
-    org: "block",
-    online: '9447932166',
-    date: "04/10/21",
-    id: "12",
-
-  },
 ];
 
 function AdminTakerUser() {

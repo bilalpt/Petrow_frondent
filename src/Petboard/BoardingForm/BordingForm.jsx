@@ -8,11 +8,14 @@ import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from 'react-redux';
 import { setBorderFormRedux } from '../../Redux/BoardUser';
 import { useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
 const BordingForm = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [formstate,usestate]=useState({pettype:'',nuberofpetboarded:'',petbreed:'',petsize:'',additionalinfo:'',startdate:'',enddate:''})
+    const token=localStorage.getItem('token')
+    const decode=jwtDecode(token)
+    const [formstate,usestate]=useState({pettype:'',nuberofpetboarded:'',petbreed:'',petsize:'',additionalinfo:'',startdate:'',enddate:'',user:decode.id})
 
 
     //validation
@@ -55,6 +58,7 @@ const BordingForm = () => {
 
             const response= await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL +"petboarding/Boardingform",formstate)
             // console.log(response)
+            console.log(response);
             dispatch(setBorderFormRedux(response.data))
             toast.success(response.data.msg);
             navigate('/PetBoards/Summary')

@@ -44,14 +44,20 @@ const Boardsplice=createSlice({
           },
           LogoutBoarduser:(state)=>{
             state.BoarduserRedux={}
+            state.BordFormRedux=[]
 
+          },
+          //updateboard user
+          Updateboarduser:(state,action)=>{
+            const {index,updatboarduser}=action.payload;
+            state.BoarduserRedux[index]=updatboarduser
           }
 
     }
 
 })
 
-export const {boarduserstore,setBorderFormRedux,UpdateBoardForm,BoarduserDetails,LogoutBoarduser}=Boardsplice.actions
+export const {Updateboarduser,boarduserstore,setBorderFormRedux,UpdateBoardForm,BoarduserDetails,LogoutBoarduser}=Boardsplice.actions
 
 export default  Boardsplice.reducer;
 

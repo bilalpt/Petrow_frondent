@@ -148,7 +148,7 @@ const PettakerProfile = () => {
 
   const [value, setValue] = useState({
      id: Takeruserinitial.id, 
-     username: Takeruserinitial.username, 
+     username: Takeruserinitial.username,
      phone: Takeruserinitial.phone,
      profileimage:null,
     })
@@ -252,7 +252,7 @@ const PettakerProfile = () => {
             <div className='flex justify-between'>
               <div className='flex justify-end w-full'>
                 <div className='border rounded-full h-24 w-24 me-10 mt-10'>
-                  <img src="https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-260nw-1714666150.jpg"
+                  <img src={Takeruserinitial.profileimage}
                     className='rounded-full h-24 w-24' alt="" />
                 </div>
               </div>
@@ -260,7 +260,7 @@ const PettakerProfile = () => {
 
               </div>
               <div className=' mt-8 ml-8 '>
-                  <h1 className=''>Hey,Im</h1><h1 className='text-2xl'>{value.username}</h1> <h1 className=''>{value.email}</h1>
+                  <h1 className=''>Hey,Im</h1><h1 className='text-2xl'>{Takeruserinitial.username}</h1> <h1 className=''>{Takeruserinitial.email}</h1>
                 <div className=' mt-14   flex gap-4'>
 
                   {/* <button className='bg-[#9A9A9A] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Edit</button> */}

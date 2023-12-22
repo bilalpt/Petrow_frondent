@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import jwtDecode from "jwt-decode";
 import { useDispatch } from 'react-redux';
 import { BoarduserDetails } from '../Redux/BoardUser';
+import { setBorderFormRedux } from '../Redux/BoardUser';
 
 
 import "react-toastify/dist/ReactToastify.css";
@@ -60,6 +61,10 @@ function BoardLogin() {
                 const decoded=jwtDecode(token)
                 const user_id=decoded.id
                 const userResponse=await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL +'petboarding/singleboarduser/'+user_id + '/' ,{withCredentials:true})
+                const boardformdata=await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL +'petboarding/passingdataRedux/'+user_id + '/' ,{withCredentials:true})
+
+                dispact(setBorderFormRedux(boardformdata.data))
+
                 dispact(BoarduserDetails({BoarduserRedux:userResponse.data}))
                 console.log(BoarduserDetails);
                 navigate("/PetBoards/BoardHome")

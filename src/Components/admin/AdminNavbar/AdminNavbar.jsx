@@ -7,8 +7,15 @@ import {
   IconButton,
   Card,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 function AdminNavbar() {
+  const navigate=useNavigate()
+
+  const Adminlogout=()=>{
+    localStorage.removeItem('token')
+    navigate('/AdminRouters/AdminLogin')
+  }
 
     const [openNav, setOpenNav] = React.useState(false);
  
@@ -21,7 +28,7 @@ function AdminNavbar() {
 
     const navList = (
         <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-          <Typography
+          {/* <Typography
             as="li"
             variant="small"
             color="blue-gray"
@@ -60,7 +67,7 @@ function AdminNavbar() {
             <a href="#" className="flex items-center">
               Docs
             </a>
-          </Typography>
+          </Typography> */}
         </ul>
       );
     return (
@@ -83,15 +90,15 @@ function AdminNavbar() {
                 size="sm"
                 className="hidden lg:inline-block"
               >
-                <span>Log In</span>
+                <span onClick={Adminlogout}>Log Out</span>
               </Button>
-              <Button
+              {/* <Button
                 variant="gradient"
                 size="sm"
                 className="hidden lg:inline-block"
               >
                 <span>Sign in</span>
-              </Button>
+              </Button> */}
             </div>
             <IconButton
               variant="text"

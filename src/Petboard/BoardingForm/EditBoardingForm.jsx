@@ -11,11 +11,16 @@ import { useDispatch } from 'react-redux';
 import { setBorderFormRedux } from '../../Redux/BoardUser';
 import { useNavigate } from 'react-router-dom';
 import { UpdateBoardForm } from '../../Redux/BoardUser'
+import jwtDecode from 'jwt-decode'
 
 const EditBoardingForm = () => {
 
+
     const dispatch =useDispatch()
-  const [formstate,usestate]=useState({id:'',pettype:'',nuberofpetboarded:'',petbreed:'',petsize:'',additionalinfo:'',startdate:'',enddate:''})
+    const token=localStorage.getItem('token')
+    const decoded=jwtDecode(token)
+
+  const [formstate,usestate]=useState({id:'',pettype:'',nuberofpetboarded:'',petbreed:'',petsize:'',additionalinfo:'',startdate:'',enddate:'',user:decoded.id})
 
   const {BordFormRedux}=useSelector((state)=>state.user);
 //   console.log(BordFormRedux);
