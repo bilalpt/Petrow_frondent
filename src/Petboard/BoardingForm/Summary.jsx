@@ -38,7 +38,7 @@ const Summary = () => {
           <h1 className='place-self-start pt-5'>{formstate.enddate}</h1>
 
           <h1 className='pt-10 space-x-12 text-2xl'><button onClick={()=>navigate('/PetBoards/EditBoardingForm')} className='bg-[#aaeeea] rounded-md w-16'>Edit</button>
-            <button className='bg-[#9B89B9] text-white  text-2xl rounded-md w-16'>Next</button></h1>
+            <button className='bg-[#9B89B9] text-white  text-2xl rounded-md w-16' onClick={()=>navigate('/PetBoards/Boardinginvitation')}>Next</button></h1>
 
 
         </div>
