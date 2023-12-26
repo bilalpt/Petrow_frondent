@@ -1,4 +1,3 @@
-import React from 'react'
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
@@ -23,6 +22,8 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 
@@ -50,6 +51,32 @@ function AdminTakerUser() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
 
+  const [users, setUsers] = useState([]);
+
+
+
+  
+  useEffect(() => {
+
+    fetchData();
+  }, [])
+
+  async function fetchData() {
+    try {
+      const response = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petboarding/Pettakerlist")
+      setUsers(response.data);
+
+      console.log(response.data,'bilal baxter');
+
+      console.log(response);
+
+    
+      console.log(response.data, 'admin board users data ');
+    } catch (error) {
+      console.error("Error fetching users:", error)
+    }
+  }
+
 
 
 
@@ -59,7 +86,7 @@ function AdminTakerUser() {
 
         <div className='grid grid-cols-2 w-full pt-10'>
           <div>
-            <h1 className='text-2xl pl-8'>Pet Owners List</h1>
+            <h1 className='text-2xl pl-8'>Pet Takers list</h1>
           </div>
 
           {/* modal */}
@@ -69,12 +96,102 @@ function AdminTakerUser() {
             </Button>
             <Dialog open={open} handler={handleOpen}>
               <DialogHeader>Pet Takers Requests</DialogHeader>
-              {/* <DialogBody>
-                The key to more success is to have a lot of pillows. Put it this way,
-                it took me twenty five years to get these plants, twenty five years of
-                blood sweat and tears, and I&apos;m never giving up, I&apos;m just
-                getting started. I&apos;m up to something. Fan luv.
-              </DialogBody> */}
+              <thead>
+    <tr>
+        <th className="ml-12">ID</th>        
+        <th className="ml-10">Images</th>    
+        <th className="ml-10">Username</th>  
+        <th>Email</th>
+        <th>Join_date</th>
+        <th>View user details</th>
+
+
+
+        {/* ... other headers if needed */}
+    </tr>
+</thead>
+
+              {users.map((users, index) => (
+                <tr key={users.id}>
+
+
+
+
+                  <td className="ml-4">
+                            <div className="flex flex-col">
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >#
+                                {users.id}
+                              </Typography>
+
+                            </div>
+                          </td>
+                          <td >
+
+                            <div className="flex items-center gap-3">
+                              <Avatar src={users.profileimage} alt={users.profileimage} size="sm" />
+                              <div className="flex flex-col">
+                                <Typography
+                                  variant="small"
+                                  color="blue-gray"
+                                  className="font-normal"
+                                >
+                                </Typography>
+
+                              </div>
+                            </div>
+                          </td>
+
+                          <td >
+                            <div className="flex flex-col">
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {users.username}
+                              </Typography>
+
+                            </div>
+                          </td>
+                          <td >
+                            <div className="flex flex-col">
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {users.email}
+                              </Typography>
+
+                            </div>
+                          </td>
+                          <td >
+                            <div className="flex flex-col">
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {users.date_and_time}
+                              </Typography>
+
+                            </div>
+                          </td>
+  
+
+                  
+                    <td >
+                        <button onClick={() => handleOpen(users)}>View Details</button>
+                    </td>
+                </tr>
+            ))}
+              
+
+
               <DialogFooter>
                 <Button
                   variant="text"
