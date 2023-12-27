@@ -17,9 +17,15 @@ import jwtDecode from 'jwt-decode'
 import { useNavigate } from 'react-router-dom'
 import { UpdateUser } from '../../../Redux/BoardTakerRedux'
 
+
+
 const PettakerProfile = () => {
   const dispatch = useDispatch();
   const navigate=useNavigate();
+
+  // const {TakerAbout}= useSelector((state)=>state.TakerAbout)
+
+  // console.log(TakerAbout,'swetha');
 
 
   //taker user details edit
@@ -46,25 +52,35 @@ const PettakerProfile = () => {
 
   const { TakerInitialDesc } = useSelector((state) => state.takerforms);
 
+  const takerdec = TakerInitialDesc[TakerInitialDesc.length - 1]
+
+
 
 
   useEffect(() => {
-    const takerdec = TakerInitialDesc[TakerInitialDesc.length - 1]
 
-    detailstate({
-      id: takerdec.id,
-      servicename: takerdec.servicename,
-      petcount: takerdec.petcount,
-      acceptingpet: takerdec.acceptingpet,
-      acceptingpetsize: takerdec.acceptingpetsize,
-      howmanywalk: takerdec.howmanywalk,
-      apartmentorhome: takerdec.apartmentorhome,
-      transportemergencies: takerdec.transportemergencies,
-      sleepinglocation: takerdec.sleepinglocation,
-      price: takerdec.price,
-      location: takerdec.location,
-      pincode: takerdec.pincode,
-    });
+    if(takerdec >= [0]){
+      detailstate({
+        id: takerdec.id,
+        servicename: takerdec.servicename,
+        petcount: takerdec.petcount,
+        acceptingpet: takerdec.acceptingpet,
+        acceptingpetsize: takerdec.acceptingpetsize,
+        howmanywalk: takerdec.howmanywalk,
+        apartmentorhome: takerdec.apartmentorhome,
+        transportemergencies: takerdec.transportemergencies,
+        sleepinglocation: takerdec.sleepinglocation,
+        price: takerdec.price,
+        location: takerdec.location,
+        pincode: takerdec.pincode,
+      });
+
+    }
+    else{
+      console.log('taker description is null');
+    }
+
+
 
   }, [])
 
@@ -145,6 +161,7 @@ const PettakerProfile = () => {
   
   //taker edit
   const {Takeruserinitial}= useSelector((state)=>state.takerforms)
+
 
   const [value, setValue] = useState({
      id: Takeruserinitial.id, 
@@ -300,7 +317,9 @@ const PettakerProfile = () => {
 
                   </Dialog>
 
-                  <button onClick={()=>navigate('/PetTakers/TakeraboutEdit')}>About Taker</button>
+
+
+                  {Takeruserinitial ?<button onClick={()=>navigate('/PetTakers/TakeraboutEdit')}>About Taker</button>:<p>one</p>}
 
 
                   {/* modal */}

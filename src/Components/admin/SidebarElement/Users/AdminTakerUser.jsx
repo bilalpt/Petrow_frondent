@@ -24,6 +24,7 @@ import {
 } from "@material-tailwind/react";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate, Link } from "react-router-dom";
 
 
 
@@ -48,6 +49,8 @@ const TABLE_ROWS = [
 
 function AdminTakerUser() {
 
+  const navigate = useNavigate()
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
 
@@ -55,7 +58,7 @@ function AdminTakerUser() {
 
 
 
-  
+
   useEffect(() => {
 
     fetchData();
@@ -66,11 +69,10 @@ function AdminTakerUser() {
       const response = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petboarding/Pettakerlist")
       setUsers(response.data);
 
-      console.log(response.data,'bilal baxter');
 
       console.log(response);
 
-    
+
       console.log(response.data, 'admin board users data ');
     } catch (error) {
       console.error("Error fetching users:", error)
@@ -92,24 +94,23 @@ function AdminTakerUser() {
           {/* modal */}
           <div className='pl-96'>
             <Button onClick={handleOpen} variant="gradient">
-              Open Dialog
-            </Button>
+              Taker Request            </Button>
             <Dialog open={open} handler={handleOpen}>
               <DialogHeader>Pet Takers Requests</DialogHeader>
               <thead>
-    <tr>
-        <th className="ml-12">ID</th>        
-        <th className="ml-10">Images</th>    
-        <th className="ml-10">Username</th>  
-        <th>Email</th>
-        <th>Join_date</th>
-        <th>View user details</th>
+                <tr>
+                  <th className="ml-12">ID</th>
+                  <th className="ml-10">Images</th>
+                  <th className="ml-10">Username</th>
+                  <th>Email</th>
+                  <th>Join_date</th>
+                  <th>View user details</th>
 
 
 
-        {/* ... other headers if needed */}
-    </tr>
-</thead>
+                  {/* ... other headers if needed */}
+                </tr>
+              </thead>
 
               {users.map((users, index) => (
                 <tr key={users.id}>
@@ -118,78 +119,78 @@ function AdminTakerUser() {
 
 
                   <td className="ml-4">
-                            <div className="flex flex-col">
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal"
-                              >#
-                                {users.id}
-                              </Typography>
+                    <div className="flex flex-col">
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >#
+                        {users.id}
+                      </Typography>
 
-                            </div>
-                          </td>
-                          <td >
+                    </div>
+                  </td>
+                  <td >
 
-                            <div className="flex items-center gap-3">
-                              <Avatar src={users.profileimage} alt={users.profileimage} size="sm" />
-                              <div className="flex flex-col">
-                                <Typography
-                                  variant="small"
-                                  color="blue-gray"
-                                  className="font-normal"
-                                >
-                                </Typography>
+                    <div className="flex items-center gap-3">
+                      <Avatar src={users.profileimage} alt={users.profileimage} size="sm" />
+                      <div className="flex flex-col">
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                        >
+                        </Typography>
 
-                              </div>
-                            </div>
-                          </td>
+                      </div>
+                    </div>
+                  </td>
 
-                          <td >
-                            <div className="flex flex-col">
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal"
-                              >
-                                {users.username}
-                              </Typography>
+                  <td >
+                    <div className="flex flex-col">
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {users.username}
+                      </Typography>
 
-                            </div>
-                          </td>
-                          <td >
-                            <div className="flex flex-col">
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal"
-                              >
-                                {users.email}
-                              </Typography>
+                    </div>
+                  </td>
+                  <td >
+                    <div className="flex flex-col">
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {users.email}
+                      </Typography>
 
-                            </div>
-                          </td>
-                          <td >
-                            <div className="flex flex-col">
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal"
-                              >
-                                {users.date_and_time}
-                              </Typography>
+                    </div>
+                  </td>
+                  <td >
+                    <div className="flex flex-col">
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {users.date_and_time}
+                      </Typography>
 
-                            </div>
-                          </td>
-  
+                    </div>
+                  </td>
 
-                  
-                    <td >
-                        <button onClick={() => handleOpen(users)}>View Details</button>
-                    </td>
+
+
+                  <td >
+                  <Link to={`/AdminRouters/AdminHome/Takerrequestpage/${users.id}`}><button>View Details</button></Link>
+                  </td>
                 </tr>
-            ))}
-              
+              ))}
+
 
 
               <DialogFooter>
