@@ -27,32 +27,21 @@ export function CareNavbar() {
   const currentUserData = useSelector(state => state.takerforms.Takeruserinitial);
   const loggedInUserId = currentUserData.id;
 
-  const { takeridInitialdata } = useSelector((state) => state.takerforms);
+  const { TakeridInitial } = useSelector((state) => state.takerforms);
 
-  // const takeridInitial = takeridInitialdata[takeridInitialdata.length -1]
+  const Takeruserlastimage=TakeridInitial[TakeridInitial.length -1]
 
-  // console.log(takeridInitial,'chora navbar');
+  let takeridproofimageid
 
-  // let pettakernav=null
-
-  // if (takeridInitial >=[0]){
-  //   pettakernav=takeridInitial
-    
-  // }else{
-  //   console.log('data not found');
-  // }
+  if(Takeruserlastimage){
+    takeridproofimageid=Takeruserlastimage.user
+  }
+  else{
+    console.log('sorry no value found in Takeruserlastimage');
+  }
 
 
 
-
-
-
-
-
-  
-
-  // console.log(takeridInitial.user);
-  console.log(loggedInUserId);
 
 
 
@@ -100,7 +89,7 @@ export function CareNavbar() {
         </Link>
       </Typography>
 
-      {/* {takeridInitialdata.user == loggedInUserId ? null : (
+      {TakeridInitial.user || takeridproofimageid === loggedInUserId ? null : (
         <Typography
           as="li"
           variant="small"
@@ -111,7 +100,7 @@ export function CareNavbar() {
             Pet Taker
           </Link>
         </Typography>
-      )} */}
+      )}
 
 
 

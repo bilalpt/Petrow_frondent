@@ -23,15 +23,10 @@ const PettakerProfile = () => {
   const dispatch = useDispatch();
   const navigate=useNavigate();
 
-  // const {TakerAbout}= useSelector((state)=>state.TakerAbout)
-
-  // console.log(TakerAbout,'swetha');
-
 
   //taker user details edit
 
   const [details, detailstate] = useState({
-    id: '',
     servicename: '',
     petcount: '',
     acceptingpet: '',
@@ -43,6 +38,7 @@ const PettakerProfile = () => {
     price: '',
     location: '',
     pincode: '',
+    user:''
   })
 
 
@@ -50,32 +46,67 @@ const PettakerProfile = () => {
 
   const handleOpen = () => setOpen(!open);
 
+  // descriptiion
   const { TakerInitialDesc } = useSelector((state) => state.takerforms);
 
-  const takerdec = TakerInitialDesc[TakerInitialDesc.length - 1]
+  const takerdec = TakerInitialDesc.data
+
+  const Takerdecription = TakerInitialDesc[TakerInitialDesc.length-1]
+  // end description
+
+
+  const { TakeridInitial } =useSelector((state)=>state.takerforms)
+  const takerintialimage=TakeridInitial[TakeridInitial.length-1]
 
 
 
 
   useEffect(() => {
 
-    if(takerdec >= [0]){
-      detailstate({
-        id: takerdec.id,
-        servicename: takerdec.servicename,
-        petcount: takerdec.petcount,
-        acceptingpet: takerdec.acceptingpet,
-        acceptingpetsize: takerdec.acceptingpetsize,
-        howmanywalk: takerdec.howmanywalk,
-        apartmentorhome: takerdec.apartmentorhome,
-        transportemergencies: takerdec.transportemergencies,
-        sleepinglocation: takerdec.sleepinglocation,
-        price: takerdec.price,
-        location: takerdec.location,
-        pincode: takerdec.pincode,
-      });
+    if(takerdec || Takerdecription !== null ){
+      if(takerdec){
+        console.log(takerdec.id,'sudev.................');
+        detailstate({
+        
+          id: takerdec.id,
+          servicename: takerdec.servicename,
+          petcount: takerdec.petcount,
+          acceptingpet: takerdec.acceptingpet,
+          acceptingpetsize: takerdec.acceptingpetsize,
+          howmanywalk: takerdec.howmanywalk,
+          apartmentorhome: takerdec.apartmentorhome,
+          transportemergencies: takerdec.transportemergencies,
+          sleepinglocation: takerdec.sleepinglocation,
+          price: takerdec.price,
+          location: takerdec.location,
+          pincode: takerdec.pincode,
+          user:takerdec.user,
+        });
+      }
+      else if(Takerdecription){
+        detailstate({
+        
+          id: Takerdecription.id,
+          servicename: Takerdecription.servicename,
+          petcount: Takerdecription.petcount,
+          acceptingpet: Takerdecription.acceptingpet,
+          acceptingpetsize: Takerdecription.acceptingpetsize,
+          howmanywalk: Takerdecription.howmanywalk,
+          apartmentorhome: Takerdecription.apartmentorhome,
+          transportemergencies: Takerdecription.transportemergencies,
+          sleepinglocation: Takerdecription.sleepinglocation,
+          price: Takerdecription.price,
+          location: Takerdecription.location,
+          pincode: Takerdecription.pincode,
+          user:Takerdecription.user,
+        });
+
+      }
+
+
 
     }
+
     else{
       console.log('taker description is null');
     }
@@ -84,7 +115,7 @@ const PettakerProfile = () => {
 
   }, [])
 
-  console.log(details,'bilal');
+  // console.log(details,'bilal');
 
 
   //taker user details edit end
@@ -148,8 +179,8 @@ const PettakerProfile = () => {
 
 
         const Response = await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakerDescriptionEdit/" + details.id, details)
-        const lastIndex = TakerInitialDesc.length - 1;
-        console.log(Response.data);
+        const lastIndex = Response.data
+        console.log(lastIndex,'daxo');
         dispatch(UpdateDescription({ index: lastIndex, updatedescription: Response.data }))
       } catch (error) {
         console.log(error);
@@ -161,6 +192,7 @@ const PettakerProfile = () => {
   
   //taker edit
   const {Takeruserinitial}= useSelector((state)=>state.takerforms)
+  
 
 
   const [value, setValue] = useState({
@@ -169,28 +201,18 @@ const PettakerProfile = () => {
      phone: Takeruserinitial.phone,
      profileimage:null,
     })
-  console.log(value,'all data geting');
 
   const [secondOpen, setSecond] = useState(false);
   const secondhandle = () => setSecond(!secondOpen);
 
- 
-  // if(!userdata){
-  //   return null;
-  // }
-  // const userdata = Takeruserinitial
-
-
-  // useEffect(() => {
-  //   stateTakeruser({
-  //     id: userdata.id,
-  //     username: userdata.username,
-  //     phone: userdata.phone,
-  //     profileimage: userdata.userdata,
-  //     email:userdata.email,
-  //   }
-  //   )
-  // },[])
+  useEffect(() => {
+    setValue((prevValue) => ({
+      ...prevValue,
+      id: Takeruserinitial.id,
+      username: Takeruserinitial.username,
+      phone: Takeruserinitial.phone,
+    }));
+  }, [Takeruserinitial]);
 
   const handleImageChange = (e) =>{
     const file = e.target.files[0];
@@ -200,11 +222,7 @@ const PettakerProfile = () => {
     profileimage: file,
   }));
   }
-  // const images=(e)=>{
-  //   console.log(e.target.files[0],'in image geting here');
-  //   file=e.target.files[0]
-  //   stateTakeruser({...takeruser,profileimage:file})
-  // }
+
 
   //taker edit end
 
@@ -219,19 +237,15 @@ const PettakerProfile = () => {
     // }
     return true
   }
+  let lastIndex
+
   const EditTaker= async (e)=>{
     e.preventDefault();
     if(uservalidation()){
-
-      
       try{
         const formdata=new FormData()
 
-
-
-
         formdata.append('username',value.username)
-        console.log(formdata,'formdata');
         formdata.append('profileimage',value.profileimage)
         formdata.append('phone',value.phone)
 
@@ -243,10 +257,8 @@ const PettakerProfile = () => {
             // Add any other headers as needed (e.g., authorization headers)
           },
         });
-        console.log(Res2,'fasil pp');
-        const takeruser2=Takeruserinitial;
-        dispatch(UpdateUser({ index:takeruser2, updateuser:Res2.data}))
-  
+        lastIndex=Res2.data;
+        dispatch(UpdateUser({ index:lastIndex, updateuser:Res2.data}))
       }
       catch(error){
         console.log(error)
@@ -255,6 +267,8 @@ const PettakerProfile = () => {
 
 
   }
+
+  
   return (
     <div>
       <div>
@@ -319,13 +333,13 @@ const PettakerProfile = () => {
 
 
 
-                  {Takeruserinitial ?<button onClick={()=>navigate('/PetTakers/TakeraboutEdit')}>About Taker</button>:<p>one</p>}
+                  {TakeridInitial.user || takerintialimage  ?<button onClick={()=>navigate('/PetTakers/TakeraboutEdit')}>About Taker</button>:null}
 
 
                   {/* modal */}
-                  <Button onClick={handleOpen} variant="gradient">
+                  {TakeridInitial.user || takerintialimage?<Button onClick={handleOpen} variant="gradient">
                     Edit Your Details
-                  </Button>
+                  </Button>:null}
                   <Dialog open={open} handler={handleOpen}>
                     {/* <DialogHeader>Edit Taker Description</DialogHeader> */}
                     <DialogBody>

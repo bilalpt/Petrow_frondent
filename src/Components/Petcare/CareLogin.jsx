@@ -56,26 +56,31 @@ function CareLogin() {
                 // const res = await BoardLogin(boarduser)
                 const res = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + 'petcare/tokenobtain_petcare', user)
                 const token = JSON.stringify(res.data);
+
                 localStorage.setItem("token", token);
                 const decoded = jwtDecode(token)
                 const user_id =  decoded.id
                 console.log(user_id);
 
+
                 const res2 =  await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + 'petcare/takeruserinfo/' +user_id+ "/",{withCredentials:true})
 
                 const AboutpageResponse=  await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + 'petcare/AboutpageRetrive/' +user_id,{withCredentials:true})
+
 
                 const descriptionData=await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + 'petcare/descriptionRetrive/' +user_id,{withCredentials:true})
 
                 const Takeridimages= await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + 'petcare/TakerIdRetreve/' +user_id,{withCredentials:true})
 
                 // const Takeraboutdata=
+                console.log(AboutpageResponse.data,'biggest errorrrrrrr');
 
                 dispatch(TakeridImages({TakeridInitial:Takeridimages.data}))
                 
                 dispatch(Takeruserfun({Takeruserinitial: res2.data}))
 
-                dispatch(TakerAboutfun({TakerAbout:AboutpageResponse.data}))
+                dispatch(TakerAboutfun({ TakerAbout: AboutpageResponse.data }));
+
 
                 dispatch(TakerDescriptionfun({TakerInitialDesc:descriptionData.data}))
 

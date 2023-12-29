@@ -31,6 +31,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 
 
+
 const TABLE_HEAD = ["# Id", "Name", "Mobile", "Date", "Email", "Block&Unblock"];
 
 const TABLE_ROWS = [
@@ -51,9 +52,10 @@ function AdminTakerUser() {
 
   const navigate = useNavigate()
 
+ 
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
-
   const [users, setUsers] = useState([]);
 
 
@@ -78,6 +80,14 @@ function AdminTakerUser() {
       console.error("Error fetching users:", error)
     }
   }
+
+
+  // if (Takeruserlastimage==users){
+  //   one=users
+  //   console.log(one,'fasil ......................................................................................');
+  // }else{
+  //   console.log('fetch userdetais');
+  // }
 
 
 
@@ -112,11 +122,10 @@ function AdminTakerUser() {
                 </tr>
               </thead>
 
+              
+
               {users.map((users, index) => (
                 <tr key={users.id}>
-
-
-
 
                   <td className="ml-4">
                     <div className="flex flex-col">
@@ -182,9 +191,6 @@ function AdminTakerUser() {
 
                     </div>
                   </td>
-
-
-
                   <td >
                   <Link to={`/AdminRouters/AdminHome/Takerrequestpage/${users.id}`}><button>View Details</button></Link>
                   </td>

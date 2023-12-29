@@ -23,26 +23,33 @@ function TakeraboutEdit() {
 
 
     const { TakerAbout } = useSelector((state) => state.takerforms);
+    const data = TakerAbout
+    console.log(data,'swetha');
+
+
+
 
 
 
 
     useEffect(() => {
 
-        const data = TakerAbout[TakerAbout.length - 1]
+        if (data >= [0]){
+
+            aboutsetstate({
+                id: data.id,
+                introduction: data.introduction,
+                petexperience: data.petexperience,
+                workstatus: data.workstatus,
+                skillandqualifications: data.skillandqualifications,
+                otherpetqualification: data.otherpetqualification,
+    
+            })
+        }else{
+            console.log('about taker data not enterd');
+        }
 
 
-        console.log(data);
-
-        aboutsetstate({
-            id: data.id,
-            introduction: data.introduction,
-            petexperience: data.petexperience,
-            workstatus: data.workstatus,
-            skillandqualifications: data.skillandqualifications,
-            otherpetqualification: data.otherpetqualification,
-
-        })
     }, [])
 
     //validation
@@ -72,12 +79,13 @@ function TakeraboutEdit() {
     const editabout = async (e) => {
         e.preventDefault();
         if (editaboutValidation())
-        console.log('sudheer');
+        console.log(data.id,'akshy');
+
 
             try {
                 const response = await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakeraboutEdit/" + aboutstate.id, aboutstate)
                 console.log(response)
-                const lastIndex = TakerAbout.length - 1;
+                const lastIndex = response.data
                 dispatch(UpdateAboutpage({ index: lastIndex, updateaboutpage: response.data }))
                 navigate()
 

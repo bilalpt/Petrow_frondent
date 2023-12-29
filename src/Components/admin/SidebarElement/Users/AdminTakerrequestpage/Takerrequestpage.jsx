@@ -33,7 +33,7 @@ function Takerrequestpage() {
 
       //taker about page
       const aboutdetails = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/AboutpageRetrive/"+userId)
-      const aboutusers = aboutdetails.data;
+      const aboutusers = aboutdetails.data[0];
       console.log(aboutusers,'about details');
 
       setaboutuser(aboutusers)
@@ -41,15 +41,9 @@ function Takerrequestpage() {
 
       //taker description
       const Takerdescription = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/descriptionRetrive/"+userId)
-      const userdescrition = Takerdescription.data;
+      const userdescrition = Takerdescription.data[0];
       console.log(userdescrition,'Takerdescription');
       settakerdescription(userdescrition)
-
-
-
-
-
-
 
       for (let user of users) {
         if (user.id == userId) {
@@ -57,10 +51,6 @@ function Takerrequestpage() {
           break;
         }
       }
-
-
-
-
       console.log(response.data, 'admin board users data ');
     } catch (error) {
       console.error("Error fetching users:", error)
@@ -93,12 +83,12 @@ function Takerrequestpage() {
 
             <h1 className='text-2xl mt-8'>Your skill and Qualification</h1>
 
-            <h1 className='mt-4 ml-12'>Some vaterinary experience</h1>
+            <h1 className='mt-4 ml-12'>{aboutstate.skillandqualifications}</h1>
 
 
             <h1 className='text-xl mt-8'>Other Special skill pet Qualification</h1>
 
-            <h1 className='mt-4 ml-12'>Nill</h1>
+            <h1 className='mt-4 ml-12'>{aboutstate.otherpetqualifications}</h1>
 
 
             <h1 className='text-xl mt-8'>ID photos</h1>

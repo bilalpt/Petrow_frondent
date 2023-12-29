@@ -96,8 +96,9 @@
                         about,
                         { withCredentials: true }
                     );
-    
+
                     dispatch(TakerAboutfun({TakerAbout:response.data}));
+
                     toast.success(response.data.msg);
                     console.log('success aboutpage', response);
     

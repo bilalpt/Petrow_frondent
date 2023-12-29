@@ -21,7 +21,6 @@ const Takersplice=createSlice({
             state.TakerInitialDesc={};
             state.TakeridInitial=[];
 
-
         },
         RemoveTakeridinitial:(state,action)=>{
         },
