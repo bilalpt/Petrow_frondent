@@ -52,7 +52,7 @@ function AdminTakerUser() {
 
   const navigate = useNavigate()
 
- 
+
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
@@ -69,10 +69,32 @@ function AdminTakerUser() {
   async function fetchData() {
     try {
       const response = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petboarding/Pettakerlist")
-      setUsers(response.data);
+      // setUsers(response.data);
+      console.log(response.data);
+      const takeriddetails = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/Takeridproofallretreave")
+      const takeruserdatas = takeriddetails.data
+      
+      const userIdsFromUsers = response.data.map(user => user.id);
+
+      console.log(userIdsFromUsers, '0000000000000000000000000000');
 
 
-      console.log(response);
+      const userIdsFromTakerUserDatas = takeruserdatas.map(user => user.user);
+
+      console.log(userIdsFromTakerUserDatas, 'billlllllllllllllllllllllllll');
+
+      const commonUserIds = userIdsFromUsers.filter(id => userIdsFromTakerUserDatas.includes(id));
+
+      console.log(commonUserIds, 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
+
+      // Filter users based on common IDs
+      const commonUsersDetails = response.data.filter(user => commonUserIds.includes(user.id));
+      setUsers(commonUsersDetails)
+      const commonTakerUsersDetails = takeruserdatas.filter(user => commonUserIds.includes(user.user));
+
+      console.log(commonUsersDetails, "Common Users Details");
+      console.log(commonTakerUsersDetails, "Common Taker Users Details");
+
 
 
       console.log(response.data, 'admin board users data ');
@@ -80,6 +102,7 @@ function AdminTakerUser() {
       console.error("Error fetching users:", error)
     }
   }
+
 
 
   // if (Takeruserlastimage==users){
@@ -100,6 +123,7 @@ function AdminTakerUser() {
           <div>
             <h1 className='text-2xl pl-8'>Pet Takers list</h1>
           </div>
+
 
           {/* modal */}
           <div className='pl-96'>
@@ -122,7 +146,7 @@ function AdminTakerUser() {
                 </tr>
               </thead>
 
-              
+
 
               {users.map((users, index) => (
                 <tr key={users.id}>
@@ -192,7 +216,7 @@ function AdminTakerUser() {
                     </div>
                   </td>
                   <td >
-                  <Link to={`/AdminRouters/AdminHome/Takerrequestpage/${users.id}`}><button>View Details</button></Link>
+                    <Link to={`/AdminRouters/AdminHome/Takerrequestpage/${users.id}`}><button>View Details</button></Link>
                   </td>
                 </tr>
               ))}
