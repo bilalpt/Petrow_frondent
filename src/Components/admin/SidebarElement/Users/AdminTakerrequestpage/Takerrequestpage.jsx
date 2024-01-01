@@ -4,6 +4,8 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';  
 import { useState } from 'react';
+import { useNavigate, Link } from "react-router-dom";
+
 
 
 
@@ -16,11 +18,28 @@ function Takerrequestpage() {
 
   const [Takerdescription,settakerdescription]=useState({id:'',servicename:'',petcount:'',acceptingpet:'',acceptingpetsize:'',howmanywalk:'',apartmentorhome:'',transportemergencies:'',sleepinglocation:'',price:'',location:'',pincode:'',user:''})
 
+  const [Takeridstate,Takeridsetstate]=useState({id:'',adharimg:'',otheridimg:'',Takeraccept:''})
+  console.log(Takeridstate.Takeraccept);
+
+  
+
+  const [Takerpetwithstate,Takerpetwithsetstate]=useState({id:'',image:''})
+
+
+  const toggleTakeraccept = () => {
+    Takeridsetstate(prevState => ({
+      ...prevState,
+      Takeraccept: !prevState.Takeraccept // Toggling the value
+    }));
+  };
+
+
   const id  = useParams();
   const userId= id.userId
 
   useEffect(()=>{
     dataFetch()
+
   },[])
 
 
@@ -51,6 +70,27 @@ function Takerrequestpage() {
           break;
         }
       }
+      const takeridimages = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakerIdRetreve/"+userId)
+      const takeridimagesdetais=takeridimages.data[0]
+      Takeridsetstate(takeridimagesdetais)
+
+
+      const Petwithimagelist = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/Petwithimagelist/"+userId)
+      const petwithimage=Petwithimagelist.data[0]
+      Takerpetwithsetstate(petwithimage)
+   
+  
+
+      const Takeridproofupdate = await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakeridproofEdit/"+userId,Takeridstate)
+
+
+console.log(Takeridproofupdate,'DATA GETING HERE');
+
+
+
+
+
+
       console.log(response.data, 'admin board users data ');
     } catch (error) {
       console.error("Error fetching users:", error)
@@ -94,12 +134,12 @@ function Takerrequestpage() {
             <h1 className='text-xl mt-8'>ID photos</h1>
             <div className='grid grid-cols-6 '>
                         <img
-                            src={tarapet}
+                            src={Takeridstate.adharimg}
                             className=" h-28  ml-12 mt-4  "
                             alt="cropanimal"
                         />
                                                 <img
-                            src={tarapet}
+                            src={Takeridstate.otheridimg}
                             className=" h-28  ml-12 mt-4  "
                             alt="cropanimal"
                         />
@@ -111,7 +151,7 @@ function Takerrequestpage() {
 
             <div className='grid grid-cols-6 '>
                         <img
-                            src={tarapet}
+                            src={Takerpetwithstate.image}
                             className=" h-28  ml-12 mt-4  "
                             alt="cropanimal"
                         />
@@ -124,7 +164,7 @@ function Takerrequestpage() {
           </div>
           <button className='mt-10 bg-[#ffffff] h-10 w-20  rounded-md ml-96'>Reject</button>
 
-          <button className='mt-10 bg-[#9A87B7] h-10 w-20 text-[#ffffff] rounded-md ml-10 mb-28 '>Accept</button>
+          <Link to={`/AdminRouters/AdminHome/AdminTakerUser`} ><button className='mt-10 bg-[#9A87B7] h-10 w-20 text-[#ffffff] rounded-md ml-10 mb-28' onClick={toggleTakeraccept}>Accept</button></Link>
         </div>
       </div>
 

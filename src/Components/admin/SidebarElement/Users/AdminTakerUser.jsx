@@ -59,6 +59,13 @@ function AdminTakerUser() {
   const [users, setUsers] = useState([]);
 
 
+  const [takeridstate,takeridsetstate]=useState([])
+  console.log(takeridstate,'baxteeeeeeeeeeeeeeeeeeeeeeeeeeee');
+
+  const [Takeridstate,Takeridsetstate]=useState({id:'',adharimg:'',otheridimg:'',Takeraccept:''})
+  console.log(Takeridstate,'TakeridstateTakeraccept');
+
+
 
 
   useEffect(() => {
@@ -70,30 +77,30 @@ function AdminTakerUser() {
     try {
       const response = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petboarding/Pettakerlist")
       // setUsers(response.data);
-      console.log(response.data);
+      console.log(response.data,'lol');
       const takeriddetails = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/Takeridproofallretreave")
       const takeruserdatas = takeriddetails.data
       
       const userIdsFromUsers = response.data.map(user => user.id);
-
-      console.log(userIdsFromUsers, '0000000000000000000000000000');
-
+      console.log(userIdsFromUsers,'lol id');
 
       const userIdsFromTakerUserDatas = takeruserdatas.map(user => user.user);
 
-      console.log(userIdsFromTakerUserDatas, 'billlllllllllllllllllllllllll');
-
       const commonUserIds = userIdsFromUsers.filter(id => userIdsFromTakerUserDatas.includes(id));
-
-      console.log(commonUserIds, 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
 
       // Filter users based on common IDs
       const commonUsersDetails = response.data.filter(user => commonUserIds.includes(user.id));
       setUsers(commonUsersDetails)
       const commonTakerUsersDetails = takeruserdatas.filter(user => commonUserIds.includes(user.user));
+      takeridsetstate(commonTakerUsersDetails)
 
       console.log(commonUsersDetails, "Common Users Details");
       console.log(commonTakerUsersDetails, "Common Taker Users Details");
+
+
+      const takeridimages = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakerIdRetreve/"+userId)
+      const takeridimagesdetais=takeridimages.data[0]
+      Takeridsetstate(takeridimagesdetais)
 
 
 
@@ -147,8 +154,7 @@ function AdminTakerUser() {
               </thead>
 
 
-
-              {users.map((users, index) => (
+              {!Takeridstate.Takeraccept &&users.map((users, index) => (
                 <tr key={users.id}>
 
                   <td className="ml-4">
