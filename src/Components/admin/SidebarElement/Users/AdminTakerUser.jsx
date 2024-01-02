@@ -32,7 +32,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 
 
-const TABLE_HEAD = ["# Id", "Name", "Mobile", "Date", "Email", "Block&Unblock"];
+const TABLE_HEAD = ["# Id", "Name", "Mobile", "Date", "Email","Status", "Block&Unblock"];
 
 const TABLE_ROWS = [
   {
@@ -60,24 +60,39 @@ function AdminTakerUser() {
 
 
   const [takeridstate,takeridsetstate]=useState([])
-  console.log(takeridstate,'baxteeeeeeeeeeeeeeeeeeeeeeeeeeee');
 
-  const [Takeridstate,Takeridsetstate]=useState({id:'',adharimg:'',otheridimg:'',Takeraccept:''})
-  console.log(Takeridstate,'TakeridstateTakeraccept');
+  const userWithTakerAccept = takeridstate.find(item => item.Takeraccept);
+
+  console.log(userWithTakerAccept, 'test')
+
+  const userIdWithTakerAccept = userWithTakerAccept ? userWithTakerAccept.user : null;
+
+  const [Takeridstate,Takeridsetstate]=useState({id:'',Takeraccept:'',user:''})
+  console.log(Takeridstate.Takeraccept,'Takeridstate.Takeraccept');
+
+
+
+
 
 
 
 
   useEffect(() => {
-
     fetchData();
   }, [])
 
+
+
+  
+
   async function fetchData() {
     try {
+
       const response = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petboarding/Pettakerlist")
-      // setUsers(response.data);
+
       console.log(response.data,'lol');
+
+
       const takeriddetails = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/Takeridproofallretreave")
       const takeruserdatas = takeriddetails.data
       
@@ -89,18 +104,15 @@ function AdminTakerUser() {
       const commonUserIds = userIdsFromUsers.filter(id => userIdsFromTakerUserDatas.includes(id));
 
       // Filter users based on common IDs
-      const commonUsersDetails = response.data.filter(user => commonUserIds.includes(user.id));
-      setUsers(commonUsersDetails)
-      const commonTakerUsersDetails = takeruserdatas.filter(user => commonUserIds.includes(user.user));
-      takeridsetstate(commonTakerUsersDetails)
+      const commonUsersDetails = await response.data.filter(user => commonUserIds.includes(user.id));
+      await setUsers(commonUsersDetails)
+
+      const commonTakerUsersDetails = await takeruserdatas.filter(user => commonUserIds.includes(user.user));
+      await takeridsetstate(commonTakerUsersDetails)
 
       console.log(commonUsersDetails, "Common Users Details");
       console.log(commonTakerUsersDetails, "Common Taker Users Details");
 
-
-      const takeridimages = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/TakerIdRetreve/"+userId)
-      const takeridimagesdetais=takeridimages.data[0]
-      Takeridsetstate(takeridimagesdetais)
 
 
 
@@ -109,6 +121,30 @@ function AdminTakerUser() {
       console.error("Error fetching users:", error)
     }
   }
+
+
+
+  const handleBlock =async (id,is_active) => {
+    let data;
+    console.log(is_active,id,'userssssssss');
+
+    if (is_active === true){
+       data ={is_active:false}
+    }else{
+      data = {is_active:true}
+    }
+    const datapass=await axios.patch(import.meta.env.VITE_PETBOARDUSERS_URL+`petboarding/userpassinadminside/${id}`,data)
+    fetchData();
+
+};
+
+const handleUnblock = () => {
+    // Logic to unblock the organization/user
+    // For example, make an API call or update a state variable
+};
+
+
+
 
 
 
@@ -154,78 +190,75 @@ function AdminTakerUser() {
               </thead>
 
 
-              {!Takeridstate.Takeraccept &&users.map((users, index) => (
-                <tr key={users.id}>
-
-                  <td className="ml-4">
-                    <div className="flex flex-col">
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
+              {users.map((user, index) => (
+          <tr key={user.id}>
+            {userIdWithTakerAccept != user.id && (
+              <>
+                <td className="ml-4">
+                  <div className="flex flex-col">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
                       >#
-                        {users.id}
-                      </Typography>
-
-                    </div>
-                  </td>
-                  <td >
-
-                    <div className="flex items-center gap-3">
-                      <Avatar src={users.profileimage} alt={users.profileimage} size="sm" />
-                      <div className="flex flex-col">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                        </Typography>
-
-                      </div>
-                    </div>
-                  </td>
-
-                  <td >
+                      {user.id}
+                    </Typography>
+                  </div>
+                </td>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <Avatar src={user.profileimage} alt={user.profileimage} size="sm" />
                     <div className="flex flex-col">
                       <Typography
                         variant="small"
                         color="blue-gray"
                         className="font-normal"
-                      >
-                        {users.username}
-                      </Typography>
-
+                      />
                     </div>
-                  </td>
-                  <td >
-                    <div className="flex flex-col">
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {users.email}
-                      </Typography>
-
-                    </div>
-                  </td>
-                  <td >
-                    <div className="flex flex-col">
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {users.date_and_time}
-                      </Typography>
-
-                    </div>
-                  </td>
-                  <td >
-                    <Link to={`/AdminRouters/AdminHome/Takerrequestpage/${users.id}`}><button>View Details</button></Link>
-                  </td>
-                </tr>
-              ))}
+                  </div>
+                </td>
+                <td>
+                  <div className="flex flex-col">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {user.username}
+                    </Typography>
+                  </div>
+                </td>
+                <td>
+                  <div className="flex flex-col">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {user.email}
+                    </Typography>
+                  </div>
+                </td>
+                <td>
+                  <div className="flex flex-col">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {user.date_and_time}
+                    </Typography>
+                  </div>
+                </td>
+                <td>
+                  <Link to={`/AdminRouters/AdminHome/Takerrequestpage/${user.id}`}>
+                    <button>View Details</button>
+                  </Link>
+                </td>
+              </>
+            )}
+          </tr>
+        ))}
 
 
 
@@ -274,25 +307,25 @@ function AdminTakerUser() {
                   </tr>
                 </thead>
                 <tbody>
-                  {TABLE_ROWS.map(
-                    ({ img, name, email, job, org, online, date }, index) => {
+                  {users.map(
+                    ({ id, profileimage, username, email, is_active, phone, date_and_time}, index) => {
                       const isLast = index === TABLE_ROWS.length - 1;
                       const classes = isLast
                         ? "p-4"
                         : "p-4 border-b border-blue-gray-50";
 
                       return (
-                        <tr key={img}>
+                        <tr key={profileimage}>
                           <td className={classes}>
                             <div className="flex items-center gap-3">
-                              <Avatar src={img} alt={img} size="sm" />
+                              <Avatar src={profileimage} alt={profileimage} size="sm" />
                               <div className="flex flex-col">
                                 <Typography
                                   variant="small"
                                   color="blue-gray"
                                   className="font-normal"
                                 >
-                                  {job}
+                                  {id}
                                 </Typography>
 
                               </div>
@@ -305,7 +338,7 @@ function AdminTakerUser() {
                                 color="blue-gray"
                                 className="font-normal"
                               >
-                                {name}
+                                {username}
                               </Typography>
 
                             </div>
@@ -317,7 +350,7 @@ function AdminTakerUser() {
                                 color="blue-gray"
                                 className="font-normal"
                               >
-                                {online}
+                                {phone}
                               </Typography>
 
                             </div>
@@ -329,7 +362,7 @@ function AdminTakerUser() {
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {date}
+                              {date_and_time}
                             </Typography>
                           </td>
 
@@ -349,8 +382,23 @@ function AdminTakerUser() {
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {org}
+                               {is_active ? (
+                              <Typography className="text-[#254870]" >Active</Typography>
+                            ) : (
+                              <Typography className="text-[#6e2424]">Inactive</Typography>
+                            )}
                             </Typography>
+                          </td>
+
+                          <td className={classes}>
+                            <Typography variant="small" color="blue-gray" className="font-normal">
+                              {is_active}
+                            </Typography>
+                            {is_active ? (
+                              <button onClick={()=>handleBlock(id,is_active)} className=" bg-[#837bdc] rounded-md h-8 w-16 text-[#ffffff]">Block</button>
+                            ) : (
+                              <button onClick={()=>handleBlock(id,is_active)}>unblock</button>
+                            )}
                           </td>
 
                         </tr>

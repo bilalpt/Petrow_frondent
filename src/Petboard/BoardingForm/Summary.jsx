@@ -11,7 +11,7 @@ const Summary = () => {
   useEffect(() => {
     
     const data = BordFormRedux[BordFormRedux.length - 1];
-    usestate({ pettype: data.pettype, nuberofpetboarded: data.nuberofpetboarded, petbreed: data.petbreed, petsize: data.petsize, additionalinfo: data.additionalinfo, startdate: data.startdate, enddate:data.enddate })
+    usestate({ pettype: data.pettype, nuberofpetboarded: data.nuberofpetboarded, petbreed: data.petbreed, petsize: data.petsize, additionalinfo: data.additionalinfo,pincode:data.pincode, startdate: data.startdate, enddate:data.enddate })
   }, [])
   return (
 
@@ -32,6 +32,8 @@ const Summary = () => {
           <h1 className='place-self-start pt-5'>{formstate.petsize}</h1>
           <h1 className='text-lg place-self-start text-[#757575] pt-5'>Anything else the sitter will need to know(optional)</h1>
           <h1 className='place-self-start pt-5'>{formstate.additionalinfo}</h1>
+          <h1 className='text-lg place-self-start text-[#757575] pt-5'>Pincode</h1>
+          <h1 className='place-self-start pt-5'>{formstate.pincode}</h1>
           <h1 className='text-lg place-self-start text-[#757575] pt-5'>Date</h1>
           <h1 className='place-self-start pt-5'>{formstate.startdate}</h1>
           <h1 className='text-lg place-self-start text-[#757575] pt-5'>End date</h1>

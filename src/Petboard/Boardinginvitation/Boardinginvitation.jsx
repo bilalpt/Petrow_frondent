@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import dogwith_boy_image from "../../assets/dogwith_boy_image.jpg"
 import tarapet from "../../assets/tarapet.jpg"
+import { BoardNavbar } from '../../Navbar/BoardNavbar'
+
 
 
 
@@ -19,6 +21,9 @@ function Boardinginvitation() {
 
     return (
         <>
+        <div>
+        <BoardNavbar />
+
             <div className='h-12 bg-[#817299]'></div>
             <div className='   h-full  bg-[#ffffff] container mx-auto '>
 
@@ -64,6 +69,7 @@ function Boardinginvitation() {
 
 
 
+            </div>
             </div>
 
         </>

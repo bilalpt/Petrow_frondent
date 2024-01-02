@@ -15,7 +15,7 @@ const BordingForm = () => {
     const navigate = useNavigate()
     const token=localStorage.getItem('token')
     const decode=jwtDecode(token)
-    const [formstate,usestate]=useState({pettype:'',nuberofpetboarded:'',petbreed:'',petsize:'',additionalinfo:'',startdate:'',enddate:'',user:decode.id})
+    const [formstate,usestate]=useState({pettype:'',nuberofpetboarded:'',petbreed:'',petsize:'',additionalinfo:'',startdate:'',enddate:'',pincode:'',user:decode.id})
 
 
     //validation
@@ -63,7 +63,7 @@ const BordingForm = () => {
             toast.success(response.data.msg);
             navigate('/PetBoards/Summary')
 
-            usestate({selectpettype:'',numberofpetboard:'',petbreed:'',petsize:'',additional_info:'',boardingdate:'',boardingenddate:''})
+            usestate({selectpettype:'',numberofpetboard:'',petbreed:'',petsize:'',additional_info:'',boardingdate:'',boardingenddate:'',pincode:''})
 
 
 
@@ -150,6 +150,10 @@ const BordingForm = () => {
 
                         <div className='mb-4 w-full'>
                             <input  name='additionalinfo' onChange={(e)=>usestate({...formstate,[e.target.name]:e.target.value})} className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type="text" placeholder='Additional Information' />
+
+                        </div>
+                        <div className='mb-4 w-full'>
+                            <input  name='pincode' onChange={(e)=>usestate({...formstate,[e.target.name]:e.target.value})} className='w-full md:w-96 lg:w-120  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type="text" placeholder='Pincode' />
 
                         </div>
 
