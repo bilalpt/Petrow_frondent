@@ -129,37 +129,37 @@ function Takerrequestpage() {
 
   return (
     <>
-      <div className='bg-[#D9D9D9] mb-20'>
+      <div className='bg-[#e6e1e1] '>
 
         <div className='ml-10  '>
 
-          <h1 className='text-4xl pt-10'>User details</h1>
-          <div className='ml-7 ' >
-            <h1 className='text-xl mt-8'>Servicer Name</h1>
+          <h1 className='text-4xl pt-10 ml-10'>User details</h1>
+          <div className='ml-7 grid grid-cols-2 ' >
+            <h1 className='text-xl mt-8 ml-8'>Servicer Name</h1>
 
             <h1 className='mt-4 ml-12'>{usersstate.username}</h1>
 
-            <h1 className='text-xl mt-8'>Introduction</h1>
+            <h1 className='text-xl mt-8 ml-8'>Introduction</h1>
 
             <h1 className='mt-4 ml-12'>{aboutstate.introduction}</h1>
 
 
-            <h1 className='text-xl mt-8'>Type of pet</h1>
+            <h1 className='text-xl mt-8 ml-8'>Type of pet</h1>
 
             <h1 className='mt-4 ml-12'>{Takerdescription.acceptingpet}</h1>
 
 
-            <h1 className='text-2xl mt-8'>Your skill and Qualification</h1>
+            <h1 className='text-xl mt-8 ml-8'>Your skill and Qualification</h1>
 
             <h1 className='mt-4 ml-12'>{aboutstate.skillandqualifications}</h1>
 
 
-            <h1 className='text-xl mt-8'>Other Special skill pet Qualification</h1>
+            <h1 className='text-xl mt-8 ml-8'>Other Special skill pet Qualification</h1>
 
             <h1 className='mt-4 ml-12'>{aboutstate.otherpetqualifications}</h1>
 
 
-            <h1 className='text-xl mt-8'>ID photos</h1>
+            <h1 className='text-xl mt-8 ml-8'>ID photos</h1>
             <div className='grid grid-cols-6 '>
               <img
                 src={sample.adharimg}
@@ -175,7 +175,7 @@ function Takerrequestpage() {
             </div>
 
 
-            <h1 className='text-xl mt-8'>Pet with</h1>
+            <h1 className='text-xl mt-8 ml-8'>Pet with</h1>
 
             <div className='grid grid-cols-6 '>
               <img
@@ -192,7 +192,7 @@ function Takerrequestpage() {
           </div>
           <Link to={`/AdminRouters/AdminHome/AdminTakerUser`} ><button className='mt-10 bg-[#ffffff] h-10 w-20  rounded-md ml-96' onClick={rejectdelete}>Reject</button></Link>
 
-          <Link to={`/AdminRouters/AdminHome/AdminTakerUser`} ><button className='mt-10 bg-[#9A87B7] h-10 w-20 text-[#ffffff] rounded-md ml-10 mb-28' onClick={fetchData}>Accept</button></Link>
+          <Link to={`/AdminRouters/AdminHome/AdminTakerUser`} ><button className='mt-10 bg-[#9A87B7] h-10 w-20 text-[#ffffff] rounded-md ml-10 mb-12' onClick={fetchData}>Accept</button></Link>
         </div>
       </div>
 

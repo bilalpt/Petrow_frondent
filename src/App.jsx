@@ -19,12 +19,9 @@ function App() {
 
       <Routes>
       <Route exact path='/' element={<Home/>}/>
-
               <Route path='/PetBoards/*' element={<Petboard/>}/>
               <Route path='/PetTakers/*' element={<TakerRouters/>}/>
               <Route path='/AdminRouters/*' element={<AdminRouters/>}/>
-
-
       </Routes>
 
 

@@ -63,9 +63,11 @@ function AdminTakerUser() {
 
   const userWithTakerAccept = takeridstate.find(item => item.Takeraccept);
 
-  console.log(userWithTakerAccept, 'test')
 
   const userIdWithTakerAccept = userWithTakerAccept ? userWithTakerAccept.user : null;
+  
+  console.log(userWithTakerAccept,userIdWithTakerAccept, 'test')
+
 
   const [Takeridstate,Takeridsetstate]=useState({id:'',Takeraccept:'',user:''})
   console.log(Takeridstate.Takeraccept,'Takeridstate.Takeraccept');

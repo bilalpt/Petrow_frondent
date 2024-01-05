@@ -23,7 +23,13 @@ function TakeraboutEdit() {
 
 
     const { TakerAbout } = useSelector((state) => state.takerforms);
-    const data = TakerAbout
+    const data = TakerAbout.data
+
+    const Takeraboutarray=TakerAbout[TakerAbout.length-1]
+
+    console.log(Takeraboutarray,'baxterrrrrrrrrrrrrrrrr');
+
+
     console.log(data,'swetha');
 
 
@@ -34,17 +40,33 @@ function TakeraboutEdit() {
 
     useEffect(() => {
 
-        if (data >= [0]){
+        if (data || Takeraboutarray!==null){
+            if(data){
+                aboutsetstate({
+                    id: data.id,
+                    introduction: data.introduction,
+                    petexperience: data.petexperience,
+                    workstatus: data.workstatus,
+                    skillandqualifications: data.skillandqualifications,
+                    otherpetqualification: data.otherpetqualification,
+        
+                });
 
-            aboutsetstate({
-                id: data.id,
-                introduction: data.introduction,
-                petexperience: data.petexperience,
-                workstatus: data.workstatus,
-                skillandqualifications: data.skillandqualifications,
-                otherpetqualification: data.otherpetqualification,
-    
-            })
+            }else if (Takeraboutarray){
+ 
+                aboutsetstate({
+                    id: Takeraboutarray.id,
+                    introduction: Takeraboutarray.introduction,
+                    petexperience: Takeraboutarray.petexperience,
+                    workstatus: Takeraboutarray.workstatus,
+                    skillandqualifications: Takeraboutarray.skillandqualifications,
+                    otherpetqualification: Takeraboutarray.otherpetqualification,
+        
+                });
+
+            }
+
+
         }else{
             console.log('about taker data not enterd');
         }
