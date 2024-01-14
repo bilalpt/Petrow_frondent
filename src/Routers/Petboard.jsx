@@ -29,6 +29,7 @@ import EditBoardingForm from '../Petboard/BoardingForm/EditBoardingForm';
 //invitation page
 import Boardinginvitation from '../Petboard/Boardinginvitation/Boardinginvitation';
 
+import Boardhistory from '../Petboard/BoardHistory/Boardhistory';
 
 
 
@@ -74,6 +75,8 @@ function Petboard() {
           {/* boarding invitation  */}
 
           <Route exact path='/Boardinginvitation' element={<Boardinginvitation/>}/>
+
+          <Route exact path='/Boardhistory' element={<Boardhistory/>}/>
          
          </Route>
 
