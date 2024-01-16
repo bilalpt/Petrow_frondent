@@ -11,6 +11,8 @@ import BoardHome from '../Petboard/BoardHome';
 import LoginNavigation from '../Components/LoginNavigation/LoginNavigation';
 import BoardProfile from '../Petboard/BoardProfile/BoardProfile';
 
+import Chat from '../Petboard/Chating/Chat';
+
 //private routers
 
 import PrivateRouters from '../ProtectedRouters/PrivateRouters';
@@ -77,6 +79,7 @@ function Petboard() {
           <Route exact path='/Boardinginvitation' element={<Boardinginvitation/>}/>
 
           <Route exact path='/Boardhistory' element={<Boardhistory/>}/>
+          <Route exact path='/Chat' element={<Chat/>}/>
          
          </Route>
 

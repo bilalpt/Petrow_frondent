@@ -119,7 +119,7 @@ function Boardinginvitation() {
                                 <h1 className='text-[#d03838] md:mt-28 text-xl '>From INR {data.price}/day</h1>
                             </div>
                         </div>
-                        <button className='bg-[#817299] w-64 ml-10 mt-3 md:w-[1025px] md:ml-[133px] mb-11 h-8 rounded-md text-[#ffffff]'>invite</button>
+                        <button className='bg-[#817299] w-64 ml-10 mt-3 md:w-[1025px] md:ml-[133px] mb-11 h-8 rounded-md text-[#ffffff]'>Chat With Me</button>
                     </div>
                 ))}
 
