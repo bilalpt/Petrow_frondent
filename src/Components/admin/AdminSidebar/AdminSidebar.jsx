@@ -28,6 +28,11 @@ import {
 function AdminSidebar() {
   const navigate=useNavigate()
 
+  const Adminlogout=()=>{
+    localStorage.removeItem('token')
+    navigate('/AdminRouters/AdminLogin')
+  }
+
 
     const [open, setOpen] = React.useState(0);
  
@@ -62,28 +67,7 @@ function AdminSidebar() {
               </Typography>
             </AccordionHeader>
           </ListItem>
-          <AccordionBody className="py-1">
-            <List className="p-0">
-              <ListItem>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Analytics
-              </ListItem>
-              <ListItem>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Reporting
-              </ListItem>
-              <ListItem>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Projects
-              </ListItem>
-            </List>
-          </AccordionBody>
+
         </Accordion>
         <Accordion
           open={open === 2}
@@ -94,55 +78,34 @@ function AdminSidebar() {
             />
           }
         >
-          <ListItem className="p-0" selected={open === 2}>
-            <AccordionHeader onClick={() => handleOpen(2)} className="border-b-0 p-3">
+
+
+          <ListItem onClick={()=>navigate('AdminBoarduser')} className="p-0" >
+            <AccordionHeader  className="border-b-0 p-3">
               <ListItemPrefix>
               <UserCircleIcon className="h-5 w-5" />
               </ListItemPrefix>
               <Typography color="blue-gray" className="mr-auto font-normal">
-                Users
+                Admin Board User
               </Typography>
             </AccordionHeader>
           </ListItem>
-          <AccordionBody className="py-1">
-            <List className="p-0">
-              <ListItem onClick={()=>navigate('AdminBoarduser')}>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                PetBoard Users
-              </ListItem>
-              <ListItem onClick={()=>navigate('AdminTakerUser')}>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                PetTaker Users
-              </ListItem>
-            </List>
-          </AccordionBody>
+
+          <ListItem onClick={()=>navigate('AdminTakerUser')} className="p-0" >
+            <AccordionHeader  className="border-b-0 p-3">
+              <ListItemPrefix>
+              <UserCircleIcon className="h-5 w-5" />
+              </ListItemPrefix>
+              <Typography color="blue-gray" className="mr-auto font-normal">
+                Admin Board User
+              </Typography>
+            </AccordionHeader>
+          </ListItem>
+
         </Accordion>
-        <ListItem>
-          <ListItemPrefix>
-            <InboxIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Inbox
-          <ListItemSuffix>
-            <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
-          </ListItemSuffix>
-        </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <UserCircleIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Profile
-        </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <Cog6ToothIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Settings
-        </ListItem>
-        <ListItem>
+
+
+        <ListItem onClick={Adminlogout}>
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5" />
           </ListItemPrefix>

@@ -12,10 +12,7 @@ import { useNavigate } from "react-router-dom";
 function AdminNavbar() {
   const navigate=useNavigate()
 
-  const Adminlogout=()=>{
-    localStorage.removeItem('token')
-    navigate('/AdminRouters/AdminLogin')
-  }
+
 
     const [openNav, setOpenNav] = React.useState(false);
  
@@ -28,46 +25,7 @@ function AdminNavbar() {
 
     const navList = (
         <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-          {/* <Typography
-            as="li"
-            variant="small"
-            color="blue-gray"
-            className="p-1 font-normal"
-          >
-            <a href="#" className="flex items-center">
-              Pages
-            </a>
-          </Typography>
-          <Typography
-            as="li"
-            variant="small"
-            color="blue-gray"
-            className="p-1 font-normal"
-          >
-            <a href="#" className="flex items-center">
-              Account
-            </a>
-          </Typography>
-          <Typography
-            as="li"
-            variant="small"
-            color="blue-gray"
-            className="p-1 font-normal"
-          >
-            <a href="#" className="flex items-center">
-              Blocks
-            </a>
-          </Typography>
-          <Typography
-            as="li"
-            variant="small"
-            color="blue-gray"
-            className="p-1 font-normal"
-          >
-            <a href="#" className="flex items-center">
-              Docs
-            </a>
-          </Typography> */}
+
         </ul>
       );
     return (
@@ -78,9 +36,9 @@ function AdminNavbar() {
           <Typography
             as="a"
             href="#"
-            className="mr-4 cursor-pointer py-1.5 font-medium"
+            className="mr-4 cursor-pointer py-1.5 font-extrabold pl-6"
           >
-            Material Tailwind
+            Petrow
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
@@ -90,15 +48,8 @@ function AdminNavbar() {
                 size="sm"
                 className="hidden lg:inline-block"
               >
-                <span onClick={Adminlogout}>Log Out</span>
               </Button>
-              {/* <Button
-                variant="gradient"
-                size="sm"
-                className="hidden lg:inline-block"
-              >
-                <span>Sign in</span>
-              </Button> */}
+
             </div>
             <IconButton
               variant="text"
