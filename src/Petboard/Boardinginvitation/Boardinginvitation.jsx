@@ -7,12 +7,17 @@ import { BoardNavbar } from '../../Navbar/BoardNavbar'
 import { useParams } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 
 function Boardinginvitation() {
+
+    const navigate=useNavigate()
+
+
 
 
     // const id = useParams();
@@ -23,6 +28,7 @@ function Boardinginvitation() {
     let token = localStorage.getItem('token');
     let decoded = jwtDecode(token);
     let userid = decoded.id
+
 
     const { BordFormRedux } = useSelector((state) => state.user);
     const [formstate, usestate] = useState({ pettype: '', nuberofpetboarded: '', petbreed: '', petsize: '', additionalinfo: '', startdate: '', enddate: '' })
@@ -37,6 +43,11 @@ function Boardinginvitation() {
     const[settaker,statetakerwit]=useState([])
 
     const [secondarray, setsecondaryarray] = useState([]);
+
+    const handleChatClick = (data) => {
+        console.log("data:", data); // Log the entire data object
+        navigate('/PetBoards/Chat', { state: { data } }); // Pass the entire data object to the next page
+    }
 
 
 
@@ -65,9 +76,10 @@ function Boardinginvitation() {
     const retrevedata = async (e) => {
 
         try {
-            const response = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + '/petboarding/showtakerdetails/' + userid)
-            console.log(response.data, 'all array data');
+            const response = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + 'petboarding/showtakerdetails/' + userid)
             const takervar = [ ...response.data.Takerwithpetdata]
+            console.log(takervar, 'all array data');
+
             statetakerwit(takervar)
             const discriptionarray=[...response.data.ServiceDescriptiondata]
             setstatediscription(discriptionarray)
@@ -119,7 +131,12 @@ function Boardinginvitation() {
                                 <h1 className='text-[#d03838] md:mt-28 text-xl '>From INR {data.price}/day</h1>
                             </div>
                         </div>
-                        <button className='bg-[#817299] w-64 ml-10 mt-3 md:w-[1025px] md:ml-[133px] mb-11 h-8 rounded-md text-[#ffffff]'>Chat With Me</button>
+                    <button 
+                    onClick={() => handleChatClick(data)}
+                    className='bg-[#817299] w-64 ml-10 mt-3 md:w-[1025px] md:ml-[133px] mb-11 h-8 rounded-md text-[#ffffff]'
+                >
+                    Chat With Me
+                </button>
                     </div>
                 ))}
 

@@ -8,6 +8,8 @@ import { useEffect } from 'react'
 import { UpdateAboutpage } from '../../../Redux/BoardTakerRedux'
 import { ToastContainer, toast } from "react-toastify";
 import axios from 'axios'
+import { CareNavbar } from '../../../Navbar/CareNavbar';
+
 
 
 
@@ -119,6 +121,8 @@ function TakeraboutEdit() {
 
     return (
         <>
+              <CareNavbar />
+
             <div className=' grid grid-cols-1 md:grid-cols-2 mb-64 bg-[#817299] h-screen '>
                 <div className=' grid grid-cols-1  md:ml-28   '>
                     <img className=' md:h-[60vh]' src={Dogwith} alt="" />
