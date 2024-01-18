@@ -116,7 +116,7 @@ export function CareNavbar() {
         className="p-1 font-normal"
       >
           <Link to={`/PetTakers/PettakerChat`} className="flex items-center">
-            Pet Taker
+            Messages
           </Link>
       </Typography>
 
