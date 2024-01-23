@@ -28,6 +28,8 @@ import { CareNavbar } from '../Navbar/CareNavbar'
 import { useState } from 'react'
 import EditTakerwithPet from '../Components/Petcare/TakerWithPet/EditTakerwithPet'
 import PettakerChat from '../Components/Petcare/PettakerChat/PettakerChat'
+import Chat from '../Petboard/Chating/Chat'
+
 
 
 
@@ -80,8 +82,8 @@ const TakerRouters = () => {
                     <Route exact path='/TakeraboutEdit' element={<TakeraboutEdit/>}/>
 
                     < Route exact path='/EditTakerwithPet' element={<EditTakerwithPet/>}/>
-
-                    <Route exact path='/PettakerChat' element={<PettakerChat/>}/>
+                    <Route exact path='/chat' element={<Chat/>}/>
+                    {/* <Route exact path='/PettakerChat' element={<PettakerChat/>}/> */}
 
                 </Route>
 

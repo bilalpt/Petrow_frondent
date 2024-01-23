@@ -32,6 +32,7 @@ import EditBoardingForm from '../Petboard/BoardingForm/EditBoardingForm';
 import Boardinginvitation from '../Petboard/Boardinginvitation/Boardinginvitation';
 
 import Boardhistory from '../Petboard/BoardHistory/Boardhistory';
+import Singleuser from '../Petboard/Singleuser';
 
 
 
@@ -39,6 +40,7 @@ import Boardhistory from '../Petboard/BoardHistory/Boardhistory';
 
 
 import React from 'react'
+import Chats from '../Petboard/Chating/Chat';
 
 function Petboard() {
   return (
@@ -78,8 +80,11 @@ function Petboard() {
 
           <Route exact path='/Boardinginvitation' element={<Boardinginvitation/>}/>
 
+          <Route exact path='BoardHome/Singleuser/:id' element={<Singleuser/>}/>
+
           <Route exact path='/Boardhistory' element={<Boardhistory/>}/>
           <Route exact path='/Chat' element={<Chat/>}/>
+          <Route exact path='/chats' element={<Chats/>}/>
          
          </Route>
 

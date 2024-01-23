@@ -1,12 +1,13 @@
-import React from 'react'
-import AdminNavbar from '../AdminNavbar/AdminNavbar'
-import AdminSidebar from '../AdminSidebar/AdminSidebar'
-import { Outlet } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
+import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import AdminSidebar from '../AdminSidebar/AdminSidebar';
+import { Outlet } from 'react-router-dom';
 
 function AdminHome() {
-
+  const [userData, setUserData] = useState([]);
+  const [dayCounts, setDayCounts] = useState({});
   const data = [
     { day: 'Day 1', users: 10 },
     { day: 'Day 2', users: 15 },
@@ -16,25 +17,40 @@ function AdminHome() {
     { day: 'Day 6', users: 18 },
     { day: 'Day 7', users: 25 },
   ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petboarding/GraphUsers");
+        const numericUsersData = response.data.filter(entry => typeof entry.users === 'number');
+        const counts = numericUsersData.reduce((acc, entry) => {
+          const day = new Date(entry.date_and_time).toLocaleDateString('en-US', { weekday: 'long' });
+          acc[day] = (acc[day] || 0) + 1;
+          return acc;
+        }, {});
+        setDayCounts(counts);
+        setUserData(numericUsersData);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <>
-      <div className='h-screen grid grid-rows-[5rem] '>
-        <div> 
+    <div className='h-screen grid grid-rows-[5rem] '>
+      <div>
         <AdminNavbar />
-        </div>
-        <div className='md:grid md:grid-cols-[18.7rem,1fr]'>
-          
-          <div className='invisible md:visible'>
+      </div>
+      <div className='md:grid md:grid-cols-[18.7rem,1fr]'>
+        <div className='invisible md:visible'>
           <AdminSidebar />
-          </div>
-
-          <div>
-
-            <div className='h-full '>
-            <Outlet/>
-
-            {/* graph starts */}
-            <div className="App p-4">
+        </div>
+        <div className='h-full '>
+          <Outlet />
+          {/* graph starts */}
+          <div className="App p-4">
       <header className="text-3xl font-bold mb-4">
         Users Joined Each Day
       </header>
@@ -52,18 +68,11 @@ function AdminHome() {
         </BarChart>
       </ResponsiveContainer>
     </div>
-            </div>
-          </div>
+          {/* graph ends */}
         </div>
       </div>
-
-
-
-
-
-
-    </>
-  )
+    </div>
+  );
 }
 
-export default AdminHome
+export default AdminHome;
