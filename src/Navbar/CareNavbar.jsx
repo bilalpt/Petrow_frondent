@@ -41,10 +41,6 @@ export function CareNavbar() {
   }
 
 
-
-
-
-
   const [openNav, setOpenNav] = React.useState(false);
 
   const navigate = useNavigate()
@@ -120,6 +116,19 @@ export function CareNavbar() {
           </Link>
       </Typography>
 
+
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <Link href="#" to={"/PetTakers/BoardRequest"} className="flex items-center">
+          Boarding Requests
+
+        </Link>
+      </Typography>
+
       <Typography
         as="li"
         variant="small"
@@ -129,8 +138,6 @@ export function CareNavbar() {
         <Link href="#" to={"/PetTakers/PettakerProfile"} className="flex items-center">
           <img class="block mx-auto h-10 rounded-full sm:mx-0 sm:shrink-0" src={defaultprofile} alt="Woman's Face" />
           Profile
-
-
         </Link>
       </Typography>
     </ul>

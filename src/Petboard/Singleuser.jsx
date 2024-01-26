@@ -12,19 +12,34 @@ function Singleuser() {
     const { id } = useParams();
     const userId = id
 
-    const [setdescription, setstatediscription] = useState([])
-    const [setabout, setstateabout] = useState([])
     const [setpet, setstatepet] = useState([])
-
-
     const [petset, petsetstate] = useState([]);
-
     useEffect(() => {
         // Filter the setpet array and update petset state
         const filteredPetSet = setpet.filter(item => item.user == userId);
-        console.log(filteredPetSet, 'filteredPetSet filteredPetSet adhil ');
         petsetstate(filteredPetSet || {});
     }, [setpet, userId]);
+
+    const [setabout, setstateabout] = useState([])
+    const [abotstate, aboutsetstate] = useState([])
+
+    useEffect(() => {
+        const aboutdata = setabout.filter(item => item.user == userId);
+        aboutsetstate(aboutdata)
+    }, [setabout, userId])
+
+
+    const [setdescription, setstatediscription] = useState([])
+    const [discriptionset, discriptionstate] = useState([])
+    console.log(discriptionset,'discriptionsetdiscriptionsetdiscriptionsetdiscriptionsetvv');
+
+    useEffect(() => {
+        const discriptiondata = setdescription.filter(item => item.user == userId);
+        discriptionstate(discriptiondata)
+    }, [setdescription, userId])
+
+
+
 
 
 
@@ -57,40 +72,13 @@ function Singleuser() {
                 <BoardNavbar />
             </div>
 
-            <div className='bg-[#e6e1e1] '>
+            <div className='bg-[#e6e1e1]  h-screen'>
 
                 <div className='ml-10  '>
 
                     <h1 className='text-4xl pt-10 ml-10'>User details</h1>
                     <div className='ml-7 grid grid-cols-2 ' >
-                        <h1 className='text-xl mt-8 ml-8'>Servicer Name</h1>
-
-                        <h1 className='mt-4 ml-12'>Pettaker</h1>
-
-                        <h1 className='text-xl mt-8 ml-8'>Introduction</h1>
-
-                        <h1 className='mt-4 ml-12'>i am a pet taker and </h1>
-
-
-                        <h1 className='text-xl mt-8 ml-8'>Type of pet</h1>
-
-                        <h1 className='mt-4 ml-12'>dog</h1>
-
-
-                        <h1 className='text-xl mt-8 ml-8'>Your skill and Qualification</h1>
-
-                        <h1 className='mt-4 ml-12'>petboarding ceartificates</h1>
-
-
-                        <h1 className='text-xl mt-8 ml-8'>Other Special skill pet Qualification</h1>
-
-                        <h1 className='mt-4 ml-12'>one of the most valuable</h1>
-
-
-
-
-
-                        <h1 className='text-xl mt-8 ml-8'>Pet with</h1>
+                        <h1 className='text-xl mt-8 ml-8'>Pet with Image</h1>
 
                         <div className='grid grid-cols-6 '>
                             {/* Map over the petset array and display images */}
@@ -103,6 +91,47 @@ function Singleuser() {
                                 />
                             ))}
                         </div>
+
+                        {discriptionset.map((data) => (
+                            <>
+                                <h1 className='text-xl mt-8 ml-8'>Servicer Name</h1>
+
+                                <h1 className='mt-4 ml-12'>{data.servicename}</h1>
+                                <h1 className='text-xl mt-8 ml-8'>Type of pet</h1>
+
+                                <h1 className='mt-4 ml-12'>{data.acceptingpet}</h1>
+
+                            </>
+
+                        ))}
+
+
+
+
+                        {abotstate && abotstate.map((user) => (
+                            <>
+                                <h1 className='text-xl mt-8 ml-8'>Introduction</h1>
+
+                                <h1 className='mt-4 ml-12'>{user.introduction} </h1>
+
+                                <h1 className='text-xl mt-8 ml-8'>Your skill and Qualification</h1>
+
+                                <h1 className='mt-4 ml-12'>{user.skillandqualifications}</h1>
+
+
+                                <h1 className='text-xl mt-8 ml-8'>Other Special skill pet Qualification</h1>
+
+                                <h1 className='mt-4 ml-12'>{user.otherpetqualifications}</h1>
+
+
+
+                                <h1 className='text-xl mt-8 ml-8'>Experienced in</h1>
+
+                                <h1 className='mt-4 ml-12'>{user.petexperience}</h1>
+
+
+                            </>
+                        ))}
 
 
 

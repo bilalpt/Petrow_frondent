@@ -29,6 +29,7 @@ import { useState } from 'react'
 import EditTakerwithPet from '../Components/Petcare/TakerWithPet/EditTakerwithPet'
 import PettakerChat from '../Components/Petcare/PettakerChat/PettakerChat'
 import Chat from '../Petboard/Chating/Chat'
+import BoardRequest from '../Components/Petcare/BoardRequest/BoardRequest'
 
 
 
@@ -84,6 +85,8 @@ const TakerRouters = () => {
                     < Route exact path='/EditTakerwithPet' element={<EditTakerwithPet/>}/>
                     <Route exact path='/chat' element={<Chat/>}/>
                     {/* <Route exact path='/PettakerChat' element={<PettakerChat/>}/> */}
+
+                    <Route exact path='/BoardRequest' element={<BoardRequest/>}/>
 
                 </Route>
 

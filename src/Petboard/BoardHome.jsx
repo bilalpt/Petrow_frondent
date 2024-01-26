@@ -21,7 +21,6 @@ function BoardHome() {
   const usercard = async () => {
     try {
       const response = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petcare/Takerusershow");
-      console.log(response.data, 'data');
 
       // Concatenate data from different arrays into a single array
       const newData = []

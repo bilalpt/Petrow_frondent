@@ -15,34 +15,37 @@ import { useNavigate } from 'react-router-dom';
 
 function Boardinginvitation() {
 
-    const navigate=useNavigate()
-
-
-
-
-    // const id = useParams();
-    // const userId = id.userId
-
-    // console.log(userId,'current user id ');
+    const navigate = useNavigate()
 
     let token = localStorage.getItem('token');
     let decoded = jwtDecode(token);
     let userid = decoded.id
 
-
     const { BordFormRedux } = useSelector((state) => state.user);
-    const [formstate, usestate] = useState({ pettype: '', nuberofpetboarded: '', petbreed: '', petsize: '', additionalinfo: '', startdate: '', enddate: '' })
+    const [formstate, usestate] = useState({ id: '', pettype: '', nuberofpetboarded: '', petbreed: '', petsize: '', additionalinfo: '', startdate: '', enddate: '', pincode: '' })
+
 
     useEffect(() => {
         const data = BordFormRedux[BordFormRedux.length - 1];
-        usestate({ pettype: data.pettype, nuberofpetboarded: data.nuberofpetboarded, petbreed: data.petbreed, petsize: data.petsize, additionalinfo: data.additionalinfo, startdate: data.startdate, enddate: data.enddate })
+        usestate({ id: data.id, pettype: data.pettype, nuberofpetboarded: data.nuberofpetboarded, petbreed: data.petbreed, petsize: data.petsize, additionalinfo: data.additionalinfo, startdate: data.startdate, enddate: data.enddate, pincode: data.pincode })
     }, [])
 
+    const [setdiscription, setstatediscription] = useState([])
+    const [setvalidate, setstatevalidate] = useState([])
+    useEffect(() => {
+        // Assuming formstate and setformstate are defined somewhere in your component
+        const matchingUsers = setdiscription.filter((data) => data.pincode == formstate.pincode);
+        setstatevalidate(matchingUsers);
+    }, [setdiscription, formstate.pincode]);
 
-    const[setdiscription,setstatediscription]=useState([])
-    const[settaker,statetakerwit]=useState([])
 
+    const [settaker, statetakerwit] = useState([])
+    useEffect(() => {
+        const samepincode = setdiscription.filter(item => item.pincode == formstate.pincode)
+    }, [formstate])
     const [secondarray, setsecondaryarray] = useState([]);
+    console.log(secondarray,'hey baxter');
+
 
     const handleChatClick = (data) => {
         console.log("data:", data); // Log the entire data object
@@ -52,42 +55,63 @@ function Boardinginvitation() {
 
 
     useEffect(() => {
-        if (setdiscription && settaker) {
-            const mergedUsersData = setdiscription.map((data) => {
-                const matchingUser = settaker.find((value) => data.user === value.user);
-                console.log(matchingUser,'matchingUser');
+        if (setvalidate && settaker) {
+            const mergedUsersData = setvalidate.map((data) => {
+                const matchingUser = settaker.find((value) => data.user == value.user);
+                console.log(matchingUser, 'matchingUser');
                 if (matchingUser) {
                     return Object.assign({}, data, matchingUser);
                 } else {
                     return data;
                 }
             });
-    
+
             setsecondaryarray(mergedUsersData);
         }
-    }, [setdiscription, settaker]);
+    }, [setvalidate, settaker]);
 
 
+
+
+    const [setinvite, setstateinvite] = useState()
+
+    const handleInviteClick = (receiverId) => {
+        retrevedata()
+        setstateinvite({
+            sender: userid,
+            receiver: receiverId,
+            boardingform: formstate.id,
+        });
+
+    };
+    
     useEffect(() => {
         retrevedata()
-
     }, [])
 
     const retrevedata = async (e) => {
 
         try {
             const response = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + 'petboarding/showtakerdetails/' + userid)
-            const takervar = [ ...response.data.Takerwithpetdata]
-            console.log(takervar, 'all array data');
-
+            const takervar = [...response.data.Takerwithpetdata]
             statetakerwit(takervar)
-            const discriptionarray=[...response.data.ServiceDescriptiondata]
+            const discriptionarray = [...response.data.ServiceDescriptiondata]
             setstatediscription(discriptionarray)
+            // Send the data in the expected format
+
+            // Log the data being sent in the request
+            console.log('Request Data:',setinvite   
+            );
+
+            const adddata = await axios.post(import.meta.env.VITE_PETBOARDUSERS_URL + "petboarding/Boardinvitation",setinvite);
+            // Log the response received from the server
+            // console.log('Response Data:', adddata.data);
 
         } catch (error) {
             console.error('Error retrieving data:', error);
         }
     }
+
 
     return (
         <>
@@ -112,33 +136,42 @@ function Boardinginvitation() {
 
                     <h1 className='pl-5 md:pl-32 text-xl pt-10 '>Invite backers To Request</h1>
                     <div className='bg-[#070608] ml-5  md:ml-32 mr-[168px] h-[1px] mt-3 '></div>
-                    {secondarray.map((data) => (
-                        
-                    <div key={data.user} className='border-[0.5px] border-[#130303] mt-3 md:border-none'>
-                        <div className='grid grid-cols-2 md:grid-cols-4 md:h-36 mt-5'>
-                            <div>
-                                <img
-                                    src={data.image}
-                                    className="pl-5 h-32 md:pl-[134px]"
-                                    alt="cropanimal"
-                                />
+                    {secondarray.length > 0 ? (
+                        secondarray.map((data) => (
+
+                            <div key={data.user} className='border-[0.5px] border-[#130303] mt-3 md:border-none'>
+                                <div className='grid grid-cols-2 md:grid-cols-4 md:h-36 mt-5'>
+                                    <div>
+                                        <img
+                                            src={data.image}
+                                            className="pl-5 h-32 md:pl-[134px]"
+                                            alt="cropanimal"
+                                        />
+                                    </div>
+                                    <div>
+                                        <h1 className='ml-4 md:ml-10 mt-7 text-xl '>{data.servicename}</h1>
+                                    </div>
+                                    <div></div>
+                                    <div>
+                                        <h1 className='text-[#d03838] md:mt-28 text-xl '>From INR {data.price}/day</h1>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={() => handleInviteClick(data.user)}
+
+
+                                    className='bg-[#817299] w-64 ml-10 mt-3 md:w-[1025px] md:ml-[133px] mb-11 h-8 rounded-md text-[#ffffff]'
+                                >
+                                    Invite
+                                </button>
                             </div>
-                            <div>
-                                <h1 className='ml-4 md:ml-10 mt-7 text-xl '>{data.servicename}</h1>
-                            </div>
-                            <div></div>
-                            <div>
-                                <h1 className='text-[#d03838] md:mt-28 text-xl '>From INR {data.price}/day</h1>
-                            </div>
+                        ))) : (
+                        <div>
+                            <h1 className='md:pl-[500px] text-3xl h-28 pt-5'>Sorry No Users Found</h1>
                         </div>
-                    <button 
-                    onClick={() => handleChatClick(data)}
-                    className='bg-[#817299] w-64 ml-10 mt-3 md:w-[1025px] md:ml-[133px] mb-11 h-8 rounded-md text-[#ffffff]'
-                >
-                    Chat With Me
-                </button>
-                    </div>
-                ))}
+                    )
+
+                    }
 
 
 
