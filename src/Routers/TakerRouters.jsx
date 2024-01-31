@@ -30,29 +30,11 @@ import EditTakerwithPet from '../Components/Petcare/TakerWithPet/EditTakerwithPe
 import PettakerChat from '../Components/Petcare/PettakerChat/PettakerChat'
 import Chat from '../Petboard/Chating/Chat'
 import BoardRequest from '../Components/Petcare/BoardRequest/BoardRequest'
-
-
-
-
-
-
-
-
+import Viewdetails from '../Components/Petcare/BoardRequest/Viewdetails';
 
 
 
 const TakerRouters = () => {
-
-    // const [takernav,settakernav]=useState(false)
-    // const [currentUser, setCurrentUser] = useState(null);
-
-
-    // const SubmitPettakernav=(user)=>{
-    //     settakernav(true)
-    //     setCurrentUser(user)
-
-    // }
-
 
 
     return (
@@ -87,15 +69,11 @@ const TakerRouters = () => {
                     {/* <Route exact path='/PettakerChat' element={<PettakerChat/>}/> */}
 
                     <Route exact path='/BoardRequest' element={<BoardRequest/>}/>
+                    <Route exact path='BoardRequest/Viewdetails/:id' element={<Viewdetails/>}/>
+
 
                 </Route>
-
-
-
                 {/* <Route exact path='/CareHome' element={<CareHome/>}/> */}
-
-
-
             </Routes>
 
 

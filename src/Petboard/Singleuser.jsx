@@ -40,11 +40,6 @@ function Singleuser() {
 
 
 
-
-
-
-
-
     useEffect(() => {
         usercard();
     }, []);
