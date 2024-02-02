@@ -46,7 +46,6 @@ const BoardProfile = () => {
 
   const EditBoarduser = async (e) => {
     e.preventDefault();
-    console.log("function-----------------------------------");
     try {
       const formdata = new FormData()
 

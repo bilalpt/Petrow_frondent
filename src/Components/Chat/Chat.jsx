@@ -9,18 +9,23 @@ import { Previos_Chat, UserListChat, WebSocket } from '../../Constants/Constants
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import blankImage from '../../Assets/blankprofile.png'
+import { useLocation } from 'react-router-dom';
 
 
 function Chats() {
+    const location = useLocation()
+
+    const taker=location.state.user
+    console.log(taker,"tekerrrrrrrrrrrrrrr");
     const userInfo = useSelector((state) => state.user)
-    const { BoarduserRedux } = useSelector((state) => state.user);Takeruserinitial
+    const { BoarduserRedux } = useSelector((state) => state.user);
 
     const [clientstate, setClientState] = useState('');
     const [senderdetails, setSenderDetails] = useState(userInfo);
     const [messageText, setMessageText] = useState('')
     const [messages, setMessages] = useState([]);
     const [ChatList, setChatList] = useState([])
-    const [recipientDetails, setrecipientDetails] = useState([])
+    const [recipientDetails, setrecipientDetails] = useState(taker)
     const [manageEmoji, setmanageEmoji] = useState(false)
     const setUpChat = async () => {
         await axios.get(`${Previos_Chat}${senderdetails.id}/${recipientDetails.id}/`).then(
@@ -73,14 +78,14 @@ function Chats() {
         };
     }
 
-    const StartChat = (event) => {
+    // const StartChat = (event) => {
 
-        const chatFound = ChatList.find((obj) => obj.email === event);
-        if (chatFound) {
-            setrecipientDetails(chatFound)
-        }
-        console.log(chatFound, '================================>>>');
-    }
+    //     const chatFound = ChatList.find((obj) => obj.email === event);
+    //     if (chatFound) {
+    //         setrecipientDetails(chatFound)
+    //     }
+    //     console.log(chatFound, '================================>>>');
+    // }
 
     useEffect(() => {
         axios.get(UserListChat).then((response) => {

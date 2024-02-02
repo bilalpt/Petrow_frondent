@@ -11,7 +11,7 @@ import BoardHome from '../Petboard/BoardHome';
 import LoginNavigation from '../Components/LoginNavigation/LoginNavigation';
 import BoardProfile from '../Petboard/BoardProfile/BoardProfile';
 
-import Chat from '../Petboard/Chating/Chat';
+// import Chat from '../Petboard/Chating/Chat';
 
 //private routers
 
@@ -34,10 +34,7 @@ import Boardinginvitation from '../Petboard/Boardinginvitation/Boardinginvitatio
 import Boardhistory from '../Petboard/BoardHistory/Boardhistory';
 import Singleuser from '../Petboard/Singleuser';
 
-
-
-
-
+import MyRequests from '../Petboard/MyRequests/MyRequests';
 
 
 import React from 'react'
@@ -84,18 +81,13 @@ function Petboard() {
           <Route exact path='BoardHome/Singleuser/:id' element={<Singleuser/>}/>
 
           <Route exact path='/Boardhistory' element={<Boardhistory/>}/>
-          <Route exact path='/Chat' element={<Chat/>}/>
+          {/* <Route exact path='/Chat' element={<Chat/>}/> */}
           <Route exact path='/chats' element={<Chats/>}/>
+          <Route exact path='/MyRequests' element={<MyRequests/>} />
          
          </Route>
 
-
-
-
-
         </Routes>
-
-
       {/* </Router> */}
       
     </div>

@@ -1,10 +1,11 @@
 import React from 'react'
 import jwtDecode from 'jwt-decode'
 import { Outlet } from 'react-router-dom'
-import PettakerHome from '../Components/PetrowHome/PettakerHome'
+// import PettakerHome from '../Components/PetrowHome/PettakerHome'
 import BoardHome from '../Petboard/BoardHome';
 import AdminHome from '../Components/admin/AdminHome/AdminHome';
 import Home from '../Components/PetrowHome/Home';
+import PetTakerHome from '../Components/Petcare/PetTakerHome';
 
 const BoardProtected = () => {
  
@@ -16,7 +17,7 @@ const BoardProtected = () => {
             return <Outlet/>;
         }
         else if(decode.roles==='taker'){
-            return<PettakerHome/>
+            return<PetTakerHome/>
         }
         else if(decode.roles === "admin" && decode.is_admin){
             <AdminHome/>

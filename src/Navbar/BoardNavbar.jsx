@@ -85,10 +85,20 @@ export function BoardNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center" onClick={()=>Logout()}
->
-          Logout
+        <Link to={'/PetBoards/MyRequests'}className="flex items-center">
+          My Requests
+        </Link>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
 
+
+        <a href="#" className="flex items-center" onClick={()=>Logout()}>
+          Logout
         </a>
       </Typography>
       <Typography

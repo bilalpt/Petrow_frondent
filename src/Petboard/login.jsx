@@ -93,14 +93,6 @@ function BoardLogin() {
 
 
 
-
-
-
-
-
-
-
-
     return (
         <>
             <ToastContainer />
@@ -127,7 +119,7 @@ function BoardLogin() {
                                 </div>
 
                                 <div className='mt-4'>
-                                    <input type="text" placeholder='Password' name='password' className='rounded-lg py-2 px-16 border ' onChange={(e) => boarduserstate({ ...boarduser, [e.target.name]: e.target.value })} />
+                                        <input type="Password" placeholder='Password' name='password' className='rounded-lg py-2 px-16 border ' onChange={(e) => boarduserstate({ ...boarduser, [e.target.name]: e.target.value })} />
                                 </div>
 
                                 <button type='submit' className='bg-cyan-500	 w-20 h-10 mt-6 text-white rounded-lg'>Login</button>

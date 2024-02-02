@@ -41,16 +41,16 @@ export function NavbarDefault() {
           Home
         </a>
     </Typography> */}
-      <Typography
+      {/* <Typography
         as="li"
         variant="small"
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center" onClick={()=>navigate('/PetBoards/Home')}>
+        <a href="#" className="flex items-center" onClick={()=>navigate('')}>
           Home 
         </a>
-      </Typography>
+      </Typography> */}
       <Typography
         as="li"
         variant="small"

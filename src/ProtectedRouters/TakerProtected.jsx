@@ -1,7 +1,7 @@
 import React from 'react'
 import jwtDecode from 'jwt-decode'
 import { Outlet } from 'react-router-dom'
-import PettakerHome from '../Components/PetrowHome/PettakerHome'
+// import PettakerHome from '../Components/PetrowHome/PettakerHome'
 import AdminHome from '../Components/admin/AdminHome/AdminHome';
 import Home from '../Components/PetrowHome/Home';
 import BoardHome from '../Petboard/BoardHome';

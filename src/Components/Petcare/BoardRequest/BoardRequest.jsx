@@ -25,11 +25,11 @@ function BoardRequest() {
     const [setboard, boardsetstate] = useState([])
     const [setform, setstateform] = useState([])
     const [invitations, setInvitations] = useState([])
-    console.log(invitations,'invitations invitations invitations');
+    console.log(invitations, 'invitations invitations invitations');
 
 
-    let boarduserdata;
-    let boardingfomsdata
+    // let boarduserdata;
+    // let boardingfomsdata
 
     const Boardrequest = async (e) => {
         try {
@@ -47,10 +47,10 @@ function BoardRequest() {
                 const reciveruserdata = datas.filter(item => item.receiver == userId);
                 setInvitations(reciveruserdata)
                 const allboardingforms = reciveruserdata.map(item => item.boardingform)
-                boardingfomsdata = boardform.filter(item => allboardingforms.includes(item.id))
+                const boardingfomsdata = boardform.filter(item => allboardingforms.includes(item.id))
                 setstateform(boardingfomsdata)
                 const allSenders = reciveruserdata.map(item => item.sender);
-                boarduserdata = boardusers.filter(item => allSenders.includes(item.id));
+                const boarduserdata = boardusers.filter(item => allSenders.includes(item.id));
                 boardsetstate(boarduserdata)
 
             } else {
@@ -64,16 +64,16 @@ function BoardRequest() {
     const handleAccept = async (invitationId) => {
         try {
             const updateinvitation = await axios.patch(`${import.meta.env.VITE_PETBOARDUSERS_URL}petboarding/Updateinvitation/${invitationId}`);
-    
+
             console.log(updateinvitation, 'updateinvitation');
-    
+
             if (updateinvitation.status === 200) {
                 // Update the local state to reflect the accepted invitation
                 setInvitations((prevInvitations) =>
                     prevInvitations.map((invitation) => {
                         console.log('invitationId:', invitationId);
                         console.log('invitation:', invitation);
-    
+
                         return invitation.id === invitationId
                             ? { ...invitation, status: 'Accepted' }
                             : invitation;
@@ -91,7 +91,7 @@ function BoardRequest() {
     const handleReject = async (invitationId) => {
         try {
             const updateinvitation = await axios.patch(`${import.meta.env.VITE_PETBOARDUSERS_URL}petboarding/Rejectinvitation/${invitationId}`);
-    
+
             if (updateinvitation.status === 200) {
                 // Update the local state to reflect the rejected invitation
                 setInvitations((prevInvitations) =>
@@ -108,11 +108,8 @@ function BoardRequest() {
             console.error('Error:', error);
         }
     };
-    
 
-
-
-
+console.log(setboard,'======================================================>>>>>>');
     return (
         <>
             <div>
@@ -120,39 +117,43 @@ function BoardRequest() {
             </div>
             <div className='bg-[#817299] h-12 shadow-2xl'></div>
 
-
-            <div className=' h-auto w-[800px] border-slate-700 bg-[#fefdfd] ml-[333px] mt-14 pt-10  shadow-2xl pb-10 '>
-                <div className='pl-20'>
-                    <tr className='text-[#615656] '>
-
-                        {invitations.map(data => (
-                            setboard.map(boardItem => (
-                                (data.sender == boardItem.id && data.status=="Pending" ? (
-                                    <React.Fragment key={data.id}>
-                                        <th className='ml-20'>{boardItem.username}</th>
-                                        <Button onClick={() => { navigate(`Viewdetails/${data.boardingform}`); }} className='ml-16 bg-[#eff1f5] text-black'>
+            {invitations.map(data => (
+                setboard.map(user => (
+                    (data.sender === user.id ? (
+                        <div key={data.id} className='h-auto w-[600px] border-slate-700 bg-[#fefdfd] ml-[433px] mt-14 pt-10 shadow-2xl pb-10'>
+                            <div className='pl-10'>
+                                <table>
+                                    <tr className='text-[#615656] '>
+                                        <th className='ml-10'>{user.username}</th>
+                                        <Button onClick={() => { navigate(`Viewdetails/${data.boardingform}`); }} className='ml-10 pt-4 bg-[#eff1f5] text-black'>
                                             View User Details
                                         </Button>
 
-                                        <Button onClick={()=>handleAccept(data.id)} className='ml-16 bg-[#3267b1]'>accept</Button>
-                                        <Button onClick={()=>handleReject(data.id)} className='ml-16 bg-[#e14242]'>reject</Button>  
+                                        {data.status === "Pending" ? (
+                                            <>
+                                                <Button onClick={() => handleAccept(data.id)} className='ml-6 bg-[#3267b1]'>
+                                                    Accept
+                                                </Button>
+                                                <Button onClick={() => handleReject(data.id)} className='ml-6 bg-[#e14242]'>
+                                                    Reject
+                                                </Button>
+                                            </>
+                                        ) : (
+                                            <div className='pl-64 text-[#7197cc]'>
+                                                {data.status === "Rejected" ? "Rejected" : (
+                                                    <Button onClick={()=>navigate(`/PetTakers/chats`,{state:{user}})} className='text-[#ffffff] bg-[#5e718e] mt-10'>Message</Button>
+                                                )}
+                                            </div>
+                                        )}
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    ) : null)
+                ))
+            ))}
 
-                                        
 
-                                    </React.Fragment>
-                                ) : <h1 className='text-xl '>No Request Found</h1>)
-                            ))
-                        ))}
-
-
-                    </tr>
-
-
-
-
-                </div>
-
-            </div>
 
 
         </>

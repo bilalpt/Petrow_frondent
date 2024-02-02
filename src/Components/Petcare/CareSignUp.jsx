@@ -122,10 +122,10 @@ function CareSignup() {
                                     <input type="text" placeholder='Enter your phone number' name='phone' className='rounded-lg py-2 px-16 border ' onChange={(e) => caresetstate({ ...careuser, [e.target.name]: e.target.value })} />
                                 </div>
                                 <div className='mt-4'>
-                                    <input type="text" placeholder='Password' name='password' className='rounded-lg py-2 px-16 border ' onChange={(e) => caresetstate({ ...careuser, [e.target.name]: e.target.value })} />
+                                    <input type="Password" placeholder='Password' name='password' className='rounded-lg py-2 px-16 border ' onChange={(e) => caresetstate({ ...careuser, [e.target.name]: e.target.value })} />
                                 </div>
                                 <div className='mt-4'>
-                                    <input type="text" placeholder='Confirm password' name='confirmpassword' className='rounded-lg py-2 px-16 border ' onChange={(e) => caresetstate({ ...careuser, [e.target.name]: e.target.value })} />
+                                    <input type="Password" placeholder='Confirm password' name='confirmpassword' className='rounded-lg py-2 px-16 border ' onChange={(e) => caresetstate({ ...careuser, [e.target.name]: e.target.value })} />
                                 </div>
                                 <button type='submit' className='bg-cyan-500	 w-20 h-10 mt-6 text-white rounded-lg'>Sign Up</button>
                                 {/* <h1 className=''>login</h1> */}

@@ -105,7 +105,7 @@ export function CareNavbar() {
       </Typography>
 
 
-      <Typography
+      {/* <Typography
         as="li"
         variant="small"
         color="blue-gray"
@@ -114,7 +114,7 @@ export function CareNavbar() {
           <Link to={`/PetTakers/PettakerChat`} className="flex items-center">
             Messages
           </Link>
-      </Typography>
+      </Typography> */}
 
 
       <Typography

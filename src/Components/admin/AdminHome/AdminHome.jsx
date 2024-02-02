@@ -6,37 +6,43 @@ import AdminSidebar from '../AdminSidebar/AdminSidebar';
 import { Outlet } from 'react-router-dom';
 
 function AdminHome() {
-  const [userData, setUserData] = useState([]);
-  const [dayCounts, setDayCounts] = useState({});
-  const data = [
-    { day: 'Day 1', users: 10 },
-    { day: 'Day 2', users: 15 },
-    { day: 'Day 3', users: 8 },
-    { day: 'Day 4', users: 12 },
-    { day: 'Day 5', users: 20 },
-    { day: 'Day 6', users: 18 },
-    { day: 'Day 7', users: 25 },
-  ];
+  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(import.meta.env.VITE_PETBOARDUSERS_URL + "petboarding/GraphUsers");
-        const numericUsersData = response.data.filter(entry => typeof entry.users === 'number');
-        const counts = numericUsersData.reduce((acc, entry) => {
-          const day = new Date(entry.date_and_time).toLocaleDateString('en-US', { weekday: 'long' });
-          acc[day] = (acc[day] || 0) + 1;
-          return acc;
-        }, {});
-        setDayCounts(counts);
-        setUserData(numericUsersData);
+        console.log(response.data, 'GraphUsersGraphUsersGraphUsersGraphUsersGraphUsers');
+
+        const userData = response.data;
+
+        // Assuming date_and_time is in ISO format
+        const last7DaysData = userData.filter(user => {
+          const userDate = new Date(user.date_and_time).toISOString().split('T')[0];
+          const currentDate = new Date().toISOString().split('T')[0];
+          return userDate >= currentDate && userDate > 7;
+        });
+
+        setChartData(last7DaysData);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error(error);
       }
     };
 
     fetchData();
   }, []);
+
+  const countUsersByDay = () => {
+    const counts = {};
+
+    chartData.forEach(user => {
+      const date = new Date(user.date_and_time).toISOString().split('T')[0];
+      counts[date] = (counts[date] || 0) + 1;
+    });
+
+    const result = Object.entries(counts).map(([date, count]) => ({ date, count }));
+    return result;
+  };
 
   return (
     <div className='h-screen grid grid-rows-[5rem] '>
@@ -50,24 +56,21 @@ function AdminHome() {
         <div className='h-full '>
           <Outlet />
           {/* graph starts */}
-          <div className="App p-4">
-      <header className="text-3xl font-bold mb-4">
-        Users Joined Each Day
-      </header>
-      <ResponsiveContainer width="100%" height={400}>
-        <BarChart
-          data={data}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="users" fill="#8884d8" className="bg-blue-500" />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart
+              width={500}
+              height={300}
+              data={countUsersByDay()}
+              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="count" fill="#8884d8" />
+            </BarChart>
+          </ResponsiveContainer>
           {/* graph ends */}
         </div>
       </div>

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import PettakerHome from '../Components/PetrowHome/PettakerHome'
 import PettakerProfile from '../Components/Petcare/PettakerProfile/PettakerProfile'
 import CareHome from '../Components/Petcare/CareHome'
 // import BoardProtected from '../ProtectedRouters/BoardProtected';
@@ -28,9 +27,10 @@ import { CareNavbar } from '../Navbar/CareNavbar'
 import { useState } from 'react'
 import EditTakerwithPet from '../Components/Petcare/TakerWithPet/EditTakerwithPet'
 import PettakerChat from '../Components/Petcare/PettakerChat/PettakerChat'
-import Chat from '../Petboard/Chating/Chat'
 import BoardRequest from '../Components/Petcare/BoardRequest/BoardRequest'
 import Viewdetails from '../Components/Petcare/BoardRequest/Viewdetails';
+import Chats from '../Petboard/Chating/Chat';
+
 
 
 
@@ -65,7 +65,8 @@ const TakerRouters = () => {
                     <Route exact path='/TakeraboutEdit' element={<TakeraboutEdit/>}/>
 
                     < Route exact path='/EditTakerwithPet' element={<EditTakerwithPet/>}/>
-                    <Route exact path='/chat' element={<Chat/>}/>
+                    <Route exact path='/chats' element={<Chats/>}/>
+
                     {/* <Route exact path='/PettakerChat' element={<PettakerChat/>}/> */}
 
                     <Route exact path='/BoardRequest' element={<BoardRequest/>}/>
